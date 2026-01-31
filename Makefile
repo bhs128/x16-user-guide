@@ -10,12 +10,16 @@ MAIN					= user_guide
 
 TARGETS					= $(MAIN).tex
 
-PARTS					= getting_to_know_commanderx16.tex \
-						  preface.tex \
-						  setup.tex \
-						  using_screen_and_keyboard.tex \
-						  graphics.tex \
-						  sound.tex \
+# Chapter files in order (following VIC-20 User Guide structure)
+PARTS					= preface.tex \
+						  ch00_setup.tex \
+						  ch01_getting_to_know_commanderx16.tex \
+						  ch02_using_screen_and_keyboard.tex \
+						  ch03_color_and_graphics.tex \
+						  ch04_animation.tex \
+						  ch05_sound_and_music.tex \
+						  ch06_conversing_with_x16.tex \
+						  ch07_introduction_to_programming.tex \
 						  appendix/basic_commands.tex \
 						  appendix/basic_table.tex \
 						  appendix/screen_codes_table.tex \
@@ -25,6 +29,8 @@ PARTS					= getting_to_know_commanderx16.tex \
 						  appendix/patch_table.tex \
 						  appendix/music_play_macros.tex \
 						  appendix/ym2151.tex \
+						  appendix/error_messages.tex \
+						  appendix/sample_programs.tex \
 
 TEMPLATES				= CommodoreBlueBook.cls
 

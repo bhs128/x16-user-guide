@@ -1,0 +1,62 @@
+%----------------------------------------------------------------------------------------
+%	PART - Introduction to Programming
+%----------------------------------------------------------------------------------------
+
+\makeatletter\@openrightfalse
+\part{Introduction to Programming}
+
+\chaptertypein{
+	\keybackgroundcolor{gray}
+	\keytextcolor{black}
+	10 REM GUESSING GAME\\
+	20 N = INT(RND(1)*10)+1\\
+	30 PRINT "GUESS 1-10:"\\
+	40 INPUT G\\
+	50 IF G = N THEN GOTO 80\\
+	60 PRINT "TRY AGAIN!"\\
+	70 GOTO 30\\
+	80 PRINT "YOU GOT IT!"
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Introduction to Programming
+%----------------------------------------------------------------------------------------
+
+\chapter*{Introduction to Programming}\index{Programming}\index{BASIC}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Introduction to Programming}
+
+% TODO: This chapter needs content covering (VIC-20 style):
+% - First BASIC commands review
+% - Random numbers (RND)
+% - IF...THEN for decisions
+% - FOR...NEXT loops
+% - Simple games combining concepts
+
+\section{Introduction}
+
+% Placeholder content - replace with actual content
+Now that you've learned the basics of using your Commander X16, it's time to
+put it all together and write some real programs! In this chapter, you'll
+learn programming concepts that will let you create games and useful programs.
+
+\section{Review of BASIC Commands}
+
+% TODO: Quick review of commands learned so far
+
+\section{Random Numbers}
+
+% TODO: Cover RND function for unpredictable programs
+
+\section{Making Decisions with IF...THEN}
+
+% TODO: Cover conditional logic
+
+\section{Loops with FOR...NEXT}
+
+% TODO: Cover repetition in programs
+
+\section{Your First Game}
+
+% TODO: Put it all together in a simple game
+
+\@openrighttrue\makeatother

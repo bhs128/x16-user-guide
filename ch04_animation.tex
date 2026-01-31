@@ -1,0 +1,61 @@
+%----------------------------------------------------------------------------------------
+%	PART - Animation
+%----------------------------------------------------------------------------------------
+
+\makeatletter\@openrightfalse
+\part{Animation}
+
+\chaptertypein{
+	\keybackgroundcolor{gray}
+	\keytextcolor{black}
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 FOR X=1 TO 38\\
+	30 PRINT "\clrhomekey";\\
+	40 PRINT TAB(X);"*"\\
+	50 FOR D=1 TO 50:NEXT D\\
+	60 NEXT X\\
+	70 GOTO 20
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Animation
+%----------------------------------------------------------------------------------------
+
+\chapter*{Animation}\index{Animation}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Animation}
+
+% TODO: This chapter needs content covering (VIC-20 style):
+% - Flying birds example
+% - Bouncing ball
+% - Cursor control for animation
+% - Animating with POKEs and PEEKs
+% - Simple game animations
+
+\section{Introduction}
+
+% Placeholder content - replace with actual content
+One of the most exciting things you can do with your Commander X16 is create
+animations! In this chapter, you'll learn how to make objects move across the
+screen, bounce around, and come to life.
+
+\section{Your First Animation}
+
+% TODO: Simple moving character animation
+
+\section{The Bouncing Ball}
+
+% TODO: Classic bouncing ball program
+
+\section{Cursor Control}
+
+% TODO: Using cursor movement for animation
+
+\section{Animation with PEEK and POKE}
+
+% TODO: Direct screen memory animation
+
+\section{Flying Objects}
+
+% TODO: Bird or spaceship animation example
+
+\@openrighttrue\makeatother

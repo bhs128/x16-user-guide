@@ -65,7 +65,7 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Setup** | [ch00_setup.tex](ch00_setup.tex) | 🚧 Placeholder | 58 | Lorem ipsum only - needs hardware setup content |
 | **Ch 1: Getting to Know Your X16** | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | 506 | Start screen, PRINT, GOTO, first program, errors |
 | **Ch 2: Using Screen & Keyboard** | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | 🔶 Partial | 432 | PRINT statement done, graphic characters started |
-| **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | 🚧 Placeholder | 66 | Has type-in example, section stubs with TODOs |
+| **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | 350+ | COLOR, TILE commands, color keys, screen locations, PETSCII graphics |
 | **Ch 4: Animation** | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | 61 | Has type-in example, section stubs with TODOs |
 | **Ch 5: Sound and Music** | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | 75 | Has FM type-in example, section stubs with TODOs |
 | **Ch 6: Conversing with Your X16** | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | 549 | INPUT, variables, GET statement, temperature converter, interactive programs |
@@ -124,7 +124,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | **Setup** | Hardware setup, TV hookup | [ch00_setup.tex](ch00_setup.tex) | 🚧 Placeholder | HDMI/VGA, SD card, USB, controllers, audio |
 | **Ch 1**: Getting to Know | First program, PRINT/GOTO | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | Minor polish |
 | **Ch 2**: Screen & Keyboard | Printing, keyboard tour, calculator | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | 🔶 Partial | Complete graphic characters, keyboard diagram |
-| **Ch 3**: Color and Graphics | COLOR, screen colors, PETSCII art | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | 🚧 Placeholder | All sections need content |
+| **Ch 3**: Color and Graphics | COLOR, screen colors, PETSCII art | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | None - covers COLOR, TILE, color keys, screen locations, keyboard graphics |
 | **Ch 4**: Animation | Bouncing ball, flying birds, PEEK/POKE | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | All sections need content |
 | **Ch 5**: Sound and Music | Making music, piano, songs | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | All sections need content (has FM type-in) |
 | **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | None - follows VIC-20 structure |
@@ -136,7 +136,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | Priority | Chapter/Section | Current State | Work Required |
 |----------|-----------------|---------------|---------------|
 | 🔴 High | **Ch 0: Setup** | Lorem ipsum | Write HDMI/VGA/composite setup, SD card prep, controller connection |
-| 🔴 High | **Ch 3: Color and Graphics** | Section stubs | Write COLOR command tutorial, color keys, PETSCII art examples |
+| ✅ Done | **Ch 3: Color and Graphics** | Complete | COLOR, TILE, color keys, screen modes, PETSCII graphics, example programs |
 | 🔴 High | **Ch 5: Sound and Music** | Section stubs | Write PSG basics, FMPLAY/PSGPLAY tutorials, piano program |
 | 🟡 Medium | **Ch 2: Screen & Keyboard** | Partial | Complete graphic characters section, add keyboard diagram |
 | 🟡 Medium | **Ch 4: Animation** | Section stubs | Write bouncing ball, cursor control, PEEK/POKE animation |

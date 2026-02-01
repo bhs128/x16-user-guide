@@ -23,44 +23,522 @@
 \chapter*{Color and Graphics}\index{Color}\index{Graphics}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Color and Graphics}
 
-% TODO: This chapter needs content covering (VIC-20 style):
-% - Programming in color
-% - Color keys on the keyboard
-% - Changing screen and border colors
-% - Screen locations
-% - Random colors
-% - Combining sound and color
-% - Keyboard graphics (PETSCII art)
+Did you try the program at the beginning of this chapter?  If you did, you saw
+the words "HELLO X16!" printed on the screen in many different colors!  The
+Commander X16 can display text and graphics in 16 beautiful colors.  In this
+chapter, you'll learn how to add color to your programs and create colorful
+graphics using the keyboard's special graphic characters.\\
 
-\section{Introduction}
+If you've read Chapter 2, you already know a little bit about the {\ttfamily
+COLOR} statement and the color keys on the keyboard.  Now we're going to
+explore color in much more detail and learn some exciting ways to use it in
+your programs.\\
 
-% Placeholder content - replace with actual content
-The Commander X16 can display text and graphics in many beautiful colors. In
-this chapter, you'll learn how to add color to your programs and create
-colorful graphics using the keyboard's special graphic characters.
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Programming in Color
+%----------------------------------------------------------------------------------------
 
-\section{Programming in Color}
+\chapter*{Programming in Color}\index{COLOR}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Programming in Color}
 
-% TODO: Cover COLOR command for text colors
+The {\ttfamily COLOR} statement is the easiest way to add color to your
+programs.  When you use the {\ttfamily COLOR} statement, any text you print
+after it will appear in the color you chose.  The {\ttfamily COLOR} statement
+takes one or two numbers.  The first number sets the \emph{foreground color}
+(the color of the letters themselves), and the optional second number sets the
+\emph{background color} (the color behind each letter).\\
 
-\section{Color Keys}
+Let's try a simple example.  Type {\ttfamily NEW} and press \returnkey to clear
+any old program, then type:\\
 
-% TODO: Cover CTRL and Commodore key color combinations
+\codeblock{
+	10 COLOR 2\\
+	20 PRINT "I AM RED!"\\
+	30 COLOR 5\\
+	40 PRINT "I AM GREEN!"\\
+	50 COLOR 7\\
+	60 PRINT "I AM YELLOW!"\\
+}
 
-\section{Screen and Border Colors}
+When you type {\ttfamily RUN} and press \returnkey, you should see each message
+printed in a different color!  The Commander X16 remembers the color you set
+and uses it for everything you print until you change it again.\\
 
-% TODO: Cover changing screen and border colors
+\section{The 16 Colors}
 
-\section{Screen Locations}
+The Commander X16 has 16 colors you can use with the {\ttfamily COLOR}
+statement.  Here they are:\\
 
-% TODO: Cover screen memory and positioning
+\begin{tabular}{|c|l||c|l|}
+	\hline
+	{\bfseries Number} & {\bfseries Color} & {\bfseries Number} & {\bfseries Color}\\ \hline
+	0 & Black & 8 & Orange \\ \hline
+	1 & White & 9 & Brown \\ \hline
+	2 & Red & 10 & Light Red \\ \hline
+	3 & Cyan & 11 & Dark Gray\\ \hline
+	4 & Purple & 12 & Medium Gray\\ \hline
+	5 & Green & 13 & Light Green\\ \hline
+	6 & Blue & 14 & Light Blue\\ \hline
+	7 & Yellow & 15 & Light Gray\\ \hline
+\end{tabular}
 
-\section{Random Colors}
+\vspace{16pt}
 
-% TODO: Fun programs with random color changes
+\tryit{
+	Modify the program above to use different color numbers.  Try using all 16
+	colors to see what they look like!\\
+}
 
-\section{Keyboard Graphics}
+\section{Foreground and Background Colors}
 
-% TODO: Cover PETSCII graphic characters for creating art
+Each character on the screen can have its own foreground color \emph{and} its
+own background color.  This lets you create very colorful displays!  To set
+both colors at once, use the {\ttfamily COLOR} statement with two numbers
+separated by a comma:\\
+
+\codeblock{
+	10 COLOR 1,2\\
+	20 PRINT "WHITE ON RED"\\
+	30 COLOR 7,6\\
+	40 PRINT "YELLOW ON BLUE"\\
+	50 COLOR 0,1\\
+	60 PRINT "BLACK ON WHITE"\\
+}
+
+Try running this program.  Each line of text has a different combination of
+foreground and background colors.  Notice how each character has its own little
+rectangle of background color --- this is one of the things that makes the
+Commander X16 so much fun for creating colorful screens!\\
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - The Color Keys
+%----------------------------------------------------------------------------------------
+
+\chapter*{The Color Keys}\index{Color Keys}
+\addcontentsline{toc}{chapter}{\protect\numberline{}The Color Keys}
+
+Look at the number keys on your Commander X16 keyboard.  You'll see that each
+number from 1 through 8 has two colors printed next to it.  These are the
+\emph{color keys}.  By holding down \ctrlkey or \altkey while pressing one of
+these number keys, you can change the color of the text you type --- even in
+the middle of typing!\\
+
+\begin{tabular}{|c|c|c|}
+	\hline
+	{\bfseries Key} & {\bfseries CTRL} & {\bfseries ALT}\\ \hline
+	1 & Black & Orange \\ \hline
+	2 & White & Brown \\ \hline
+	3 & Red & Light Red \\ \hline
+	4 & Cyan & Dark Gray\\ \hline
+	5 & Purple & Medium Gray\\ \hline
+	6 & Green & Light Green\\ \hline
+	7 & Blue & Light Blue\\ \hline
+	8 & Yellow & Light Gray\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+Holding \ctrlkey while pressing a number key selects the color listed on top.
+Holding \altkey while pressing a number key selects the color listed on the
+bottom.  This gives you all 16 colors right from the keyboard!\\
+
+\section{Using Color Keys in Programs}
+
+The color keys are especially useful inside {\ttfamily PRINT} statements.
+When you're typing the text inside quotation marks, you can press \ctrlkey or
+\altkey with a number key to insert a special control character.  This
+character will look like a strange symbol on your screen, but when the program
+runs, it will change the color of the text that follows it.\\
+
+Try this program:\\
+
+\codeblock{
+	10 PRINT "THIS IS \ctrlkey\key{3}RED\ctrlkey\key{6} AND GREEN"\\
+}
+
+When you type this line, after typing {\ttfamily THIS IS }, hold down \ctrlkey
+and press \key{3}.  You'll see a special character appear.  Then type
+{\ttfamily RED}, hold \ctrlkey and press \key{6}, and finally type
+{\ttfamily\ AND GREEN"}.  When you run the program, the word "RED" will appear
+in red and "AND GREEN" will appear in green!\\
+
+\note{
+	When you use the color keys inside a {\ttfamily PRINT} statement, a special
+	symbol appears in your program listing.  Don't worry --- this is normal!
+	The symbol tells the Commander X16 to change colors when the program runs.\\
+}
+
+\section{Reverse Mode}
+
+You may have noticed that \key{9} has "RVS ON" and \key{0} has "RVS OFF" on the
+keyboard.  Pressing \ctrlkey + \key{9} turns on \emph{reverse mode}, which
+swaps the foreground and background colors.  Pressing \ctrlkey + \key{0} turns
+reverse mode off.\\
+
+Reverse mode is very useful for creating highlighted text or drawing solid
+blocks of color.  Try this:\\
+
+\codeblock{
+	10 COLOR 1,6\\
+	20 PRINT "NORMAL ";\\
+	30 PRINT "\ctrlkey\key{9}REVERSED\ctrlkey\key{0}";\\
+	40 PRINT " NORMAL"\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Screen and Border Colors
+%----------------------------------------------------------------------------------------
+
+\chapter*{Screen and Border Colors}\index{Screen Colors}\index{Border Colors}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Screen and Border Colors}
+
+So far we've been changing the color of individual characters.  But what if you
+want to change the color of the entire screen or add a colorful border around
+it?  The Commander X16 has several ways to do this!\\
+
+\section{Clearing the Screen with Color}
+
+One quick way to fill the screen with a background color is to set the
+background color with {\ttfamily COLOR} and then clear the screen.  Remember
+from Chapter 1 that you can clear the screen by holding \shiftkey and pressing
+\clrhomekey.  You can also clear the screen from a program using {\ttfamily
+PRINT} with the clear screen character inside it:\\
+
+\codeblock{
+	10 COLOR 1,6\\
+	20 PRINT "\shiftkey\clrhomekey"\\
+	30 PRINT "BLUE BACKGROUND!"\\
+}
+
+When you run this program, the entire screen turns blue and the text appears in
+white!\\
+
+\section{Screen Modes with Borders}
+
+The Commander X16 can display a border around the screen, just like the classic
+Commodore computers.  To use a screen mode with a border, use the {\ttfamily
+SCREEN} command with mode 7 or higher:\\
+
+\codeblock{
+	SCREEN 7\\
+}
+
+Screen mode 7 gives you a 22 by 23 character display with a nice border around
+it.  The border color is determined by the first color in the palette (color
+0).\\
+
+\begin{tabular}{|c|l|}
+	\hline
+	{\bfseries Mode} & {\bfseries Description}\\ \hline
+	7 & 22x23 Text with border\\ \hline
+	8 & 64x50 Text with border\\ \hline
+	9 & 64x25 Text with border\\ \hline
+	10 & 32x50 Text with border\\ \hline
+	11 & 32x25 Text with border\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+To go back to the normal 80x60 screen without a border, type:\\
+
+\codeblock{
+	SCREEN 0\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Screen Locations
+%----------------------------------------------------------------------------------------
+
+\chapter*{Screen Locations}\index{Screen Locations}\index{LOCATE}\index{TILE}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Screen Locations}
+
+Sometimes you want to put text or graphics at a specific spot on the screen.
+The Commander X16 gives you several ways to control exactly where things
+appear.\\
+
+\section{The LOCATE Statement}
+
+The {\ttfamily LOCATE} statement moves the cursor to a specific row on the
+screen.  The rows are numbered starting from 1 at the top.  After using
+{\ttfamily LOCATE}, the next {\ttfamily PRINT} statement will start printing
+at that row:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 LOCATE 10\\
+	30 PRINT "THIS IS ROW 10"\\
+	40 LOCATE 20\\
+	50 PRINT "THIS IS ROW 20"\\
+}
+
+\section{The TAB Function}
+
+The {\ttfamily TAB} function lets you move to a specific column (horizontal
+position) within a {\ttfamily PRINT} statement.  Columns are numbered starting
+from 1 on the left:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 PRINT TAB(20);"COLUMN 20"\\
+	30 PRINT TAB(40);"COLUMN 40"\\
+}
+
+\section{The TILE Statement}
+
+The {\ttfamily TILE} statement is a powerful command that lets you place any
+character at any position on the screen using X and Y coordinates.  Unlike
+{\ttfamily LOCATE} and {\ttfamily PRINT}, the {\ttfamily TILE} statement uses
+coordinates that start from 0, and lets you specify both the column (X) and row
+(Y) at the same time:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 TILE 10,5,1 : REM PUT 'A' AT COLUMN 10, ROW 5\\
+	30 TILE 20,10,2 : REM PUT 'B' AT COLUMN 20, ROW 10\\
+	40 TILE 30,15,3 : REM PUT 'C' AT COLUMN 30, ROW 15\\
+}
+
+The third number in the {\ttfamily TILE} statement is the \emph{screen code}
+of the character you want to display.  Screen code 1 is the letter A, 2 is B,
+and so on.  You can find a complete list of screen codes in the appendix.\\
+
+The {\ttfamily TILE} statement can also set the color of the character by
+adding a fourth number.  This number combines the foreground and background
+colors into a single value:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 TILE 10,5,1,\$61 : REM 'A' IN WHITE ON BLUE\\
+	30 TILE 20,10,2,\$25 : REM 'B' IN GREEN ON RED\\
+}
+
+The color value is calculated by putting the background color in the upper 4
+bits and the foreground color in the lower 4 bits.  For example, \$61 means
+background color 6 (blue) and foreground color 1 (white).\\
+
+\note{
+
+	On the original Commodore 64, programmers used {\ttfamily POKE} commands to
+	write characters and colors directly to screen memory.  The Commander X16
+	can do this too using {\ttfamily VPOKE} to write to the VERA's video memory,
+	but the memory addresses and organization are different from the C64.  The
+	good news is that the {\ttfamily COLOR} and {\ttfamily TILE} statements make
+	this much easier!  Instead of calculating memory addresses and remembering
+	offsets, you can simply tell the X16 \emph{where} you want something and
+	\emph{what color} it should be.  The X16 handles all the complicated memory
+	details for you.\\
+
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Random Colors
+%----------------------------------------------------------------------------------------
+
+\chapter*{Random Colors}\index{Random Colors}\index{RND}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Random Colors}
+
+One of the most fun things you can do with colors is to use \emph{random}
+colors!  The {\ttfamily RND} function generates random numbers, and we can use
+it to pick random colors for our programs.\\
+
+\section{A Colorful Screen Filler}
+
+Here's a program that fills the screen with randomly colored characters:\\
+
+\codeblock{
+	10 COLOR RND(1)*16,RND(1)*16\\
+	20 PRINT "*";\\
+	30 GOTO 10\\
+}
+
+Run this program and watch the screen fill up with colorful asterisks!  Each
+asterisk has a random foreground color and a random background color.  Press
+\runstopkey to stop the program when you've seen enough.\\
+
+Let's look at how this works.  {\ttfamily RND(1)} gives us a random number
+between 0 and 1, like 0.5 or 0.234.  When we multiply it by 16, we get a random
+number between 0 and 16.  The {\ttfamily COLOR} statement only uses the whole
+number part, so we end up with a random color from 0 to 15 --- exactly the
+range we need!\\
+
+\section{Rainbow Text}
+
+Here's a fun program that prints a message in rainbow colors:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 A\$="COMMANDER X16 IS COLORFUL! "\\
+	30 FOR I=1 TO LEN(A\$)\\
+	40 COLOR (I-1) AND 15\\
+	50 PRINT MID\$(A\$,I,1);\\
+	60 NEXT I\\
+	70 PRINT\\
+	80 GOTO 20\\
+}
+
+This program prints each letter of the message in a different color, cycling
+through all 16 colors.  The {\ttfamily AND 15} makes sure the color number
+stays in the valid range of 0-15.\\
+
+\section{Color Cycling}
+
+Here's a mesmerizing program that continuously changes colors:\\
+
+\codeblock{
+	10 FOR C=0 TO 15\\
+	20 COLOR C,15-C\\
+	30 PRINT "COLOR ";C\\
+	40 SLEEP 30\\
+	50 NEXT C\\
+	60 GOTO 10\\
+}
+
+This program cycles through all the colors, showing each color number and using
+complementary foreground and background colors.  The {\ttfamily SLEEP 30}
+command pauses for about half a second so you can see each color.\\
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Keyboard Graphics
+%----------------------------------------------------------------------------------------
+
+\chapter*{Keyboard Graphics}\index{Keyboard Graphics}\index{PETSCII}\index{Graphic Characters}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Keyboard Graphics}
+
+The Commander X16 keyboard has many special \emph{graphic characters} that you
+can use to draw pictures, borders, and designs.  These characters are part of
+the PETSCII character set, named after the classic Commodore PET computer.\\
+
+\section{Typing Graphic Characters}
+
+Look at your keyboard.  Most keys have one or two small symbols on the front
+of the key.  These are graphic characters!  To type them:\\
+
+\begin{itemize}
+	\item Hold \shiftkey and press a key to type the graphic on the
+	      \emph{right} side of the key
+	\item Hold \altkey and press a key to type the graphic on the
+	      \emph{left} side of the key
+\end{itemize}
+
+For example, pressing \shiftkey + \key{S} types a heart symbol, while
+\altkey + \key{S} types a corner piece.\\
+
+\section{Drawing Boxes}
+
+One of the most useful things you can do with graphic characters is draw boxes
+and borders.  Here are the keys for drawing a simple box:\\
+
+\begin{tabular}{|c|c|l|}
+	\hline
+	{\bfseries Keys} & {\bfseries Character} & {\bfseries Description}\\ \hline
+	\altkey + \key{U} & Rounded top-left corner & Corner piece \\ \hline
+	\altkey + \key{I} & Rounded top-right corner & Corner piece \\ \hline
+	\altkey + \key{J} & Rounded bottom-left corner & Corner piece \\ \hline
+	\altkey + \key{K} & Rounded bottom-right corner & Corner piece \\ \hline
+	\shiftkey + \key{-} & Horizontal line & Top/bottom edges \\ \hline
+	\shiftkey + \key{|} & Vertical line & Left/right edges \\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+Try drawing a box by typing these characters.  Use the arrow keys to position
+your cursor, and use \shiftkey and \altkey with the keys above to draw the
+edges and corners.\\
+
+\section{A Box-Drawing Program}
+
+Here's a program that draws a colorful box on the screen:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 COLOR 14,6\\
+	30 REM TOP OF BOX\\
+	40 PRINT "\altkey\key{U}";\\
+	50 FOR I=1 TO 20:PRINT "\shiftkey\key{-}";:NEXT\\
+	60 PRINT "\altkey\key{I}"\\
+	70 REM SIDES OF BOX\\
+	80 FOR J=1 TO 5\\
+	90 PRINT "\shiftkey\key{|}";TAB(22);"\shiftkey\key{|}"\\
+	100 NEXT J\\
+	110 REM BOTTOM OF BOX\\
+	120 PRINT "\altkey\key{J}";\\
+	130 FOR I=1 TO 20:PRINT "\shiftkey\key{-}";:NEXT\\
+	140 PRINT "\altkey\key{K}"\\
+}
+
+\note{
+	When you type this program, the graphic characters will appear as symbols
+	in your listing.  The notation \altkey\key{U} means "hold ALT and press U"
+	to type the rounded corner character.\\
+}
+
+\section{Making Pictures}
+
+With practice, you can create amazing pictures using graphic characters!  The
+secret is to combine different characters and colors.  Here are some ideas to
+get you started:\\
+
+\begin{itemize}
+	\item Use \shiftkey + \key{Q} and \shiftkey + \key{W} for ball shapes
+	\item Use \shiftkey + \key{A} and \shiftkey + \key{S} for card suit symbols
+	\item Use \altkey + \key{A}, \key{S}, \key{Z}, \key{X} for quarter-block
+	      characters that can make smooth diagonal lines
+	\item Combine reverse mode with spaces to make solid color blocks
+\end{itemize}
+
+\tryit{
+	Try creating your own picture using graphic characters!  Start simple ---
+	maybe a house, a car, or a smiley face.  Use {\ttfamily COLOR} to add colors
+	to different parts of your picture.\\
+}
+
+\section{The Character Set}
+
+The Commander X16 has 256 different characters, including all the letters,
+numbers, punctuation, and graphic symbols.  You can see all of them using this
+program:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 FOR I=0 TO 255\\
+	30 TILE I AND 15, I/16, I\\
+	40 NEXT I\\
+}
+
+This uses the {\ttfamily TILE} statement to display all 256 characters in a
+16 by 16 grid.  The character codes go from 0 to 255.  You can find a complete
+chart of all characters and their codes in the appendix.\\
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Combining Color and Sound
+%----------------------------------------------------------------------------------------
+
+\chapter*{Combining Color and Sound}\index{Color and Sound}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Combining Color and Sound}
+
+Colors and sounds go great together!  Here's a simple program that makes random
+colors and plays random notes at the same time:\\
+
+\codeblock{
+	10 COLOR RND(1)*16,RND(1)*16\\
+	20 PRINT "\shiftkey\key{Q}";\\
+	30 N\$="CDEFGAB"\\
+	40 PSGPLAY 0,"O3"+MID\$(N\$,RND(1)*7+1,1)\\
+	50 SLEEP 10\\
+	60 GOTO 10\\
+}
+
+This program fills the screen with colorful circles while playing random
+musical notes.  You'll learn more about making music in Chapter 5 --- for now,
+just enjoy the colorful noise!\\
+
+\tip{Making Your Own Light Show}{
+
+	Try modifying the program above to create your own audio-visual experience!
+	Change the graphic character to something else, adjust the {\ttfamily SLEEP}
+	time to speed up or slow down the show, or use {\ttfamily TILE} to place
+	characters in specific patterns while the music plays.\\
+
+}
 
 \@openrighttrue\makeatother

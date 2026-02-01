@@ -18,44 +18,534 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER - Animation
+%	CHAPTER - Animation Introduction
 %----------------------------------------------------------------------------------------
 
 \chapter*{Animation}\index{Animation}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Animation}
 
-% TODO: This chapter needs content covering (VIC-20 style):
-% - Flying birds example
-% - Bouncing ball
-% - Cursor control for animation
-% - Animating with POKEs and PEEKs
-% - Simple game animations
+Did you try the program at the beginning of this chapter?  If you did, you saw
+a little asterisk zooming across the screen, over and over again!  Animation is
+one of the most exciting things you can do with your Commander X16.  In this
+chapter, you'll learn how to make objects move across the screen, bounce
+around, and even fly!\\
 
-\section{Introduction}
+Animation on a computer works just like animation in cartoons.  A cartoon movie
+is really just a series of still pictures shown very quickly, one after
+another.  Each picture is slightly different from the one before it, and when
+they flash by fast enough, your eyes see smooth movement.  Computer animation
+works the same way --- we draw something, erase it, and draw it again in a
+slightly different position.\\
 
-% Placeholder content - replace with actual content
-One of the most exciting things you can do with your Commander X16 is create
-animations! In this chapter, you'll learn how to make objects move across the
-screen, bounce around, and come to life.
+If you've read Chapter 3, you already know how to put colors and characters on
+the screen.  Now we're going to make those characters \emph{move}!\\
 
-\section{Your First Animation}
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Your First Animation
+%----------------------------------------------------------------------------------------
 
-% TODO: Simple moving character animation
+\chapter*{Your First Animation}\index{Animation!First Animation}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Your First Animation}
 
-\section{The Bouncing Ball}
+Let's take a close look at the program from the beginning of this chapter to
+understand how it makes the asterisk move across the screen:\\
 
-% TODO: Classic bouncing ball program
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 FOR X=1 TO 38\\
+	30 PRINT "\clrhomekey";\\
+	40 PRINT TAB(X);"*"\\
+	50 FOR D=1 TO 50:NEXT D\\
+	60 NEXT X\\
+	70 GOTO 20\\
+}
 
-\section{Cursor Control}
+Line 10 clears the screen at the start of the program.  This gives us a nice
+blank canvas to work with.\\
 
-% TODO: Using cursor movement for animation
+Line 20 starts a {\ttfamily FOR...NEXT} loop.  The variable {\ttfamily X} will
+count from 1 to 38, and we'll use this number to control where the asterisk
+appears.  Why 38?  Because the standard screen is 40 characters wide, and we
+want to leave a little room at the edges.\\
 
-\section{Animation with PEEK and POKE}
+Line 30 moves the cursor to the home position (top-left corner) without
+clearing the screen.  The \clrhomekey key by itself (without \shiftkey) just
+moves the cursor home.  The semicolon at the end keeps the cursor on that
+line.\\
 
-% TODO: Direct screen memory animation
+Line 40 is where the magic happens!  The {\ttfamily TAB(X)} function moves to
+column {\ttfamily X}, and then we print the asterisk.  Each time through the
+loop, {\ttfamily X} is one bigger, so the asterisk appears one position further
+to the right.\\
 
-\section{Flying Objects}
+Line 50 is a \emph{delay loop}.  It counts from 1 to 50, doing nothing useful
+--- just wasting a little time.  Without this delay, the asterisk would zoom
+across the screen so fast you could barely see it!\\
 
-% TODO: Bird or spaceship animation example
+Line 60 completes the {\ttfamily FOR...NEXT} loop, sending us back to line 20
+with a new value of {\ttfamily X}.\\
+
+Line 70 sends us back to line 20 to start the whole animation over again.\\
+
+\note{
+	The delay loop in line 50 is a classic technique from early computers.  The
+	Commander X16 also has a {\ttfamily SLEEP} command that pauses for a
+	specified number of ``jiffies'' (60ths of a second), which can be easier to
+	use.  Try replacing line 50 with {\ttfamily 50 SLEEP 1} and see if you like
+	the timing better!\\
+}
+
+\section{Understanding the Animation}
+
+Here's what happens each time through the loop:\\
+
+\begin{enumerate}
+	\item The cursor moves to the home position (top-left corner)
+	\item The {\ttfamily TAB} function moves to column X
+	\item The asterisk is printed at that position
+	\item The delay loop pauses briefly
+	\item X increases by 1, and we repeat
+\end{enumerate}
+
+But wait --- why don't we see a trail of asterisks across the screen?  Look
+carefully at line 30 again.  The \clrhomekey moves the cursor to the top-left,
+and then when we print the asterisk with {\ttfamily TAB(X)}, the spaces from
+column 1 to column X automatically erase any previous asterisk!  The {\ttfamily
+TAB} function fills in spaces as it moves across.\\
+
+\tryit{
+	Change line 40 to use a different character instead of the asterisk.  Try a
+	ball ({\ttfamily \shiftkey\key{Q}}), a heart ({\ttfamily \shiftkey\key{S}}),
+	or your favorite graphic character from Chapter 3!\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - The Bouncing Ball
+%----------------------------------------------------------------------------------------
+
+\chapter*{The Bouncing Ball}\index{Animation!Bouncing Ball}
+\addcontentsline{toc}{chapter}{\protect\numberline{}The Bouncing Ball}
+
+Now let's make something that moves in \emph{two} directions --- the classic
+bouncing ball!  Type {\ttfamily NEW} and enter this program:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 X=1:Y=1\\
+	30 DX=1:DY=1\\
+	40 TILE X,Y,81\\
+	50 SLEEP 2\\
+	60 TILE X,Y,32\\
+	70 X=X+DX:Y=Y+DY\\
+	80 IF X<1 OR X>38 THEN DX=-DX\\
+	90 IF Y<1 OR Y>28 THEN DY=-DY\\
+	100 GOTO 40\\
+}
+
+Run this program and watch the ball bounce around the screen!  It moves
+diagonally, and when it hits an edge, it bounces back.  Press \runstopkey to
+stop the program when you've seen enough.\\
+
+Let's look at how this program works:\\
+
+Lines 20-30 set up our \emph{variables}.  {\ttfamily X} and {\ttfamily Y} are
+the ball's position on the screen.  {\ttfamily DX} and {\ttfamily DY} are the
+ball's \emph{direction} --- how much to move each step.  When {\ttfamily DX} is
+1, the ball moves right; when it's -1, the ball moves left.  The same is true
+for {\ttfamily DY} and up/down movement.\\
+
+Line 40 draws the ball using the {\ttfamily TILE} statement.  The number 81 is
+the screen code for a filled circle ({\ttfamily \shiftkey\key{Q}}).  Remember
+from Chapter 3 that {\ttfamily TILE} takes X position, Y position, and
+character code.\\
+
+Line 50 pauses for a tiny moment so we can see the ball.  {\ttfamily SLEEP 2}
+waits for 2 ``jiffies'' (about 1/30th of a second).\\
+
+Line 60 erases the ball by putting a space (screen code 32) at the ball's
+current position.  This is important!  If we didn't erase the old ball, we'd
+see a trail of balls instead of one moving ball.\\
+
+Line 70 moves the ball by adding the direction values to the position.  If
+{\ttfamily DX} is 1, then {\ttfamily X=X+DX} makes {\ttfamily X} one bigger,
+moving the ball to the right.\\
+
+Lines 80-90 check if the ball has hit an edge.  If {\ttfamily X} is less than 1
+or greater than 38, we've hit the left or right edge, so we reverse the
+horizontal direction by making {\ttfamily DX=-DX}.  The same logic applies for
+the top and bottom edges with {\ttfamily Y} and {\ttfamily DY}.\\
+
+Line 100 goes back to line 40 to draw the ball in its new position and continue
+the animation.\\
+
+\section{Adding Color to the Ball}
+
+Let's make the bouncing ball more colorful!  Modify line 40 to include a
+color:\\
+
+\codeblock{
+	40 TILE X,Y,81,\$71\\
+}
+
+The {\ttfamily \$71} sets the color to white (1) on a yellow (7) background.
+But why stop at one color?  Let's make the ball change colors as it bounces!\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 X=1:Y=1:C=1\\
+	30 DX=1:DY=1\\
+	40 TILE X,Y,81,C*16+C\\
+	50 SLEEP 2\\
+	60 TILE X,Y,32\\
+	70 X=X+DX:Y=Y+DY\\
+	80 IF X<1 OR X>38 THEN DX=-DX:C=C+1\\
+	90 IF Y<1 OR Y>28 THEN DY=-DY:C=C+1\\
+	95 IF C>15 THEN C=1\\
+	100 GOTO 40\\
+}
+
+Now the ball changes color every time it bounces!  Line 95 makes sure the color
+stays in the valid range of 1-15 (we skip 0, which is black on black).\\
+
+\tip{Making it Faster or Slower}{
+	The {\ttfamily SLEEP 2} in line 50 controls the speed of the animation.
+	Change it to {\ttfamily SLEEP 1} for a faster ball, or {\ttfamily SLEEP 5}
+	for a slower one.  You can even remove line 50 entirely for maximum speed
+	--- but the ball might move too fast to follow!\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Cursor Control for Animation
+%----------------------------------------------------------------------------------------
+
+\chapter*{Cursor Control for Animation}\index{Animation!Cursor Control}\index{Cursor Control}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Cursor Control for Animation}
+
+Before the {\ttfamily TILE} statement existed, early Commodore programmers
+animated by using cursor control characters inside {\ttfamily PRINT} statements.
+This technique still works on the Commander X16, and it's a fun way to
+understand how animation really works.\\
+
+\section{Cursor Movement Characters}
+
+You can move the cursor around the screen using special control characters.
+These can be typed inside quotation marks in a {\ttfamily PRINT} statement:\\
+
+\begin{tabular}{|c|l|}
+	\hline
+	{\bfseries Keys} & {\bfseries Action}\\ \hline
+	\ctrlkey + \key{N} or Cursor Down & Move cursor down one row\\ \hline
+	\ctrlkey + \key{P} or Cursor Up & Move cursor up one row\\ \hline
+	\ctrlkey + \key{M} or Cursor Right & Move cursor right one column\\ \hline
+	\ctrlkey + \key{Y} or Cursor Left & Move cursor left one column\\ \hline
+	\clrhomekey (alone) & Move cursor to home position\\ \hline
+	\shiftkey + \clrhomekey & Clear screen and home cursor\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+When you press these keys while inside quotation marks in a {\ttfamily PRINT}
+statement, a special symbol appears in your program listing.  When the program
+runs, the Commander X16 interprets that symbol as a cursor movement
+instruction.\\
+
+\section{A Moving Star with Cursor Control}
+
+Here's a program that moves a star across the screen using cursor control:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 PRINT "\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}";\\
+	30 FOR I=1 TO 35\\
+	40 PRINT " *\key{CrsrLt}";\\
+	50 FOR D=1 TO 50:NEXT D\\
+	60 NEXT I\\
+	70 GOTO 10\\
+}
+
+In line 20, you would press the cursor-down key five times while inside the
+quotation marks.  This moves the cursor down five rows so the star doesn't
+appear at the very top of the screen.\\
+
+Line 40 is where the animation magic happens.  Inside the quotation marks,
+we print:\\
+\begin{itemize}
+	\item A space (to erase the previous star)
+	\item An asterisk (the new star)
+	\item A cursor-left (to position for the next erase)
+\end{itemize}
+
+Each time through the loop, the space erases the old star, a new star is
+printed one position to the right, and the cursor-left gets us ready for the
+next cycle.\\
+
+\note{
+	When typing cursor control characters inside quotation marks, you'll see
+	strange-looking symbols appear.  Don't worry --- this is normal!  These
+	symbols tell the Commander X16 to move the cursor when the program runs.
+	They'll look like reversed letters or special graphics characters.\\
+}
+
+\section{The Classic Bouncing Ball with Cursor Control}
+
+Here's the traditional way programmers made a bouncing ball move across the
+screen, using only cursor control and {\ttfamily PRINT} statements:\\
+
+\codeblock{
+	10 REM BOUNCING BALL\\
+	20 PRINT "\shiftkey\clrhomekey"\\
+	25 FOR X=1 TO 10:PRINT "\key{CrsrDn}":NEXT\\
+	30 FOR BL=1 TO 38\\
+	40 PRINT " \shiftkey\key{Q}\key{CrsrLt}";\\
+	50 FOR TM=1 TO 50:NEXT TM\\
+	60 NEXT BL\\
+	70 REM MOVE BALL RIGHT TO LEFT\\
+	80 FOR BL=38 TO 1 STEP -1\\
+	90 PRINT " \key{CrsrLt}\key{CrsrLt}\shiftkey\key{Q}\key{CrsrLt}";\\
+	100 FOR TM=1 TO 50:NEXT TM\\
+	110 NEXT BL\\
+	120 GOTO 20\\
+}
+
+This program moves a ball from left to right, then from right to left, over and
+over.  Line 25 positions the ball in the middle of the screen vertically.
+Lines 30-60 move the ball to the right, and lines 80-110 move it back to the
+left.\\
+
+The trick in line 40 is printing a space first (to erase the old ball), then
+the ball character (\shiftkey + \key{Q}), and finally a cursor-left to position
+for the next erase.\\
+
+Line 90 is a bit different because we're moving left.  We print a space, then
+two cursor-lefts (to move past where the ball was), the ball, and then one more
+cursor-left.\\
+
+\tryit{
+	Try changing line 25 to position the ball at different heights on the
+	screen.  What happens if you use more or fewer cursor-down characters?  Can
+	you make the ball bounce along the top of the screen?\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Animation with VPOKE
+%----------------------------------------------------------------------------------------
+
+\chapter*{Animation with VPOKE}\index{Animation!VPOKE}\index{VPOKE}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Animation with VPOKE}
+
+For the fastest possible animation, you can write directly to the Commander
+X16's video memory using the {\ttfamily VPOKE} command.  This bypasses the
+normal {\ttfamily PRINT} routines and lets you put characters and colors
+anywhere on the screen almost instantly.\\
+
+The Commander X16's video chip is called VERA (Video Enhanced Retro Adapter).
+VERA has its own memory that holds the screen contents, and {\ttfamily VPOKE}
+lets you write directly to that memory.\\
+
+\section{Understanding Screen Memory}
+
+In the default text mode, each character on screen takes up two bytes in VERA
+memory:\\
+
+\begin{itemize}
+	\item The first byte is the \emph{screen code} --- which character to display
+	\item The second byte is the \emph{color} --- foreground and background colors
+\end{itemize}
+
+The screen memory starts at address {\ttfamily \$1B000} in VERA memory, which
+means bank 1 at address {\ttfamily \$B000}.  Each row of 80 characters takes up
+160 bytes (80 characters × 2 bytes each).  To find the address of any character
+at column X and row Y, use this formula:\\
+
+\begin{center}
+	{\ttfamily ADDRESS = \$B000 + (Y * 160) + (X * 2)}
+\end{center}
+
+The color byte is at ADDRESS + 1.\\
+
+\section{Using VPOKE}
+
+The {\ttfamily VPOKE} command takes three numbers: the VERA bank, the address,
+and the value to write.  For the text screen, we use bank 1 with addresses
+starting at {\ttfamily \$B000}:\\
+
+\codeblock{
+	VPOKE 1, \$B000 + offset, value\\
+}
+
+Here's a simple example that puts a red ``A'' at the top-left corner of the
+screen:\\
+
+\codeblock{
+	10 VPOKE 1,\$B000,1\\
+	20 VPOKE 1,\$B001,\$02\\
+}
+
+Line 10 puts screen code 1 (the letter A) at address {\ttfamily \$B000} in bank
+1.  Line 20 puts color {\ttfamily \$02} (red foreground, black background) at
+address {\ttfamily \$B001}.\\
+
+\section{A Fast Bouncing Ball}
+
+Here's a bouncing ball program using {\ttfamily VPOKE} for faster animation:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 X=0:Y=0\\
+	30 DX=1:DY=1\\
+	40 A=\$B000+(Y*160)+(X*2)\\
+	50 VPOKE 1,A,81:VPOKE 1,A+1,\$71\\
+	60 SLEEP 1\\
+	70 VPOKE 1,A,32\\
+	80 X=X+DX:Y=Y+DY\\
+	90 IF X<0 OR X>78 THEN DX=-DX\\
+	100 IF Y<0 OR Y>58 THEN DY=-DY\\
+	110 GOTO 40\\
+}
+
+This program works just like our earlier bouncing ball, but uses {\ttfamily
+VPOKE} instead of {\ttfamily TILE}.  Line 40 calculates the memory address for
+position X,Y.  Line 50 writes both the character (81 = ball) and the color
+(\$71 = white on yellow).  Line 70 erases the ball by writing a space (32).\\
+
+\note{
+	The {\ttfamily TILE} statement is usually easier to use than {\ttfamily
+	VPOKE}, but {\ttfamily VPOKE} gives you more control and can be slightly
+	faster for complex animations.  When you're starting out, stick with
+	{\ttfamily TILE}.  As you become more advanced, you might want to experiment
+	with {\ttfamily VPOKE} for special effects.\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Flying Objects
+%----------------------------------------------------------------------------------------
+
+\chapter*{Flying Objects}\index{Animation!Flying Objects}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Flying Objects}
+
+Let's put everything together and create a program with multiple moving
+objects!  We'll make a scene with a flying bird and some clouds.\\
+
+\section{A Simple Flying Bird}
+
+First, let's make a bird that flaps its wings as it flies.  The trick is to
+alternate between two different characters to create the flapping effect:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 FOR X=0 TO 78\\
+	30 W=(X AND 1)\\
+	40 IF W=0 THEN TILE X,10,118\\
+	50 IF W=1 THEN TILE X,10,119\\
+	60 SLEEP 3\\
+	70 TILE X,10,32\\
+	80 NEXT X\\
+	90 GOTO 10\\
+}
+
+Screen codes 118 and 119 look like a bird with wings up and wings down.  Line
+30 uses {\ttfamily AND 1} to check if X is odd or even --- this makes the wings
+alternate with each step.  Lines 40-50 draw the appropriate wing position, and
+line 70 erases the bird before it moves to the next position.\\
+
+\section{Adding Multiple Birds}
+
+Now let's make things more interesting with several birds flying at different
+heights and speeds:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 DIM X(3),Y(3),S(3)\\
+	30 FOR I=0 TO 2\\
+	40 X(I)=RND(1)*40\\
+	50 Y(I)=RND(1)*10+5\\
+	60 S(I)=INT(RND(1)*3)+1\\
+	70 NEXT I\\
+	80 REM ANIMATION LOOP\\
+	90 FOR I=0 TO 2\\
+	100 TILE X(I),Y(I),32\\
+	110 X(I)=X(I)+S(I)\\
+	120 IF X(I)>78 THEN X(I)=0\\
+	130 W=X(I) AND 1\\
+	140 IF W=0 THEN TILE X(I),Y(I),118\\
+	150 IF W=1 THEN TILE X(I),Y(I),119\\
+	160 NEXT I\\
+	170 SLEEP 2\\
+	180 GOTO 90\\
+}
+
+This program uses \emph{arrays} to keep track of three birds.  Each bird has
+its own X position ({\ttfamily X()}), Y position ({\ttfamily Y()}), and speed
+({\ttfamily S()}).  Lines 30-70 initialize each bird with random starting
+positions and speeds.  The main loop at lines 90-160 moves and draws all three
+birds.\\
+
+\tryit{
+	Change the number of birds by modifying line 20 to {\ttfamily DIM X(5),
+	Y(5), S(5)} and changing the loops to go from 0 to 4.  How many birds can
+	you have flying at once before the animation starts to slow down?\\
+}
+
+\section{A Starfield}
+
+Here's a fun program that creates a scrolling starfield, like you're flying
+through space:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 DIM X(20),Y(20),S(20)\\
+	30 FOR I=0 TO 19\\
+	40 X(I)=RND(1)*80\\
+	50 Y(I)=RND(1)*60\\
+	60 S(I)=INT(RND(1)*3)+1\\
+	70 NEXT I\\
+	80 COLOR 1,0\\
+	90 REM ANIMATION LOOP\\
+	100 FOR I=0 TO 19\\
+	110 TILE X(I),Y(I),32\\
+	120 X(I)=X(I)-S(I)\\
+	130 IF X(I)<0 THEN X(I)=79:Y(I)=RND(1)*60\\
+	140 TILE X(I),Y(I),46,\$01\\
+	150 NEXT I\\
+	160 SLEEP 1\\
+	170 GOTO 100\\
+}
+
+Twenty ``stars'' (actually periods) move from right to left at different
+speeds.  When a star goes off the left edge, it reappears on the right at a
+random height.  Stars moving faster appear to be closer, creating a sense of
+depth!\\
+
+\section{Putting It All Together}
+
+Here's a more complete program that combines several animation techniques into
+a little scene:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 COLOR 14,6\\
+	30 LOCATE 25\\
+	40 FOR I=1 TO 80:PRINT "\shiftkey\key{-}";:NEXT\\
+	50 COLOR 5\\
+	60 X=0:Y=10\\
+	70 TILE X,Y,118+((X AND 2)/2)\\
+	80 SLEEP 2\\
+	90 TILE X,Y,32\\
+	100 X=X+1\\
+	110 IF X>79 THEN X=0:Y=INT(RND(1)*15)+5\\
+	120 GOTO 70\\
+}
+
+This creates a simple scene with a ``ground'' line (made of horizontal
+lines) and a bird flying across the sky.  When the bird goes off the right
+edge, it reappears on the left at a random height.\\
+
+\tip{Making Your Own Animations}{
+	The key to good animation is practice!  Start with simple programs like
+	the ones in this chapter, then try combining them.  Add colors, sounds (from
+	Chapter 5), and user input (from Chapter 6) to create your own animated
+	programs and games.  The Commander X16 has the power to create amazing
+	animations --- all it takes is your imagination!\\
+}
 
 \@openrighttrue\makeatother

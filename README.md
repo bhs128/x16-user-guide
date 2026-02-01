@@ -65,8 +65,8 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Setup** | [ch00_setup.tex](ch00_setup.tex) | 🚧 Placeholder | 58 | Lorem ipsum only - needs hardware setup content |
 | **Ch 1: Getting to Know Your X16** | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | 506 | Start screen, PRINT, GOTO, first program, errors |
 | **Ch 2: Using Screen & Keyboard** | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | 🔶 Partial | 432 | PRINT statement done, graphic characters started |
-| **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | 350+ | COLOR, TILE commands, color keys, screen locations, PETSCII graphics |
-| **Ch 4: Animation** | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | 61 | Has type-in example, section stubs with TODOs |
+| **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | 545 | COLOR, TILE commands, color keys, screen locations, PETSCII graphics |
+| **Ch 4: Animation** | [ch04_animation.tex](ch04_animation.tex) | ✅ Complete | 420+ | Bouncing ball, cursor control, VPOKE animation, flying objects, starfield |
 | **Ch 5: Sound and Music** | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | 75 | Has FM type-in example, section stubs with TODOs |
 | **Ch 6: Conversing with Your X16** | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | 549 | INPUT, variables, GET statement, temperature converter, interactive programs |
 | **Ch 7: Introduction to Programming** | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | 503 | RND, INT, IF...THEN, FOR...NEXT, guessing game, dice roller |
@@ -125,10 +125,10 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | **Ch 1**: Getting to Know | First program, PRINT/GOTO | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | Minor polish |
 | **Ch 2**: Screen & Keyboard | Printing, keyboard tour, calculator | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | 🔶 Partial | Complete graphic characters, keyboard diagram |
 | **Ch 3**: Color and Graphics | COLOR, screen colors, PETSCII art | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | None - covers COLOR, TILE, color keys, screen locations, keyboard graphics |
-| **Ch 4**: Animation | Bouncing ball, flying birds, PEEK/POKE | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | All sections need content |
+| **Ch 4**: Animation | Bouncing ball, flying birds, PEEK/POKE | [ch04_animation.tex](ch04_animation.tex) | ✅ Complete | None - covers bouncing ball, cursor control, VPOKE, flying objects, starfield |
 | **Ch 5**: Sound and Music | Making music, piano, songs | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | All sections need content (has FM type-in) |
 | **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | None - follows VIC-20 structure |
-| **Ch 7**: Intro to Programming | BASIC commands, RND, IF/THEN, FOR/NEXT | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | 🚧 Placeholder | All sections need content |
+| **Ch 7**: Intro to Programming | BASIC commands, RND, IF/THEN, FOR/NEXT | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | None - covers RND, IF/THEN, FOR/NEXT, games |
 | **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | 🔶 Mixed | Error messages partial, sample programs needed |
 
 ### 📋 Priority TODO List
@@ -137,10 +137,9 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 |----------|-----------------|---------------|---------------|
 | 🔴 High | **Ch 0: Setup** | Lorem ipsum | Write HDMI/VGA/composite setup, SD card prep, controller connection |
 | ✅ Done | **Ch 3: Color and Graphics** | Complete | COLOR, TILE, color keys, screen modes, PETSCII graphics, example programs |
+| ✅ Done | **Ch 4: Animation** | Complete | Bouncing ball, cursor control, VPOKE animation, flying objects, starfield |
 | 🔴 High | **Ch 5: Sound and Music** | Section stubs | Write PSG basics, FMPLAY/PSGPLAY tutorials, piano program |
 | 🟡 Medium | **Ch 2: Screen & Keyboard** | Partial | Complete graphic characters section, add keyboard diagram |
-| 🟡 Medium | **Ch 4: Animation** | Section stubs | Write bouncing ball, cursor control, PEEK/POKE animation |
-| 🟡 Medium | **Ch 7: Programming** | Section stubs | Write RND, IF/THEN, FOR/NEXT tutorials, sample game |
 | 🟡 Medium | **Appendix: Sample Programs** | Section stubs | Add 5-10 type-in programs |
 | 🟢 Low | **Appendix: Error Messages** | 7 errors | Complete full error list |
 | 🟢 Low | **Appendix: 65C02 Op Codes** | Empty | Add instruction reference (or remove if covered elsewhere) |

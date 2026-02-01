@@ -34,42 +34,632 @@
 \chapter*{Sound and Music}\index{Sound}\index{Music}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Sound and Music}
 
-% TODO: This chapter needs content covering (VIC-20 style):
-% - Making music on the X16
-% - The sound capabilities (PSG and FM)
-% - Sound effects
-% - Using the X16 as a piano
-% - Playing songs with FMPLAY/PSGPLAY
+Did you type in the program at the beginning of this chapter?  If so, you heard
+the Commander X16 play the opening of Beethoven's ``Für Elise''---complete with
+melody and accompaniment!  Even if you don't know how to read music, you can
+make the X16 create musical masterpieces by following a few simple rules.\\
 
-\section{Introduction}
+The Commander X16 has incredible sound capabilities that rival professional
+music synthesizers.  With not one, but \textit{two} sound chips, you can create
+everything from simple beeps and boops to complex multi-voice orchestrations.
+The first chip is called the \textbf{PSG} (Programmable Sound Generator), which
+is built into the VERA graphics chip and provides 16 voices of simple waveform
+sounds.  The second is the \textbf{YM2151}, a dedicated FM synthesis chip with
+8 channels that can produce rich, instrument-like sounds.\\
 
-% Placeholder content - replace with actual content
-The Commander X16 has amazing sound capabilities! With both a PSG (Programmable
-Sound Generator) and an FM synthesis chip, you can create music, sound effects,
-and even use your X16 as a musical instrument.
+Don't worry if those terms sound complicated---the X16's BASIC makes it easy to
+create music without understanding the technical details!
 
-\section{Making Your First Sound}
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Making Your First Sound
+%----------------------------------------------------------------------------------------
 
-% TODO: Simple sound example with PSG
+\chapter*{Making Your First Sound}\index{Sound!first sound}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Making Your First Sound}
 
-\section{The Voices of the X16}
+Let's start by making a simple sound using the PSG chip.  Clear any old program
+by holding \shiftkey and pressing \clrhomekey, then type {\ttfamily NEW} and
+press \returnkey.  Now type in this short program:\\
 
-% TODO: Cover PSG channels and FM voices
+\codeblock{
+	10 PSGINIT\\
+	20 PSGNOTE 0,\$4A\\
+	30 SLEEP 120\\
+	40 PSGNOTE 0,0\\
+}
 
-\section{Making Music}
+Type {\ttfamily RUN} and press \returnkey.  You should hear a tone play for
+about two seconds and then stop.  Congratulations---you just made your first
+sound on the Commander X16!\\
 
-% TODO: Cover FMPLAY and PSGPLAY commands
+Let's look at what each line does:
 
-\section{Sound Effects}
+\begin{itemize}
+	\item \textbf{Line 10}: {\ttfamily PSGINIT} initializes (prepares) the PSG
+		sound chip.  You should always run this command before making sounds
+		with the PSG.
+	\item \textbf{Line 20}: {\ttfamily PSGNOTE 0,\$4A} tells voice 0 to play a
+		note.  The {\ttfamily \$4A} is a special code that means ``Concert A''
+		(the note that orchestras tune to).
+	\item \textbf{Line 30}: {\ttfamily SLEEP 120} pauses for about 2 seconds
+		(60 ``jiffies'' = 1 second).  This gives the note time to play.
+	\item \textbf{Line 40}: {\ttfamily PSGNOTE 0,0} turns off the note on voice 0.
+\end{itemize}
 
-% TODO: Creating sound effects for games
+\tip{Hexadecimal Numbers}{The {\ttfamily \$} symbol means the number is written
+in \textit{hexadecimal} (base 16).  Don't worry about understanding hex right
+now---just type the codes exactly as shown!}
 
-\section{Using the X16 as a Piano}
+Now let's try the FM chip.  Type {\ttfamily NEW} and enter this program:\\
 
-% TODO: Interactive piano program
+\codeblock{
+	10 FMINIT\\
+	20 FMNOTE 0,\$4A\\
+	30 SLEEP 120\\
+	40 FMNOTE 0,0\\
+}
 
-\section{Playing Songs}
+Type {\ttfamily RUN} and listen.  Notice how different it sounds from the PSG?
+The FM chip creates richer, more complex tones that can sound like real musical
+instruments.  The {\ttfamily FMINIT} command initializes the FM chip and loads
+a default instrument (an electric piano sound) into all 8 channels.\\
 
-% TODO: Complete song examples
+Did you notice another difference?  The PSG note played at a constant volume
+until we turned it off, but the FM note \textit{faded away on its own}!  This
+is because FM instruments have built-in ``envelope'' settings that control how
+the sound changes over time---just like a real piano note that gradually fades
+after you press the key.\\
+
+To make an FM note sustain longer, you can use an instrument with a longer
+envelope.  Try this program with an organ sound that holds its notes:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,16:REM ORGAN\\
+	30 FMNOTE 0,\$4A\\
+	40 SLEEP 180\\
+	50 FMNOTE 0,0\\
+}
+
+The organ sustains until you release it, just like the PSG.  Different
+instruments have different behaviors---experiment to find the sounds you like!\\
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - The Voices of the X16
+%----------------------------------------------------------------------------------------
+
+\chapter*{The Voices of the X16}\index{Sound!voices}
+\addcontentsline{toc}{chapter}{\protect\numberline{}The Voices of the X16}
+
+Just like a choir has many singers, the Commander X16 has many ``voices'' that
+can play sounds at the same time.
+
+\section{PSG Voices}
+
+The PSG chip has \textbf{16 voices}, numbered 0 through 15.  Each voice can
+play one note at a time, and you can use multiple voices together to create
+chords or complex sound effects.\\
+
+Each PSG voice can produce four different types of sound waves:
+
+\begin{itemize}
+	\item \textbf{Pulse (Square) Wave}: A buzzy, electronic sound---great for
+		classic video game music
+	\item \textbf{Sawtooth Wave}: A bright, brassy sound
+	\item \textbf{Triangle Wave}: A soft, mellow sound like a flute
+	\item \textbf{Noise}: Random sounds for explosions, drums, or wind effects
+\end{itemize}
+
+The default waveform after {\ttfamily PSGINIT} is a pulse (square) wave with a
+50\% duty cycle.  You can change the waveform using the {\ttfamily PSGWAV}
+command.  Try this program to hear the different waveforms:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 PRINT "PULSE WAVE"\\
+	30 PSGWAV 0,63:REM PULSE 50\%\\
+	40 PSGNOTE 0,\$4A\\
+	50 SLEEP 90:PSGNOTE 0,0\\
+	60 SLEEP 30\\
+	70 PRINT "SAWTOOTH WAVE"\\
+	80 PSGWAV 0,64:REM SAWTOOTH\\
+	90 PSGNOTE 0,\$4A\\
+	100 SLEEP 90:PSGNOTE 0,0\\
+	110 SLEEP 30\\
+	120 PRINT "TRIANGLE WAVE"\\
+	130 PSGWAV 0,128:REM TRIANGLE\\
+	140 PSGNOTE 0,\$4A\\
+	150 SLEEP 90:PSGNOTE 0,0\\
+	160 SLEEP 30\\
+	170 PRINT "NOISE"\\
+	180 PSGWAV 0,192:REM NOISE\\
+	190 PSGNOTE 0,\$4A\\
+	200 SLEEP 90:PSGNOTE 0,0\\
+}
+
+\section{FM Channels}
+
+The YM2151 FM chip has \textbf{8 channels}, numbered 0 through 7.  Unlike the
+simple waveforms of the PSG, the FM chip uses a technique called \textit{frequency
+modulation} to create complex, rich sounds that can imitate real instruments.\\
+
+The X16 comes with over 160 built-in instrument sounds (called ``patches'')
+that you can load into any FM channel using the {\ttfamily FMINST} command.
+Here are just a few examples:\\
+
+\begin{center}
+\begin{tabular}{|c|l||c|l|}
+	\hline
+	\textbf{Number} & \textbf{Instrument} & \textbf{Number} & \textbf{Instrument}\\ \hline
+	0 & Electric Piano 1 & 24 & Acoustic Guitar (nylon)\\ \hline
+	16 & Drawbar Organ & 40 & Violin\\ \hline
+	56 & Trumpet & 73 & Flute\\ \hline
+	80 & Square Lead & 104 & Sitar\\ \hline
+	127 & Applause & 11 & Vibraphone\\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{16pt}
+
+Try this program to hear some different instruments:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 PRINT "ELECTRIC PIANO"\\
+	30 FMINST 0,0\\
+	40 FMNOTE 0,\$4A:SLEEP 90\\
+	50 FMNOTE 0,0:SLEEP 30\\
+	60 PRINT "TRUMPET"\\
+	70 FMINST 0,56\\
+	80 FMNOTE 0,\$4A:SLEEP 90\\
+	90 FMNOTE 0,0:SLEEP 30\\
+	100 PRINT "FLUTE"\\
+	110 FMINST 0,73\\
+	120 FMNOTE 0,\$4A:SLEEP 90\\
+	130 FMNOTE 0,0:SLEEP 30\\
+	140 PRINT "VIBRAPHONE"\\
+	150 FMINST 0,11\\
+	160 FMNOTE 0,\$4A:SLEEP 90\\
+	170 FMNOTE 0,0\\
+}
+
+\note{A complete list of FM instrument patches is available in the Appendix.
+Try experimenting with different patch numbers to find sounds you like!}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Making Music with PLAY Commands
+%----------------------------------------------------------------------------------------
+
+\chapter*{Making Music with PLAY Commands}\index{Sound!FMPLAY}\index{Sound!PSGPLAY}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Making Music with PLAY Commands}
+
+While {\ttfamily PSGNOTE} and {\ttfamily FMNOTE} let you play individual notes,
+the Commander X16 has a much easier way to play melodies: the {\ttfamily FMPLAY}
+and {\ttfamily PSGPLAY} commands.\\
+
+These commands let you write music using letter names for notes, just like
+reading sheet music!  Type in this program:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMPLAY 0,"CDEFGAB>C"\\
+}
+
+Run it and you'll hear a C major scale!  The letters C, D, E, F, G, A, and B
+play those musical notes.  The {\ttfamily >} symbol moves up one octave, so
+the final C is higher than where we started.\\
+
+\section{Understanding the Music String}
+
+The string you pass to {\ttfamily FMPLAY} or {\ttfamily PSGPLAY} is like a
+simple music notation.  Here are the basic codes:\\
+
+\begin{center}
+\begin{tabular}{|c|p{10cm}|}
+	\hline
+	\textbf{Code} & \textbf{What It Does}\\ \hline
+	A-G & Plays that musical note\\ \hline
+	+ or \# & Sharp (raises the note by a half step)---put after the note letter\\ \hline
+	- & Flat (lowers the note by a half step)---put after the note letter\\ \hline
+	R & Rest (silence)\\ \hline
+	> & Move up one octave\\ \hline
+	< & Move down one octave\\ \hline
+	O{\em n} & Set the octave to {\em n} (0-7), where 4 is the middle octave\\ \hline
+	L{\em n} & Set the default note length (1=whole, 2=half, 4=quarter, 8=eighth, etc.)\\ \hline
+	T{\em n} & Set the tempo (beats per minute)\\ \hline
+	. & Dotted note (adds 50\% more time to the note)\\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{16pt}
+
+Let's try a more interesting example.  This program plays ``Mary Had a Little
+Lamb'':\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMPLAY 0,"T120 L4 O4"\\
+	30 FMPLAY 0,"EDCDEEE2"\\
+	40 FMPLAY 0,"DDD2EGG2"\\
+	50 FMPLAY 0,"EDCDEEEE"\\
+	60 FMPLAY 0,"DDEDL2C"\\
+}
+
+Let's break down what's happening:
+
+\begin{itemize}
+	\item {\ttfamily T120} sets the tempo to 120 beats per minute
+	\item {\ttfamily L4} sets the default note length to quarter notes
+	\item {\ttfamily O4} sets the octave to 4 (middle octave)
+	\item Numbers after notes (like {\ttfamily E2}) set that note's length:
+		{\ttfamily 2} means a half note, which is twice as long as a quarter note
+\end{itemize}
+
+\section{Playing Chords}
+
+What if you want to play multiple notes at the same time?  You can use the
+{\ttfamily FMCHORD} or {\ttfamily PSGCHORD} commands!  Try this:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,16:FMINST 1,16:FMINST 2,16\\
+	30 FMCHORD 0,"O3CEG"\\
+	40 SLEEP 180\\
+	50 FMCHORD 0,"RRR"\\
+}
+
+This plays a C major chord by starting notes C, E, and G simultaneously on
+channels 0, 1, and 2.  The {\ttfamily RRR} at the end releases all three notes.\\
+
+\tip{Mixing Melody and Chords}{You can mix melody and chords!  Use
+{\ttfamily FMCHORD} to start background chords on some channels, then use
+{\ttfamily FMPLAY} on another channel to play a melody over the top---just like
+in the opening ``Für Elise'' example!}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Sound Effects
+%----------------------------------------------------------------------------------------
+
+\chapter*{Sound Effects}\index{Sound!effects}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Sound Effects}
+
+Music isn't the only thing you can create with sound.  Games and programs often
+need sound effects like explosions, laser beams, or warning buzzers.  The
+Commander X16 makes it easy to create these too!\\
+
+\section{A Simple Beep}
+
+Here's a basic beep that could be used for a button press or menu selection:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 PSGNOTE 0,\$5C:REM HIGH C\\
+	30 SLEEP 10\\
+	40 PSGNOTE 0,0\\
+}
+
+\section{An Explosion}
+
+Explosions sound great with the noise waveform.  Try this:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 PSGWAV 0,192:REM NOISE\\
+	30 PSGVOL 0,63:REM FULL VOLUME\\
+	40 PSGNOTE 0,\$30\\
+	50 FOR V=63 TO 0 STEP -1\\
+	60 PSGVOL 0,V\\
+	70 FOR T=1 TO 20:NEXT T\\
+	80 NEXT V\\
+}
+
+This creates an explosion sound by starting with loud noise and gradually
+reducing the volume to create a fade-out effect.  The {\ttfamily PSGVOL}
+command sets the volume of a voice (0 is silent, 63 is maximum).\\
+
+\section{A Laser Sound}
+
+Science fiction games need laser sounds!  This effect uses a rapidly falling
+pitch:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 FOR F=4000 TO 200 STEP -100\\
+	30 PSGFREQ 0,F\\
+	40 NEXT F\\
+	50 PSGFREQ 0,0\\
+}
+
+The {\ttfamily PSGFREQ} command lets you specify the exact frequency in Hertz
+(cycles per second) instead of using note codes.  By quickly decreasing the
+frequency from high to low, we create that classic ``pew pew'' laser sound.\\
+
+\section{A Siren}
+
+Emergency!  Here's a two-tone siren:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 FOR I=1 TO 5\\
+	30 PSGFREQ 0,800\\
+	40 SLEEP 25\\
+	50 PSGFREQ 0,600\\
+	60 SLEEP 25\\
+	70 NEXT I\\
+	80 PSGFREQ 0,0\\
+}
+
+\section{Power-Up Sound}
+
+When the player collects a power-up in a game, play this rising arpeggio:\\
+
+\codeblock{
+	10 PSGINIT\\
+	20 PSGWAV 0,63:REM PULSE\\
+	30 PSGPLAY 0,"T250 L32 O4 CEG>CEG>C"\\
+}
+
+Notice how we used {\ttfamily PSGPLAY} here---you can use the play commands for
+sound effects too, not just music!
+
+\tryit{Try combining different waveforms, volumes, and frequencies to create
+your own unique sound effects.  What sound would a jumping character make?
+A door opening?  A coin being collected?}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Using the X16 as a Piano
+%----------------------------------------------------------------------------------------
+
+\chapter*{Using the X16 as a Piano}\index{Sound!piano}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Using the X16 as a Piano}
+
+Now let's put everything together and turn your Commander X16 into a musical
+instrument!  This program lets you play notes using the keyboard:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 PRINT "\shiftkey\clrhomekey"\\
+	30 PRINT "*** X16 PIANO ***"\\
+	40 PRINT\\
+	50 PRINT "PLAY NOTES WITH KEYS:"\\
+	60 PRINT " A S D F G H J K"\\
+	70 PRINT " C D E F G A B C"\\
+	80 PRINT\\
+	90 PRINT "PRESS Q TO QUIT"\\
+	100 PRINT\\
+	110 GET K\$:IF K\$="" THEN 110\\
+	120 IF K\$="Q" THEN FMINIT:END\\
+	130 IF K\$="A" THEN N\$="C"\\
+	140 IF K\$="S" THEN N\$="D"\\
+	150 IF K\$="D" THEN N\$="E"\\
+	160 IF K\$="F" THEN N\$="F"\\
+	170 IF K\$="G" THEN N\$="G"\\
+	180 IF K\$="H" THEN N\$="A"\\
+	190 IF K\$="J" THEN N\$="B"\\
+	200 IF K\$="K" THEN N\$=">C"\\
+	210 IF N\$="" THEN 110\\
+	220 PRINT N\$;" ";\\
+	230 FMPLAY 0,"L8 O4 "+N\$\\
+	240 N\$=""\\
+	250 GOTO 110\\
+}
+
+When you run this program, you can play notes by pressing the keys A through K
+on your keyboard.  Each key corresponds to a note of the C major scale.  Press
+Q when you're done playing.\\
+
+\section{Adding More Features}
+
+Here's an enhanced version with sharps, flats, and octave control:\\
+
+\codeblock{
+	10 FMINIT:FMINST 0,0\\
+	20 O=4:REM STARTING OCTAVE\\
+	30 PRINT "\shiftkey\clrhomekey"\\
+	40 PRINT "*** DELUXE X16 PIANO ***"\\
+	50 PRINT\\
+	60 PRINT "WHITE KEYS: A S D F G H J K"\\
+	70 PRINT "            C D E F G A B C"\\
+	80 PRINT\\
+	90 PRINT "BLACK KEYS: W E   T Y U"\\
+	100 PRINT "            C\# D\#  F\# G\# A\#"\\
+	110 PRINT\\
+	120 PRINT "1-7 = OCTAVE, Q = QUIT"\\
+	130 PRINT\\
+	140 GET K\$:IF K\$="" THEN 140\\
+	150 IF K\$="Q" THEN FMINIT:END\\
+	160 IF K\$>="1" AND K\$<="7" THEN O=VAL(K\$):PRINT "OCTAVE:";O:GOTO 140\\
+	170 N\$=""\\
+	180 IF K\$="A" THEN N\$="C"\\
+	190 IF K\$="W" THEN N\$="C+"\\
+	200 IF K\$="S" THEN N\$="D"\\
+	210 IF K\$="E" THEN N\$="D+"\\
+	220 IF K\$="D" THEN N\$="E"\\
+	230 IF K\$="F" THEN N\$="F"\\
+	240 IF K\$="T" THEN N\$="F+"\\
+	250 IF K\$="G" THEN N\$="G"\\
+	260 IF K\$="Y" THEN N\$="G+"\\
+	270 IF K\$="H" THEN N\$="A"\\
+	280 IF K\$="U" THEN N\$="A+"\\
+	290 IF K\$="J" THEN N\$="B"\\
+	300 IF K\$="K" THEN N\$=">C"\\
+	310 IF N\$="" THEN 140\\
+	320 PRINT N\$;" ";\\
+	330 FMPLAY 0,"L8 O"+STR\$(O)+N\$\\
+	340 GOTO 140\\
+}
+
+Now you can play sharps using the ``black key'' row (W, E, T, Y, U) and change
+octaves by pressing number keys 1-7!\\
+
+\tryit{Try playing some simple songs on your X16 piano.  Can you figure out
+``Twinkle Twinkle Little Star'' or ``Happy Birthday''?  Once you learn a song,
+you can write it down as an {\ttfamily FMPLAY} string!}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Playing Songs
+%----------------------------------------------------------------------------------------
+
+\chapter*{Playing Songs}\index{Sound!songs}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Playing Songs}
+
+Let's learn how to play complete songs on the Commander X16.  We'll start with
+some simple melodies and work up to multi-voice arrangements.\\
+
+\section{Happy Birthday}
+
+Here's the classic birthday song:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,11:REM VIBRAPHONE\\
+	30 FMVIB 200,20:REM ADD VIBRATO\\
+	40 FMPLAY 0,"T100 L8 O4"\\
+	50 FMPLAY 0,"C.C16DL4C"\\
+	60 FMPLAY 0,"L4 F E2"\\
+	70 FMPLAY 0,"L8 C.C16DL4C"\\
+	80 FMPLAY 0,"L4 G F2"\\
+	90 FMPLAY 0,"L8 C.C16>L4C"\\
+	100 FMPLAY 0,"L4 <A F E D"\\
+	110 FMPLAY 0,"L8 A-.A-16L4GFG"\\
+	120 FMPLAY 0,"L1 F"\\
+}
+
+The {\ttfamily FMVIB} command adds a gentle vibrato effect that makes the
+vibraphone sound more realistic.\\
+
+\section{Twinkle Twinkle Little Star}
+
+This nursery rhyme is great for beginners:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,13:REM XYLOPHONE\\
+	30 FMPLAY 0,"T120 L4 O4"\\
+	40 FMPLAY 0,"CCGGAAG2"\\
+	50 FMPLAY 0,"FFEEDDC2"\\
+	60 FMPLAY 0,"GGFFEED2"\\
+	70 FMPLAY 0,"GGFFEED2"\\
+	80 FMPLAY 0,"CCGGAAG2"\\
+	90 FMPLAY 0,"FFEEDDC2"\\
+}
+
+\section{A Two-Voice Arrangement}
+
+Here's ``Frère Jacques'' (Are You Sleeping?) with a simple two-voice
+arrangement---melody and bass:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,0:REM PIANO FOR MELODY\\
+	30 FMINST 1,32:REM BASS\\
+	40 FMVOL 1,45:REM BASS QUIETER\\
+	50 REM === PHRASE 1 ===\\
+	60 FMCHORD 1,"O2C"\\
+	70 FMPLAY 0,"T140 L4 O4 CDEC"\\
+	80 FMCHORD 1,"R"\\
+	90 REM === PHRASE 2 ===\\
+	100 FMCHORD 1,"O2C"\\
+	110 FMPLAY 0,"CDEC"\\
+	120 FMCHORD 1,"R"\\
+	130 REM === PHRASE 3 ===\\
+	140 FMCHORD 1,"O2G"\\
+	150 FMPLAY 0,"EFG2"\\
+	160 FMCHORD 1,"O2C"\\
+	170 FMPLAY 0,"EFG2"\\
+	180 FMCHORD 1,"R"\\
+	190 REM === PHRASE 4 ===\\
+	200 FMCHORD 1,"O2G"\\
+	210 FMPLAY 0,"L8G AG FEL4C"\\
+	220 FMCHORD 1,"O2C"\\
+	230 FMPLAY 0,"L8G AG FEL4C"\\
+	240 FMCHORD 1,"R"\\
+	250 REM === PHRASE 5 ===\\
+	260 FMCHORD 1,"O2F"\\
+	270 FMPLAY 0,"L4 <G>C2"\\
+	280 FMCHORD 1,"O2C"\\
+	290 FMPLAY 0,"L4 <G>C2"\\
+	300 FMCHORD 1,"R"\\
+}
+
+This example shows how to combine {\ttfamily FMCHORD} and {\ttfamily FMPLAY} to
+create arrangements where one instrument holds a note (the bass) while another
+plays a melody (the piano).\\
+
+\section{Using DATA for Songs}
+
+For longer songs, you can store the notes in {\ttfamily DATA} statements:\\
+
+\codeblock{
+	10 FMINIT\\
+	20 FMINST 0,73:REM FLUTE\\
+	30 FMPLAY 0,"T100 L4 O5"\\
+	40 READ N\$\\
+	50 IF N\$="END" THEN END\\
+	60 FMPLAY 0,N\$\\
+	70 GOTO 40\\
+	100 DATA "E2DC","L2<B>E","L4DC<B"\\
+	110 DATA "L2AB","L4>CDC","L2<BA"\\
+	120 DATA "END"\\
+}
+
+This technique makes it easy to compose longer pieces---just add more
+{\ttfamily DATA} lines!\\
+
+\tip{Saving Your Music}{Once you've created a song you like, you can save your
+program to the SD card using {\ttfamily SAVE "MYSONG.BAS"}.  Then you can load
+and play it anytime with {\ttfamily LOAD "MYSONG.BAS"} followed by
+{\ttfamily RUN}.}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - A Few Words About Sound Commands
+%----------------------------------------------------------------------------------------
+
+\chapter*{A Few Words About Sound Commands}\index{Sound!commands summary}
+\addcontentsline{toc}{chapter}{\protect\numberline{}A Few Words About Sound Commands}
+
+Here's a quick reference of all the sound commands we've learned:\\
+
+\section{PSG Commands}
+
+\begin{tabular}{|l|p{9cm}|}
+	\hline
+	\textbf{Command} & \textbf{What It Does}\\ \hline
+	{\ttfamily PSGINIT} & Initialize the PSG chip (always do this first!)\\ \hline
+	{\ttfamily PSGNOTE v,n} & Play note {\em n} on voice {\em v} (0 = stop)\\ \hline
+	{\ttfamily PSGFREQ v,f} & Play frequency {\em f} Hz on voice {\em v}\\ \hline
+	{\ttfamily PSGVOL v,vol} & Set volume of voice {\em v} (0-63)\\ \hline
+	{\ttfamily PSGWAV v,w} & Set waveform of voice {\em v}\\ \hline
+	{\ttfamily PSGPAN v,p} & Set stereo panning (1=left, 2=right, 3=both)\\ \hline
+	{\ttfamily PSGPLAY v,s\$} & Play music string {\em s\$} on voice {\em v}\\ \hline
+	{\ttfamily PSGCHORD v,s\$} & Start chord from string {\em s\$} on voices starting at {\em v}\\ \hline
+\end{tabular}
+
+\section{FM Commands}
+
+\begin{tabular}{|l|p{9cm}|}
+	\hline
+	\textbf{Command} & \textbf{What It Does}\\ \hline
+	{\ttfamily FMINIT} & Initialize the FM chip and load default instruments\\ \hline
+	{\ttfamily FMINST c,p} & Load instrument patch {\em p} into channel {\em c}\\ \hline
+	{\ttfamily FMNOTE c,n} & Play note {\em n} on channel {\em c} (0 = stop)\\ \hline
+	{\ttfamily FMFREQ c,f} & Play frequency {\em f} Hz on channel {\em c}\\ \hline
+	{\ttfamily FMVOL c,vol} & Set volume of channel {\em c} (0-63)\\ \hline
+	{\ttfamily FMPAN c,p} & Set stereo panning (1=left, 2=right, 3=both)\\ \hline
+	{\ttfamily FMVIB s,d} & Set vibrato speed {\em s} and depth {\em d}\\ \hline
+	{\ttfamily FMPLAY c,s\$} & Play music string {\em s\$} on channel {\em c}\\ \hline
+	{\ttfamily FMCHORD c,s\$} & Start chord from string {\em s\$} on channels starting at {\em c}\\ \hline
+	{\ttfamily FMDRUM c,d} & Play drum sound {\em d} on channel {\em c}\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+For a complete reference of music string macros, see the Appendix on ``Macro
+Language for Music.''\\
+
+Now you know enough about sound and music to add audio to your programs, create
+your own songs, and even build musical instruments!  The Commander X16's dual
+sound chips give you incredible creative possibilities---so experiment and have
+fun making noise!
 
 \@openrighttrue\makeatother

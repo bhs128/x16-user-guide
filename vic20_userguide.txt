@@ -1,0 +1,570 @@
+Personal Computing on the VIC-20
+A friendly computer guide  
+(or "The VIC20 User Guide")
+
+- PAGE II - 
+
+PREFACE
+You are about to meet a friendly computer! Friendly in price,
+friendly in size, friendly to use and learn on and experience.
+Most important — you don't have to be a computer 
+programmer, or even a typist, to use it!
+
+If you're a first time computerist, this manual will provide an
+excellent introduction to computing. Unlike most instruction 
+manuals, you don't have to read through this whole book to get
+to the "good stuff." After reading Chapter 1 (GETTING
+STARTED), you can go directly to a chapter that interests you
+and start reading. If you're interested in animation turn to
+Chapter 4. If you like music, try Chapter 5.
+
+The first page of each chapter has a sample program to start 
+you off. Just type the program exactly as shown ("Try Typing
+This Program") and see what happens. The rest of the chapter 
+explains what you did, and shows you how to do more. Chapter
+7 summarizes some important programming concepts, and
+explains the techniques used in the sample programs. 
+
+If you're an experienced programmer, you can use the VIC like
+any microcomputer. Familiarity with Commodore computers
+will help, since the BASIC and graphics are nearly identical to
+those used in the PET/CBM. Advanced reference material and
+programming information are included in the Appendix. For
+more sophisticated programming, see the VIC PROGRAMMERS 
+REFERENCE GUIDE, available from your Commodore dealer.
+
+If you're a noncomputerist and have no interest in
+programming, per se, you should check out the VIC's growing
+library of plug-in cartridges and program tapes. VIC cartridges
+plug directly into the back of the console and work
+automatically. Programs are also provided on cassette tapes for
+use with the Commodore Cassette Tape Recorder.
+
+Cartridges and tapes include exciting "arcade-type" games
+such as "VIC INVADERS" as well as educational programs to 
+help you develop special skills, and home utility programs to
+help you solve problems and perform calculations.
+
+Peripherals and accessories for the VIC include the VIC tape
+cassette recorder, single disk drive, telephone modem and
+printer, to name a tew. (See Appendix A) 
+
+Computers are becoming an increasingly important part of our
+everyday lives — in our homes, at school and in business.
+Those who become familiar with computers now will have an
+important advantage in the coming months and years. The VIC 
+not only introduces you to the world of computing, but also
+gives you the features and flexibility you need to expand that
+world.
+
+Enjoy your new world!
+
+- PAGE III - 
+TABLE OF CONTENTS
+
+CHAPTER  TITLE                             PAGE
+    PREFACE                                II
+    UNPACKING AND CONNECTING THE VLC20     V
+    
+1   GETTING TO KNOW YOUR VIC               1
+    • Getting Started                      3
+    • Your First Computer Program          7
+    
+2   USING THE SCREEN AND KEYBOARD          11
+    • Your First Graphic Character         14
+    • A Tour of the VIC20 Keyboard         17
+    • Printing on theScreen                21
+    • The VIC20 Calculator                 24
+    • Introduction to Color                25
+    
+3   COLOR AND GRAPHICS                     27
+    • Programming in Color                 30
+    • The VIC Color Keys                   32
+    • Changing Screen and Border Colors    34
+    • Screen & Border Color Combinations   37
+    • Coloring the Screen                  37
+    • Screen Locations                     39
+    • Random Colors                        40
+    • Combining Sound and Color            45
+    • Keyboard Graphics                    47
+    • Graphics in Headlines and Titles     48
+    
+4   ANIMATION                              51
+    • Flying Birds                         53
+    • Bouncing Ball                        57
+    • Controlling the Cursor               60
+    • Animating with POKEs and PEEKs       61
+
+- PAGE III -
+5   SOUND AND MUSIC                        67
+    • Making Music                         69
+    • The Four Voices of VIC               71
+    • The White Noise Generator            74
+    • Using the VIC as a Piano             76
+    • Playing Songs                        78
+    • A Few Words About Poke               80
+    
+6   CONVERSING WITH YOUR VIC               61
+    • What's Your Name?                    83
+    • Introducing Variables                86
+    • Choose a Note                        88
+    • The GET Statement                    89
+    
+7   INTRODUCTION TO PROGRAMMING            93
+    • Your First BASIC Commands            95
+    • Random Numbers                       103
+    
+    TITLE                                  PAGE
+    APPENDIX                               105
+    A. VIC System Accessories              106
+    B. Working With Tape Cassettes         109
+    C. VIC BASIC Vocabulary                113
+    D. BASIC Command Abbreviations         133
+    E. Screenand Border Color Combinations 134
+    F. Musical Notes                       135
+    G. Sample Sound Effects                136
+    H. Screen DisplayCodes                 139
+    I. Screen Memory Map                   143
+    J. Ascii and Character($) Codes        145
+    K. Deriving Mathematical Functions     148
+    L. Pinouts for Input/Output Devices    150
+    M. VIC Programs to Try                 153
+    N. Error Messages                      160
+    
+    INDEX                                  162
+
+- PAGE IV -
+
+UNPACKING AND CONNECTING THE VLC20
+
+Welcome to computing! The following sfep-by-step instructions show you how
+to unpack the VIC, connect it to /our television sel and make sure it's working
+properly.
+
+Let's begin by taking a quick
+look at the VIC20:
+
+(Diagram of right side of VIC-20)
+
+KEYBOARD
+(used to type
+information
+and instructions
+into the computer)
+
+POWER LIGHT
+(glows when your
+VIC is turned on)
+
+POWER CORD
+SOCKET
+(Attach power
+supply here)
+
+GAME PORT
+(For joystick
+and other
+game control
+devices)
+
+ON/OFF
+SWITCH
+
+(Diagram of back of VIC-20)
+
+EXPANSION
+PORT
+(VIC Program
+cartridges
+plug in here)
+USER PORT
+(For special
+accessories)
+
+5 PIN
+VIDEO
+PORT
+(For
+connection
+to TV set
+or monitor)
+
+SERIAL
+PORT
+(For special
+accessories
+like printer,
+disk drive, etc.)
+
+CASSETTE
+PORT
+(Tape
+cassette
+goes here)
+
+- PAGE V -
+
+1. Check the contents of your VIC container. You should find the
+following items;
+— VIC 20 Personal Computer
+— Power Supply (large box with 2 cords coming out of it)
+— RF Modulator (small metal box) and short cable*
+— Video Cable
+
+2. You will need 2 electrical outlets (sockets) — one for the VfC and
+one for your television set.
+
+3. Position the VfC and Television set so you can use the keyboard
+comfortably while viewing the television screen...ideally, a tablelop
+or desk.
+
+4. Find the ON/OFF switch on
+the rrght hand side of the VIC.
+Make sure ifs in the "OFF"
+position. (Diagram of right-side of VIC-20 showing ON/OFF Switch, POWER SUPPLY, and POWER CORD SOCKET)
+
+5. There are two cords coming
+out of the power supply box.
+Plug the power supply cord
+into an electrical outlet and
+plug the other cord into the
+power cord socket on the side
+of the VIC. NOTE: The power
+supply remains "on" while
+plugged in so you should
+unplug it when not in use. (Diagram of REAR VIEW OF THE VIC showing VIDEO PORT)
+
+6. Connect the video cable to
+the back of the VIC and to the
+RF Modulator box, as shown.
+Make sure to connect it to the
+video port and not to the 6-pin
+serial port, which is next to it. (Diagram of VIDEO PLUG VIDEO CABLE and RF MODULATOR)
+
+7. Connect the RF Modulator to
+your television set. For this
+you'll need a screwdriver. The
+short TV connector cord runs
+from the RF Modulator box to
+the 2 VHF Antenna leads on
+the back of your television.
+Simply connect the two wires
+to the VHF leads and tighten
+the screws firmly." (Diagram of RF MODULATOR, CONNECT WIRE LEADS TO ANTENNA LEADS ON YOUR TV SET and REAR VIEW OF TV SET showing VHF terminals)
+
+8. Turn on the TV set.
+
+footnote: Some VICs are provided wiht a "switchbox" which attaches between the RF modulator and TV set
+The switchbox contains a switch with settings for "computer" and "TV" and should be set to "computer"
+when using the VIC
+
+- PAGE VI -
+
+TROUBLESHOOTING CHART
+
+SYMPTOM CAUSE REMEDY
+
+NO PICTURE (POWER LIGHT OFF)
+	- VIC not "on"
+		Make sure power switch is in "on" position
+	- VIC not plugged in
+		Check power socket next to power switch
+	- Power supply not plugged tn
+		Check connection with wall outlet
+	- Bad fuse in VIC
+		Take VIC to your Authorized Commodore Service Center for replacement of fuse*
+
+NO PICTURE (POWER LIGHT ON) (Try turning VIC off far a few secondsh then back on)
+	- TV on wrong channel
+		Check Channel 3 & 4 for picture
+	- Incorrect hookup
+		VIC hooks up to "VHF" terminals on TV
+	- Modulator not plugged in
+		Check connection at 5-pin Video Port
+	- Modulator on wrong channel
+		Flip switch on Modulator
+	- Video cable not connected
+		Check connection on modulator
+
+PICTURE WITHOUT COLOR (TRY TV & MODULATOR ON CHANNEL 3 & 4)
+	- Poorly tuned TV
+		RetuneTV
+PICTURE WITH POOR COLOR 
+	- Bad color adjustment on TV (see "picture without color")
+		Adjust color/hue/brightness controls on TV
+PICTURE WITH EXCESS BACKGROUND NOJSE
+	- TV volume is up too high (see "picture without color")
+		Adjust volume of TV
+PICTURE OK, BUT NO SOUND
+	- TV volume too low
+		Adjust volume of TV
+
+(drawing of cartoon-style VIC holding a screwdriver)
+
+Footnote: The VIC uses a 3 amp SLO-BLO fuse.
+
+
+- PAGE VII -
+
+9. Turn on the VIC (the red
+power light on the top of the
+computer should come on). If
+the power light does nol.
+consult the accompanying
+troubleshooting chart.
+
+10. There is a switch on the RF
+Modulator for selecting either
+Channel 3 or 4. Choose the
+channel with the weaker
+reception in your area+ and set
+both the TV and the
+Modulator to lhat channel.
+The fine tuning on your
+television may need some
+adjustment.
+
+Here is what you should see
+on the screen — sometimes it
+takes a second or two lo
+activate. If you don't get the
+following display on your
+screen, turn the computer off,
+wait a few seconds and turn it
+on again. (Screen diagram showing "****======**** BYTES FREE and a blinking cursor on a new line")
+
+11. Adjusting the color and
+tint/hue depends on the color
+controls provided on your
+television set — naturally,
+sets with better controls yield
+better color. Some sets show
+some colors better than
+others.
+
+10. If you have trouble with any of
+these steps, consult the
+accompanying
+troubleshooting chart.
+
+NOW...you are ready to start using the VIC.
+
+NOTE: You can use a monitor instead of a television set — in which case you
+can go directly from the VIC to the monitor cable, without the RF
+Modulator.
+
+IF ALL ELSE FAILS... CALL THE TOLL-FREE
+COMMODORE TECHNICAL HOTLINE...
+1-800-523-5622
+
+- PAGE VIII -
+
+CH 1
+Getting to Know You VIC
+
+- Getting Started
+- Your First COmputer Program
+
+- PAGE 1 - 
+
+TRY TYPING THIS PROGRAM:
+
+Type this program exactly as shown and see
+what happens!
+
+(Diagram with three lines )
+1 PRINT "VIC20" [RETURN]
+2 GOTO 1 [RETURN]
+RUN [RETURN]
+
+(In bubble with arrow pointing to line 1)
+This line tells
+the VIC to print
+what's between the
+quotation marks.
+
+(In bubble with arrow pointing to line 2)
+This line tells the VIC
+to go back to Line 1
+and print it again.
+
+(In bubble with arrow pointing to line 3)
+Typing the word RUN
+makes the program
+run.
+
+To stop the program, press the [RUN/STOP] key.
+
+(drawing of cartoon-style VIC pointing to the [RUN/STOP] key)
+
+- PAGE 2 - 
+
+GETTING STARTED—
+EXPERIMENT A LITTLE
+
+You made it! Your VIC is aglow with color and ready for you
+to tell it what to do. The dark blue, blinking rectangle, called
+the cursor, is a signal from the ViC that it is waiting for you.
+
+(Diagram of screen showing "**** CBM BASIC V2 **** 3583 BYTES FREE READ. []")
+
+(In bubble pointing to cursor)
+The VIC is saying it's ready
+
+VIC TIP:
+If you type a character on the screen that you don't want, press the
+ [INST/DEL] key.
+This key will erase the character immediately to the left of the blink
+ing cursor.
+Use this key as often as you like to delete unwanted characters.
+
+Now, on with the tour! Begin by pressing the following keys:
+[P][R][I][N][T]
+
+See how the cursor moves over one position every time you
+press a key? The cursor tells you where the next character is
+going to appear on the screen. OK, now find the SHIFT key, it
+looks like this:
+ [SHIFT]
+There are two of them, both the same
+
+- PAGE 3 - 
+
+Hold the [SHIFT] key down, and while it is being held.
+press:
+[2]
+
+You can release the [SHIFT] key alter you press the [2] key.
+The screen should look like this:
+
+
+*** CSM BASIC V2 ***
+3583 BYTES FREE
+READY.
+PRINT" []  
+
+(In bubble pointing to the cursor)
+you typed this
+
+Pressing the [2] key while holding down the [SHIFT]
+key caused the quotation mark to appear on the screen. *
+Let's continue. Now press the following keys:
+[R][A][I][N][B][O][W]
+
+Finally, hold down the [SHIFT] key, and press the [2]
+key once again. The screen
+now shows:
+
+CBM BASIC V2
+3583 BYTES FREE .
+READY,
+PRINT "RAINBOW"
+
+(In bubble pointing to the PRINT line)
+Everything you typed is on this line.
+
+Footnote: Note: if the number 2 appeared on the screen instead of the
+" sign, you didn't hold down the shift key. Hit the [INST/DEL]
+once to erase the 2 and try again.
+
+- PAGE 4 - 
+
+(gap in pages)
+
+Try typing this program:
+Type this program exactly as shown and see
+what happens!
+10 INPUT"DEGREES FAHRENHEIT";F
+20 PRINT F"DEGREES F."
+30 PRINT"IS"(F-32)*5/9"DEGREES C."
+40 PRINT
+50 GOTO 10
+
+(In bubble pointing to line 40)
+Typing the 
+word PRINT
+by itself
+on a line
+adds a blank
+line when
+the program
+is run. Try
+it with and
+without this
+line
+
+To stop the program, press the [RUN/STOP] key.
+
+and hit
+[RESTORE]
+
+- PAGE 82 - 
+
+Good morning VIC. Your mission (and we know you are going
+to accept it) is to perform miracles whenever we touch just a
+few keys!
+
+Yes, your VIC is ready, able and willing to respond to your
+touch like no other computer ever made. So let's buckle down
+to some non-stop fun!
+
+Hold down the [SHIFT] key and press the [CLR/HOME] key.
+Type the following keys:
+
+[N][E][W] and press the 
+[RETURN] key.
+
+1INPUT (This is the number one, not the "L")
+"WHAT'S YOUR  (Press the space bar, not the letters)
+NAME";A$ (Don't forget the ; semicolon!)
+and press the [RETURN] key. 
+
+2PRINT"HI, "A$
+and the [RETURN] key.
+3GOTO2 and the [RETURN] key.
+Now press [R][U][N] and [RETURN]
+
+- PAGE 83 - 
+
+And the VIC responds:
+
+(Diagram of a screen showing the typed program, the run command and the text "WHAT's YOUR NAME?")
+
+(Bubble of text pointing to the input prompt)
+Notice that
+the computer
+automatically
+adds the question^
+mark (?) to show ^
+you that it's
+waiting for
+an input.
+
+At which point you type in the customary response or if your
+name happens to be VIC you can type:
+[V][I][V] and [RETURN]
+
+And whoopee! Your name splashed all over the screen! To
+slow down the show just press the [CTRL] key. When you
+are ready to leave stardom behind, press the [RUN/STOP] key.
+To enter another name just type RUN and you will see the
+same _prompt_ again. The _prompt_ in this case is:
+WHAT'S YOUR NAME?
+
+Prompts are questions directed to you in an effort to get in-
+formation into the VIC. The VIC has a limited number of ways
+to get information from the human world. Perhaps the most
+useful method for the computer to collect information from
+our keyboard is the INPUT statement. Let's go through the
+steps of our program. Here's what we told VIC to do:
+
+First, display the message "WHAT'S YOUR NAME" on the
+screen and then wait for you to put in (or INPUT) characters
+from the keyboard. Take the response and name it "A$". In
+our example "VIC" becomes A$. This is a kind of shorthand
+for the computer.
+
+Second, print the word "HI" followed by whatever was typed
+at the keyboard. In our example we print HI VIC.
+
+- PAGE 84 - 

@@ -453,6 +453,18 @@
 	\end{outputwidekey}
 }
 
+\newcommand{\deletekey}{
+	\begin{outputwidekey}{gray}{black}
+		\fontsize{10pt}{10pt}\selectfont\uppercase{delete}
+	\end{outputwidekey}
+}
+
+\newcommand{\insertkey}{
+	\begin{outputwidekey}{gray}{black}
+		\fontsize{10pt}{10pt}\selectfont\uppercase{insert}
+	\end{outputwidekey}
+}
+
 \newcommand{\spacebar}{
 	\begin{outputwidekey}{white}{black}
 		\fontsize{10pt}{10pt}\selectfont\uppercase{space}

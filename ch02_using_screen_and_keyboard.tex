@@ -388,45 +388,365 @@ and background colors, but reversed.\\
 %CHAPTER - Screen Modes
 %----------------------------------------------------------------------------------------
 
-\chapter*{Screen Modes}
+\chapter*{Screen Modes}\index{Screen Modes}\index{SCREEN}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Screen Modes}
 
-Minima ut quasi aliquid sapiente quo. Id veritatis ipsa vitae molestias velit
-modi natus et. Quia incidunt totam laboriosam nostrum sed nihil. Assumenda
-reiciendis molestiae quidem enim quis. Eius excepturi neque dolorem quia.
-Nesciunt et consequuntur expedita enim soluta in recusandae. Reprehenderit
-rerum ut facilis aut eius. Velit eveniet esse dolorem dolores tempore ratione
-tempora. Iste sequi architecto dolores repellendus rem quia sequi. Voluptas
-error maxime ipsam est sint saepe. Nulla similique eos dolorem esse nobis autem
-nam a. Aut fugit quae reprehenderit qui. Minima dolorum nihil sapiente dolorem
-porro minima id. Perspiciatis natus numquam voluptatum. Qui sint nemo
-praesentium exercitationem voluptatem esse. Et perferendis praesentium
-voluptatibus. Occaecati facere eligendi eos eum exercitationem. Nobis aperiam
-inventore laudantium eius consequatur cupiditate. Tempora dolore culpa magni ut
-eum sint voluptatibus. Quasi repudiandae necessitatibus repellendus cumque quia
-dolorum. Illo et ut qui. Ut alias et quod repellat sit nobis. Officiis
-doloremque quaerat vitae iste. Et nostrum pariatur dolorum iusto nulla quae ab.
-Et voluptatem itaque quae perspiciatis quia.
+When you turn on your Commander X16, the screen displays 80 columns across and
+60 rows down.  That's a lot of characters!  But what if you want bigger text
+that's easier to read from across the room?  The Commander X16 can display text
+in several different screen modes, and it's easy to switch between them.\\
+
+\section{Switching Between 80 and 40 Column Modes}
+
+The two most commonly used screen modes are:\\
+
+\begin{itemize}
+	\item {\bfseries 80 columns} --- Lots of text fits on the screen (80
+		characters wide, 60 rows tall)
+	\item {\bfseries 40 columns} --- Larger text that's easier to see (40
+		characters wide, 30 rows tall)
+\end{itemize}
+
+The easiest way to switch between these two modes is to press the \key{F4} key
+and then press \returnkey.  Try it now!  Your screen will clear and the text
+will appear much larger.  Press \key{F4} and \returnkey again to go back to 80
+column mode.\\
+
+\note{
+	You must press \returnkey after pressing \key{F4}.  This prevents you from
+	accidentally switching modes when you didn't mean to!\\
+}
+
+\section{The SCREEN Statement}
+
+You can also change screen modes from within a BASIC program using the
+{\ttfamily SCREEN} statement.  Try this example:\\
+
+\codeblock{
+	10 SCREEN 3\\
+	20 PRINT "THIS IS 40 COLUMN MODE!"\\
+	30 PRINT "THE TEXT IS NICE AND BIG."\\
+	40 SLEEP 120\\
+	50 SCREEN 0\\
+	60 PRINT "NOW WE'RE BACK TO 80 COLUMNS."\\
+}
+
+When you {\ttfamily RUN} this program, it switches to 40 column mode, prints a
+message, waits two seconds, and then switches back to 80 column mode.  The
+{\ttfamily SCREEN} statement clears the screen when it changes modes, so
+anything that was displayed before will be erased.\\
+
+\section{Available Screen Modes}
+
+The Commander X16 supports many different text modes.  Here are the most useful
+ones:\\
+
+\begin{tabular}{|c|c|l|}
+	\hline
+	{\bfseries Mode} & {\bfseries Size} & {\bfseries Description}\\ \hline
+	0 & 80 $\times$ 60 & Default mode, lots of room for text\\ \hline
+	1 & 80 $\times$ 30 & Wide but shorter\\ \hline
+	2 & 40 $\times$ 60 & Big text, tall screen\\ \hline
+	3 & 40 $\times$ 30 & Big text, like classic computers\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+Mode 3 (40 $\times$ 30) is especially nice if you're connecting your X16 to an
+older television or CRT monitor, because the larger characters are easier to
+read on those displays.\\
+
+\tryit{
+	Write a program that prints your name in each of the four screen modes
+	listed above.  Use {\ttfamily SLEEP 60} between each mode change so you
+	have time to see the result!\\
+}
+
+\section{A Quick Mode Toggle}
+
+There's a handy shortcut for switching between 80 and 40 column modes.  Using
+{\ttfamily SCREEN -1} will toggle between the two modes:\\
+
+\codeblock{
+	10 SCREEN -1\\
+	20 PRINT "PRESS A KEY TO TOGGLE"\\
+	30 GET A\$: IF A\$="" THEN 30\\
+	40 GOTO 10\\
+}
+
+This program toggles between 40 and 80 column mode each time you press a key.
+It's a fun way to see the difference between the two modes!\\
+
+\section{Starting Up in Your Favorite Mode}
+
+If you prefer to always start your Commander X16 in 40 column mode, you can do
+this by modifying your AUTOBOOT.X16 file.  This is an advanced topic, but
+here's a hint: by adding {\ttfamily SCREEN 3} at the beginning of your
+AUTOBOOT.X16 file, your X16 will switch to 40 column mode every time it starts
+up.\\
+
+But wait --- how do you modify a file that already exists?  That's exactly what
+we'll learn in the next section!
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER - Editing Text
 %----------------------------------------------------------------------------------------
 
-\chapter*{Editing Text}
+\chapter*{Editing Text}\index{Editing}\index{Cursor}\index{Full Screen Editor}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Editing Text}
 
-Ea repudiandae laboriosam omnis consequatur omnis quam nesciunt est. Hic
-voluptate explicabo sint pariatur mollitia. Omnis asperiores in praesentium
-dolor quibusdam. Odit vitae possimus ut recusandae quia sapiente ipsum non.
-Optio error velit eligendi. Facere itaque tenetur fugiat. Aspernatur magnam
-tenetur nulla aspernatur architecto. Repellat repudiandae autem sunt qui.
-Libero vel dolorem sed mollitia. Voluptatem eligendi minima voluptatum facere
-aut magnam laborum vel. Quis rem officia aliquam nisi quisquam dolor quia.
-Nobis magni non eos explicabo. Qui nisi in est voluptatem enim a repellendus.
-Id quia incidunt enim sint impedit recusandae. Ut sit ut neque. Et sit delectus
-id excepturi. Vero maiores libero minus. Ad accusantium sed ut vitae quia
-earum. Iusto fugit repudiandae aut. Illum atque et dolores. Suscipit qui culpa
-dolor. Voluptatibus consequuntur culpa ab vitae. Totam libero harum quia. Ipsa
-aut minima labore eaque eos ipsam. Nulla quae eius tempore.
+When you turn on your Commander X16, it starts up in the \emph{full screen
+editor}.  This is different from many other computers where you can only type
+at the bottom of the screen.  On the X16, you can move the cursor anywhere on
+the screen --- up, down, left, or right --- and type or edit text wherever you
+want!\\
+
+This is incredibly useful because it means you can go back and fix mistakes, or
+even re-run commands you typed earlier.  If you typed something wrong and got
+an error, you don't have to type the whole thing again.  Just move the cursor
+back up to the line with the mistake, fix it, and press \returnkey.  Let's
+learn how this works on this flubbed classic program:\\
+
+
+\begin{center}
+	\screenbox{2.75in}{2in}{
+
+		NEW\\
+		
+		READY.\\
+		10 PIRNT7 "HE WORLD"\\
+		RUN\\
+
+		?SYNTAX ERROR IN 10\\
+		READY.\\
+		\cursor
+
+	}
+\end{center}
+
+\section{The Cursor Keys}
+
+You've already seen the blinking square called the \emph{cursor}.  The cursor
+shows you where the next character you type will appear on the screen.  You can
+move the cursor anywhere on the screen using the arrow keys.\\
+
+Try pressing the arrow keys now.  You'll find four of them on the right side of
+the keyboard:\\
+
+\begin{itemize}
+	\item \key{$\uparrow$} moves the cursor up one line
+	\item \key{$\downarrow$} moves the cursor down one line
+	\item \key{$\leftarrow$} moves the cursor left one space
+	\item \key{$\rightarrow$} moves the cursor right one space
+\end{itemize}
+
+If you hold down an arrow key, the cursor keeps moving in that direction until
+you let go.  This makes it easy to move quickly across the screen!\\
+
+\section{Fixing Mistakes Without Retyping}
+
+Let's see the power of the full screen editor in action.  First type in this line
+exactly as shown (with the mistakes!)\\
+
+\codeblock{
+	NEW\\
+	10 PIRNT7 "HE WORLD"\\
+	RUN\\
+}
+
+You should see an error message:\\
+
+\codeblock{
+	?SYNTAX ERROR IN 10\\
+	READY.\\
+}
+
+The syntax error is because we didn't type in a valid BASIC statement: we typed
+{\ttfamily PIRNT7} instead of {\ttfamily PRINT}.  Even inside the quotes there
+is a second typo --- we wrote {\ttfamily HE WORLD} instead of {\ttfamily HELLO
+WORLD}.  On most computers, you would have to type the whole line again.  But
+not on the Commander X16!\\
+
+\subsection{Using the Cursor Keys to Go Back}
+
+Use the \key{$\uparrow$} arrow key to move the cursor back up to the line 10 you
+typed.  Position the cursor so it's on top of the {\ttfamily I} in {\ttfamily
+PIRNT7}.  Now type {\ttfamily R} --- it replaces the {\ttfamily I}.  Then type
+{\ttfamily I} --- it replaces the {\ttfamily N}.  Now you have {\ttfamily
+PRINT7} which is closer, but we still need to get rid of the extra {\ttfamily 7}!\\
+
+\subsection{Using Backspace to Remove Extra Characters}
+
+Use the cursor keys to move to the right, stopping on the space after the
+{\ttfamily 7}.  Now press the \backspacekey key.  The {\ttfamily 7} disappears
+and the rest of the line shifts left.  Now you have {\ttfamily 10 PRINT "HE
+WORLD"}.  Almost there!\\
+
+\subsection{Using Insert to Add Missing Characters}
+
+Use the cursor keys to move to the right, stopping on the space between
+{\ttfamily HE} and {\ttfamily WORLD}.  We can't just type here, because it
+would overwrite the rest of our string --- we don't have enough space!  Never
+fear!  We can use the \insertkey key!\\
+
+Press the \insertkey key.  Notice that the entire rest of the line moves to the
+right.  The cursor is now waiting for the character we want to put there.  Type
+\key{L}.  Hmmm, but we still need more room.  Press the \insertkey key two more
+times and type \key{L}\key{O}.  The line should now read the familiar
+{\ttfamily 10 PRINT "HELLO WORLD"}.  We've corrected all the mistakes without
+typing the entire line again!\\
+
+With the cursor anywhere on the line, press \returnkey to accept the changes.
+Now your cursor has moved down to the line with your previous {\ttfamily RUN}
+command.  Press \returnkey again to run your fixed program.  You should see:\\
+
+\begin{center}
+	\screenbox{2.75in}{2in}{
+
+		NEW\\
+		
+		READY.\\
+		10 PRINT "HELLO WORLD"\\
+		RUN\\
+		HELLO WORLD\\
+		?SYNTAX ERROR IN 10\\
+		READY.\\
+		\cursor
+
+	}
+\end{center}
+
+Wait --- why does it still say {\ttfamily ?SYNTAX ERROR IN 10}?  Don't worry!
+Look carefully: your correct {\ttfamily HELLO WORLD} message is printed
+\emph{above} the old error.  The error message is still visible because we
+never cleared the screen --- it's just leftover text from our earlier failed
+attempt.  Your program is working perfectly!\\
+
+This can be confusing at first, so remember: the Commander X16's screen is like
+a chalkboard.  Old text stays visible until you erase it.  To clean up the
+display, hold down \shiftkey and press \clrhomekey to clear the screen.\\
+
+\note{
+	The \backspacekey key deletes the character to the \emph{left} of the
+	cursor (and moves the cursor back), while the \deletekey key deletes the
+	character \emph{under} the cursor (and pulls everything to the right
+	closer).  Both are useful for different situations!\\
+}
+
+\section{The Home Key}
+
+The \clrhomekey key has two useful functions:\\
+
+\begin{itemize}
+	\item Pressing \clrhomekey by itself moves the cursor to the ``home''
+		position --- the upper-left corner of the screen.
+	\item Pressing \shiftkey + \clrhomekey clears the entire screen and moves
+		the cursor to the home position.
+\end{itemize}
+
+This is a quick way to get a fresh start without losing your program.
+Remember, clearing the screen doesn't erase your program from memory --- it
+just cleans up the display.\\
+
+\section{Saving Your Work to a File}
+
+When you type a program into the Commander X16, it lives in the computer's
+memory.  But if you turn off the computer, that memory is erased and your
+program is gone!  To keep your program, you need to \emph{save} it to the SD
+card as a file.\\
+
+Let's save a simple program.  First, clear any old program by typing
+{\ttfamily NEW} and pressing \returnkey.  Now type this one-line program:\\
+
+\codeblock{
+	10 PRINT "HELLO"\\
+}
+
+To save this program to a file, use the {\ttfamily SAVE} command followed by a
+filename in quotation marks:\\
+
+\codeblock{
+	SAVE "HELLO.BAS"\\
+}
+
+You should see {\ttfamily SAVING HELLO.BAS} followed by {\ttfamily READY.}
+Your program is now safely stored on the SD card!\\
+
+\section{Loading a Program from a File}
+
+Later, when you want to work on your program again, you can \emph{load} it back
+into memory using the {\ttfamily LOAD} command:\\
+
+\codeblock{
+	LOAD "HELLO.BAS"\\
+}
+
+After loading, type {\ttfamily LIST} to see your program, or {\ttfamily RUN} to
+run it.\\
+
+\section{Deleting a File}
+
+If you no longer need a file, you can delete it using the {\ttfamily SCRATCH}
+command (through the DOS command interface):\\
+
+\codeblock{
+	DOS "S:HELLO.BAS"\\
+}
+
+Be careful with this command --- once a file is deleted, it's gone forever!\\
+
+\section{Editing a Saved Program}
+
+Now let's put your editing skills to use on a real file.  Remember how we
+mentioned modifying the AUTOBOOT.X16 file to change your startup screen mode?
+Here's how you would do it.\\
+
+First, let's see if you have an AUTOBOOT.X16 file.  Type:\\
+
+\codeblock{
+	LOAD "AUTOBOOT.X16"\\
+}
+
+If you see {\ttfamily FILE NOT FOUND ERROR}, that's okay --- it just means you
+don't have one yet.  In that case, we'll create a simple one.  Type:\\
+
+\codeblock{
+	NEW\\
+	10 REM MY AUTOBOOT FILE\\
+}
+
+If you did have an AUTOBOOT.X16 file and it loaded successfully, type
+{\ttfamily LIST} to see what's in it.  Now let's add a line to switch to 40
+column mode at startup.  Type:\\
+
+\codeblock{
+	5 SCREEN 3\\
+}
+
+Because we used line number 5, this new line will appear \emph{before} any
+existing lines in the program.  Type {\ttfamily LIST} to see your program with
+the new line added.\\
+
+To save your changes, type:\\
+
+\codeblock{
+	SAVE "AUTOBOOT.X16"\\
+}
+
+If you already had an AUTOBOOT.X16 file, use this command instead to overwrite
+the old version:\\
+
+\codeblock{
+	SAVE "@:AUTOBOOT.X16"\\
+}
+
+The next time you turn on your Commander X16, it will automatically run this
+program and switch to 40 column mode!\\
+
+\tryit{
+	Practice your editing skills by typing in a short program with some
+	intentional mistakes, then use the cursor keys, \insertkey, and \deletekey
+	to fix them without retyping the whole line.\\
+}
 
 \@openrighttrue\makeatother

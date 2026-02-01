@@ -68,7 +68,7 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | 🚧 Placeholder | 66 | Has type-in example, section stubs with TODOs |
 | **Ch 4: Animation** | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | 61 | Has type-in example, section stubs with TODOs |
 | **Ch 5: Sound and Music** | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | 75 | Has FM type-in example, section stubs with TODOs |
-| **Ch 6: Conversing with Your X16** | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | 🚧 Placeholder | 58 | Has INPUT type-in, section stubs with TODOs |
+| **Ch 6: Conversing with Your X16** | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | 549 | INPUT, variables, GET statement, temperature converter, interactive programs |
 | **Ch 7: Introduction to Programming** | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | 🚧 Placeholder | 62 | Has guessing game type-in, section stubs with TODOs |
 | **Appendix: BASIC Commands** | [appendix/basic_commands.tex](appendix/basic_commands.tex) | ✅ Extensive | 3982 | Comprehensive BASIC reference documentation |
 | **Appendix: BASIC Table** | [appendix/basic_table.tex](appendix/basic_table.tex) | ✅ Reference | 147 | Quick reference table |
@@ -127,7 +127,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | **Ch 3**: Color and Graphics | COLOR, screen colors, PETSCII art | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | 🚧 Placeholder | All sections need content |
 | **Ch 4**: Animation | Bouncing ball, flying birds, PEEK/POKE | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | All sections need content |
 | **Ch 5**: Sound and Music | Making music, piano, songs | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | All sections need content (has FM type-in) |
-| **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | 🚧 Placeholder | All sections need content |
+| **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | None - follows VIC-20 structure |
 | **Ch 7**: Intro to Programming | BASIC commands, RND, IF/THEN, FOR/NEXT | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | 🚧 Placeholder | All sections need content |
 | **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | 🔶 Mixed | Error messages partial, sample programs needed |
 
@@ -140,7 +140,6 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | 🔴 High | **Ch 5: Sound and Music** | Section stubs | Write PSG basics, FMPLAY/PSGPLAY tutorials, piano program |
 | 🟡 Medium | **Ch 2: Screen & Keyboard** | Partial | Complete graphic characters section, add keyboard diagram |
 | 🟡 Medium | **Ch 4: Animation** | Section stubs | Write bouncing ball, cursor control, PEEK/POKE animation |
-| 🟡 Medium | **Ch 6: Conversing** | Section stubs | Write INPUT tutorial, variable introduction, GET examples |
 | 🟡 Medium | **Ch 7: Programming** | Section stubs | Write RND, IF/THEN, FOR/NEXT tutorials, sample game |
 | 🟡 Medium | **Appendix: Sample Programs** | Section stubs | Add 5-10 type-in programs |
 | 🟢 Low | **Appendix: Error Messages** | 7 errors | Complete full error list |

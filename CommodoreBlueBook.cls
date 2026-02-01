@@ -578,10 +578,10 @@
 		minimum height=\paperheight,
 		minimum width=\paperwidth] at (current page.center) {};
 
-		% Lines
-		\draw[white, thick] (-3,2.0) -- (13,2.0);
-		\draw[white, thick] (-3,2.125) -- (13,2.125);
-		\draw[white, thick] (-3,2.25) -- (13,2.25);
+		% Lines - three horizontal white lines across the page
+		\draw[white, thick] ([yshift=-2.0in]current page.north west) -- ([yshift=-2.0in]current page.north east);
+		\draw[white, thick] ([yshift=-2.0625in]current page.north west) -- ([yshift=-2.0625in]current page.north east);
+		\draw[white, thick] ([yshift=-2.125in]current page.north west) -- ([yshift=-2.125in]current page.north east);
 
 		% Part number
 		\node[

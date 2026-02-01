@@ -632,6 +632,8 @@
 	{} % Code before the label
 	[] % Code after the label
 
+\titlespacing*{\part}{0pt}{-\baselineskip}{0pt} % Pull anchor toward top of page
+
 %-------------------------------------------
 
 % Command to output the chapter title with optional background image

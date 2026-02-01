@@ -69,7 +69,7 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Ch 4: Animation** | [ch04_animation.tex](ch04_animation.tex) | 🚧 Placeholder | 61 | Has type-in example, section stubs with TODOs |
 | **Ch 5: Sound and Music** | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | 🚧 Placeholder | 75 | Has FM type-in example, section stubs with TODOs |
 | **Ch 6: Conversing with Your X16** | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | 549 | INPUT, variables, GET statement, temperature converter, interactive programs |
-| **Ch 7: Introduction to Programming** | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | 🚧 Placeholder | 62 | Has guessing game type-in, section stubs with TODOs |
+| **Ch 7: Introduction to Programming** | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | 503 | RND, INT, IF...THEN, FOR...NEXT, guessing game, dice roller |
 | **Appendix: BASIC Commands** | [appendix/basic_commands.tex](appendix/basic_commands.tex) | ✅ Extensive | 3982 | Comprehensive BASIC reference documentation |
 | **Appendix: BASIC Table** | [appendix/basic_table.tex](appendix/basic_table.tex) | ✅ Reference | 147 | Quick reference table |
 | **Appendix: Screen Codes** | [appendix/screen_codes_table.tex](appendix/screen_codes_table.tex) | ✅ Reference | 222 | Screen character codes |

@@ -18,45 +18,485 @@
 	80 PRINT "YOU GOT IT!"
 }
 
+\begin{tikzpicture}
+	\hyphenpenalty=10000
+	\bubble{2.5in}{2.6in}{5.0}{6.6}{
+		The X16 picks a secret number between 1 and 10.}
+	\bubble{2.5in}{1.9in}{4.2}{5.6}{
+		You type your guess and the X16 remembers it as G.}
+	\bubble{2.5in}{1.2in}{5.3}{3.5}{
+		If your guess equals the secret number, you win!}
+\end{tikzpicture}
+
+\newpage
+\partheading{Introduction to Programming}
+
+Now that you've learned the basics of using your Commander X16---printing to
+the screen, using variables, and getting input from the keyboard---it's time to
+put it all together and write some real programs!
+
+In this chapter, you'll learn some important programming concepts that will let
+you create games, solve problems, and have fun with your X16.  We'll explore
+how to make your programs unpredictable with random numbers, how to make
+decisions with {\ttfamily IF...THEN}, and how to repeat actions with {\ttfamily
+FOR...NEXT} loops.
+
+By the end of this chapter, you'll have all the tools you need to write your
+own games and useful programs!
+
 %----------------------------------------------------------------------------------------
-%	CHAPTER - Introduction to Programming
+%	CHAPTER - Random Numbers
 %----------------------------------------------------------------------------------------
 
-\chapter*{Introduction to Programming}\index{Programming}\index{BASIC}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Introduction to Programming}
+\chapter*{Random Numbers}\index{RND}\index{Random Numbers}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Random Numbers}
 
-% TODO: This chapter needs content covering (VIC-20 style):
-% - First BASIC commands review
-% - Random numbers (RND)
-% - IF...THEN for decisions
-% - FOR...NEXT loops
-% - Simple games combining concepts
+Many times when you're writing a game or a fun program, you need to generate a
+random number.  For example, if you're simulating the throw of dice, you need
+the computer to pick a number between 1 and 6---and you don't want to know what
+it will be ahead of time!
 
-\section{Introduction}
+The Commander X16 has a built-in function called {\ttfamily RND} that generates
+random numbers for you.  To see what {\ttfamily RND} does, try this short
+program:
 
-% Placeholder content - replace with actual content
-Now that you've learned the basics of using your Commander X16, it's time to
-put it all together and write some real programs! In this chapter, you'll
-learn programming concepts that will let you create games and useful programs.
+\codeblock{
+	NEW\\\\
+	10 FOR X = 1 TO 10\\
+	20 PRINT RND(1),\\
+	30 NEXT X\\
+}
 
-\section{Review of BASIC Commands}
+\reminder{
+	The comma at the end of line 20 makes the numbers print across the screen
+	in columns instead of down the screen in a single column.
+}
 
-% TODO: Quick review of commands learned so far
+After running the program, you will see a display something like this:
 
-\section{Random Numbers}
+\begin{center}
+\screenbox{3.5in}{1.5in}{
+	.789280697\hspace{1em}.664673958\\
+	.256373663\hspace{1em}.0123442287\\
+	.682952381\hspace{1em}.390587279\\
+	.402343724\hspace{1em}.879300926\\
+	.158209063\hspace{1em}.245596701\\
+}
+\end{center}
 
-% TODO: Cover RND function for unpredictable programs
+Your numbers won't match these---and that's exactly the point!  If they did
+match, they wouldn't be very random, would they?
 
-\section{Making Decisions with IF...THEN}
+Try running the program a few more times.  You'll notice that the results are
+always different, but some things stay the same:
 
-% TODO: Cover conditional logic
+\begin{itemize}
+	\item The results are always between 0 and 1 (but never exactly 0 or 1)
+	\item The numbers have lots of decimal places
+\end{itemize}
 
-\section{Loops with FOR...NEXT}
+This is a problem if we want to simulate rolling dice, since we need whole
+numbers between 1 and 6, not fractions!
 
-% TODO: Cover repetition in programs
+\section{Getting Useful Random Numbers}
 
-\section{Your First Game}
+Let's fix this step by step.  First, let's make the numbers bigger by
+multiplying.  Replace line 20 with:
 
-% TODO: Put it all together in a simple game
+\codeblock{
+	20 PRINT 6*RND(1),\\
+}
+
+Now run the program again.  You should see numbers like:
+
+\begin{center}
+\screenbox{3.5in}{1.5in}{
+	3.60563664\hspace{1em}4.53660853\\
+	5.47238963\hspace{1em}1.40850227\\
+	3.19265054\hspace{1em}4.39547668\\
+	3.16331095\hspace{1em}5.50620749\\
+	2.32527884\hspace{1em}4.17090293\\
+}
+\end{center}
+
+That's better---the numbers are larger now!  But we still have those pesky
+decimal places.  To get rid of them, we can use another function called
+{\ttfamily INT}.  The {\ttfamily INT} function takes any number and gives you
+just the whole number part (the {\em integer}).  Replace line 20 again:
+
+\codeblock{
+	20 PRINT INT(6*RND(1)),\\
+}
+
+Run the program and you should see something like:
+
+\begin{center}
+\screenbox{3.5in}{1in}{
+	2\hspace{2em}3\hspace{2em}1\hspace{2em}0\\
+	2\hspace{2em}4\hspace{2em}5\hspace{2em}5\\
+	0\hspace{2em}1\\
+}
+\end{center}
+
+We're getting closer!  Now we have whole numbers.  But look carefully---the
+numbers range from 0 to 5, not 1 to 6.  That's because {\ttfamily INT} always
+rounds {\em down}, and {\ttfamily RND(1)} never quite reaches 1.
+
+The final step is simple: just add 1!
+
+\codeblock{
+	20 PRINT INT(6*RND(1))+1,\\
+}
+
+Now you have a perfect dice simulator!  The numbers will always be 1, 2, 3, 4,
+5, or 6---just like a real die.
+
+\section{The Random Number Formula}
+
+You can use this same technique to generate random numbers in any range you
+want.  Just multiply {\ttfamily RND(1)} by the highest number you want, use
+{\ttfamily INT} to get a whole number, and add 1.
+
+For example, to generate random numbers between 1 and 25:
+
+\codeblock{
+	20 PRINT INT(25*RND(1))+1,\\
+}
+
+The general formula for generating random numbers in a range is:
+
+\begin{center}
+{\ttfamily NUMBER = INT(UPPER*RND(1))+1}
+\end{center}
+
+Where {\ttfamily UPPER} is the highest number you want.
+
+\tryit{
+	Try changing the program to simulate different things:
+	\begin{itemize}
+		\item A coin flip (1 or 2, for heads or tails)
+		\item Drawing a card (1 to 52)
+		\item Picking a lottery number (1 to 100)
+	\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Making Decisions with IF...THEN
+%----------------------------------------------------------------------------------------
+
+\chapter*{Making Decisions with IF...THEN}\index{IF...THEN}\index{Decisions}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Making Decisions with IF...THEN}
+
+So far, your programs have run straight through from beginning to end, or
+looped forever with {\ttfamily GOTO}.  But what if you want your program to do
+different things depending on what happens?  That's where {\ttfamily IF...THEN}
+comes in!
+
+The {\ttfamily IF...THEN} statement lets your program make decisions.  It works
+just like it sounds: {\em IF} something is true, {\em THEN} do something.
+
+Let's try a simple example:
+
+\codeblock{
+	NEW\\\\
+	10 CT = 0\\
+	20 PRINT "COMMANDER X16"\\
+	30 CT = CT + 1\\
+	40 IF CT < 5 THEN GOTO 20\\
+	50 PRINT "DONE!"\\
+}
+
+When you run this program, you'll see:
+
+\begin{center}
+\screenbox{3in}{2in}{
+	COMMANDER X16\\
+	COMMANDER X16\\
+	COMMANDER X16\\
+	COMMANDER X16\\
+	COMMANDER X16\\
+	DONE!\\\\
+	READY.\\
+	\cursor
+}
+\end{center}
+
+Let's walk through what happened:
+
+\begin{itemize}
+	\item Line 10 sets a variable called {\ttfamily CT} (for ``count'') to 0
+	\item Line 20 prints our message
+	\item Line 30 adds 1 to {\ttfamily CT} (this counts how many times we've
+		printed)
+	\item Line 40 checks: is {\ttfamily CT} less than 5?  If yes, go back to
+		line 20.  If no, continue to line 50
+	\item Line 50 prints ``DONE!'' when the loop is finished
+\end{itemize}
+
+The magic is in line 40.  Each time through the loop, {\ttfamily CT} increases
+by 1.  When {\ttfamily CT} finally reaches 5, the condition {\ttfamily CT < 5}
+is no longer true, so the program continues to line 50 instead of jumping back.
+
+\section{Comparison Symbols}
+
+The {\ttfamily IF...THEN} statement can check many different conditions using
+these comparison symbols:
+
+\begin{center}
+\begin{tabular}{|c|l|l|}
+	\hline
+	\textbf{Symbol} & \textbf{Meaning} & \textbf{Example} \\ \hline
+	{\ttfamily <} & Less than & {\ttfamily IF X < 10} \\ \hline
+	{\ttfamily >} & Greater than & {\ttfamily IF X > 10} \\ \hline
+	{\ttfamily =} & Equal to & {\ttfamily IF X = 10} \\ \hline
+	{\ttfamily <>} & Not equal to & {\ttfamily IF X <> 10} \\ \hline
+	{\ttfamily <=} & Less than or equal to & {\ttfamily IF X <= 10} \\ \hline
+	{\ttfamily >=} & Greater than or equal to & {\ttfamily IF X >= 10} \\ \hline
+\end{tabular}
+\end{center}
+
+\section{IF...THEN with Strings}
+
+You can also use {\ttfamily IF...THEN} to compare words and letters!  Try this
+program:
+
+\codeblock{
+	NEW\\\\
+	10 INPUT "WHAT IS THE PASSWORD"; P\$\\
+	20 IF P\$ = "SECRET" THEN GOTO 50\\
+	30 PRINT "WRONG! TRY AGAIN."\\
+	40 GOTO 10\\
+	50 PRINT "WELCOME, FRIEND!"\\
+}
+
+This program asks for a password.  If you type ``SECRET'', it welcomes you.
+If you type anything else, it tells you to try again!
+
+\tip{Shortcuts in IF...THEN}{
+	You can leave out the word {\ttfamily GOTO} in an {\ttfamily IF...THEN}
+	statement.  These two lines do exactly the same thing:\\
+
+	{\ttfamily IF X = 5 THEN GOTO 100}\\
+	{\ttfamily IF X = 5 THEN 100}\\
+
+	Most programmers use the shorter version to save typing!
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Loops with FOR...NEXT
+%----------------------------------------------------------------------------------------
+
+\chapter*{Loops with FOR...NEXT}\index{FOR...NEXT}\index{Loops}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Loops with FOR...NEXT}
+
+Remember the program we wrote with {\ttfamily IF...THEN} to print ``COMMANDER
+X16'' five times?  There's actually a simpler and more elegant way to do the
+same thing using {\ttfamily FOR...NEXT}:
+
+\codeblock{
+	NEW\\\\
+	10 FOR CT = 1 TO 5\\
+	20 PRINT "COMMANDER X16"\\
+	30 NEXT CT\\
+}
+
+Run this program and you'll see the same result---but with fewer lines of code!
+
+Here's how {\ttfamily FOR...NEXT} works:
+
+\begin{itemize}
+	\item Line 10 says ``start {\ttfamily CT} at 1 and keep going until it
+		reaches 5''
+	\item Line 20 does the printing
+	\item Line 30 says ``go to the {\ttfamily NEXT} value of {\ttfamily CT}''
+		(which adds 1 to {\ttfamily CT} and jumps back to line 10)
+\end{itemize}
+
+The X16 automatically keeps track of {\ttfamily CT} for you, adding 1 each time
+and stopping when it goes past 5.  Much simpler than doing it yourself!
+
+\section{Counting by Different Amounts}
+
+What if you want to count by something other than 1?  Use the {\ttfamily STEP}
+keyword:
+
+\codeblock{
+	NEW\\\\
+	10 FOR N = 2 TO 10 STEP 2\\
+	20 PRINT N,\\
+	30 NEXT N\\
+}
+
+This prints:
+
+\begin{center}
+\screenbox{3in}{0.75in}{
+	\hspace{0.5em}2\hspace{2em}4\hspace{2em}6\hspace{2em}8\hspace{2em}10\\
+}
+\end{center}
+
+You can even count backwards using a negative {\ttfamily STEP}:
+
+\codeblock{
+	NEW\\\\
+	10 FOR N = 10 TO 1 STEP -1\\
+	20 PRINT N\\
+	30 NEXT N\\
+	40 PRINT "BLAST OFF!"\\
+}
+
+This prints a countdown from 10 to 1, then ``BLAST OFF!''
+
+\section{Using FOR...NEXT for Timing}
+
+A common trick is to use a {\ttfamily FOR...NEXT} loop to create a delay in
+your program:
+
+\codeblock{
+	10 PRINT "GET READY..."\\
+	20 FOR D = 1 TO 1000 : NEXT D\\
+	30 PRINT "GO!"\\
+}
+
+Line 20 counts from 1 to 1000, doing nothing useful---but it takes a moment to
+do so!  This creates a pause between ``GET READY...'' and ``GO!''
+
+\note{
+	Notice that line 20 puts both {\ttfamily FOR} and {\ttfamily NEXT} on the
+	same line, separated by a colon ({\ttfamily :}).  The colon lets you put
+	multiple statements on one line.  This is handy for short loops like this
+	delay.
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Your First Game: Guess the Number
+%----------------------------------------------------------------------------------------
+
+\chapter*{Your First Game: Guess the Number}\index{Games}\index{Guessing Game}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Your First Game: Guess the Number}
+
+Now let's put everything together and make a real game!  This is the program
+from the beginning of the chapter.  Type it in and run it:
+
+\codeblock{
+	NEW\\\\
+	10 REM GUESSING GAME\\
+	20 N = INT(RND(1)*10)+1\\
+	30 PRINT "GUESS A NUMBER FROM 1 TO 10:"\\
+	40 INPUT G\\
+	50 IF G = N THEN GOTO 80\\
+	60 PRINT "TRY AGAIN!"\\
+	70 GOTO 30\\
+	80 PRINT "YOU GOT IT!"\\
+}
+
+When you run this game, the X16 picks a secret number between 1 and 10, and you
+try to guess it.  Keep guessing until you get it right!
+
+Let's trace through the program:
+
+\begin{itemize}
+	\item Line 10 is a {\ttfamily REM} (remark)---it's just a note to remind us
+		what the program does.  The X16 ignores it.
+	\item Line 20 picks a random number from 1 to 10 and stores it in
+		{\ttfamily N}
+	\item Line 30 asks for your guess
+	\item Line 40 waits for you to type a number and stores it in {\ttfamily G}
+	\item Line 50 checks if your guess equals the secret number.  If yes, jump
+		to line 80 (you win!)
+	\item Line 60 prints ``TRY AGAIN!'' (only reached if you didn't win)
+	\item Line 70 goes back to ask for another guess
+	\item Line 80 celebrates your victory!
+\end{itemize}
+
+\section{Making the Game Better}
+
+This game works, but it could be more helpful.  What if the X16 told you
+whether to guess higher or lower?  Try this improved version:
+
+\codeblock{
+	NEW\\\\
+	10 REM IMPROVED GUESSING GAME\\
+	20 N = INT(RND(1)*100)+1\\
+	30 CT = 0\\
+	40 PRINT "I'M THINKING OF A NUMBER"\\
+	50 PRINT "FROM 1 TO 100."\\
+	60 PRINT\\
+	70 PRINT "WHAT IS YOUR GUESS";\\
+	80 INPUT G\\
+	90 CT = CT + 1\\
+	100 IF G = N THEN GOTO 150\\
+	110 IF G < N THEN PRINT "TOO LOW!"\\
+	120 IF G > N THEN PRINT "TOO HIGH!"\\
+	130 PRINT\\
+	140 GOTO 70\\
+	150 PRINT "YOU GOT IT IN"; CT; "GUESSES!"\\
+}
+
+This version:
+\begin{itemize}
+	\item Uses numbers from 1 to 100 (more challenging!)
+	\item Tells you if your guess is too high or too low
+	\item Counts how many guesses it takes you
+\end{itemize}
+
+\tip{The Best Strategy}{
+	Here's a secret: the fastest way to guess the number is to always guess the
+	middle of the remaining possibilities.  Start with 50.  If it's too high,
+	guess 25.  If it's too low, guess 75.  Keep halving the range and you can
+	always find a number from 1 to 100 in 7 guesses or less!
+}
+
+\section{Roll the Dice}
+
+Here's another fun program that simulates rolling two dice:
+
+\codeblock{
+	NEW\\\\
+	10 PRINT "PRESS ANY KEY TO ROLL..."\\
+	20 GET A\$ : IF A\$ = "" THEN 20\\
+	30 D1 = INT(6*RND(1))+1\\
+	40 D2 = INT(6*RND(1))+1\\
+	50 PRINT "DIE 1:"; D1\\
+	60 PRINT "DIE 2:"; D2\\
+	70 PRINT "TOTAL:"; D1+D2\\
+	80 PRINT\\
+	90 GOTO 10\\
+}
+
+This program waits for you to press a key, then ``rolls'' two dice and shows
+you the results.  You can use this as part of a board game simulation!
+
+Line 20 uses the {\ttfamily GET} statement, which checks if a key has been
+pressed without waiting.  The {\ttfamily IF A\$ = "" THEN 20} part keeps
+checking until you actually press something.
+
+\section{What You've Learned}
+
+Congratulations!  In this chapter, you've learned some of the most important
+concepts in programming:
+
+\begin{itemize}
+	\item {\ttfamily RND} generates random numbers for games and simulations
+	\item {\ttfamily INT} converts decimal numbers to whole numbers
+	\item {\ttfamily IF...THEN} lets your programs make decisions
+	\item {\ttfamily FOR...NEXT} repeats actions a specific number of times
+	\item {\ttfamily REM} lets you add notes to your programs
+	\item The colon ({\ttfamily :}) lets you put multiple statements on one
+		line
+\end{itemize}
+
+With these tools, you can write all sorts of programs---games, quizzes,
+simulations, and much more.  The only limit is your imagination!
+
+\tryit{
+	Try modifying the guessing game:
+	\begin{itemize}
+		\item Change the range to 1-1000 for a harder challenge
+		\item Add a limit of 10 guesses (and print ``GAME OVER'' if they run
+			out)
+		\item Ask if the player wants to play again when the game ends
+	\end{itemize}
+}
 
 \@openrighttrue\makeatother

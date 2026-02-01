@@ -1,0 +1,32 @@
+name: Build and Release PDF
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: user_guide.tex
+          latexmk_use_xelatex: true
+          pre_compile: |
+            apk add make
+          post_compile: |
+            makeindex user_guide.idx -s indexstyle.ist
+            biber user_guide
+            xelatex -halt-on-error -file-line-error -shell-escape -jobname=x16_user_guide user_guide.tex
+            xelatex -halt-on-error -file-line-error -shell-escape -jobname=x16_user_guide user_guide.tex
+
+      - name: Upload PDF to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: x16_user_guide.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

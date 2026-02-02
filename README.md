@@ -7,6 +7,12 @@ Commander X16 project team.
 
 ---
 
+## 📥 Download the User Guide
+
+**Just want the PDF?** Head over to the [**GitHub Releases**](https://github.com/X16Community/x16-user-guide/releases) page to download the latest version of the Commander X16 User's Guide.
+
+---
+
 ## Inspiration and Structure
 
 This User's Guide takes inspiration (often shamelessly) from the Commodore

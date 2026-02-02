@@ -5,50 +5,292 @@
 \chapter*{Error Messages}\index{Error Messages}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Error Messages}
 
-% TODO: This appendix needs content covering:
-% - List of all BASIC error messages
-% - Explanation of what causes each error
-% - How to fix common errors
-% - Example code that produces each error
-
 \section*{Introduction}
 
 When the Commander X16 encounters a problem while running your program, it
 displays an error message. Understanding these messages will help you fix
-problems in your programs quickly.
+problems in your programs quickly.\\
 
-% TODO: Add comprehensive list of error messages
-% Format suggestion:
-% \subsection*{?SYNTAX ERROR}
-% This error occurs when the X16 doesn't understand what you typed.
-% Common causes:
-% - Misspelled command
-% - Missing quotation marks
-% - Incorrect punctuation
+Error messages in BASIC are displayed in the format:
 
-\section*{Common Error Messages}
+\codeblock{
+	?ERROR NAME  IN LINE xxx\\
+}
 
-% Placeholder - expand with full error list
+The ``xxx'' is the line number where the error occurred. If you are typing
+commands in direct mode (without line numbers), the ``IN LINE xxx'' part
+will not appear.\\
 
-\subsection*{?SYNTAX ERROR}
-The X16 doesn't understand the command or statement. Check for typos and missing punctuation.
+Here is a complete list of the error messages you may encounter on the
+Commander X16, along with explanations of what causes them and how to fix them.
 
-\subsection*{?ILLEGAL QUANTITY ERROR}
-A number is out of the acceptable range for the command being used.
+%----------------------------------------------------------------------------------------
+\section*{BASIC Error Messages}
+%----------------------------------------------------------------------------------------
 
-\subsection*{?OUT OF MEMORY ERROR}
-The program is too large or has used all available memory.
+\subsection*{?BAD DATA ERROR}
+\index{Error Messages!BAD DATA}
 
-\subsection*{?UNDEF'D STATEMENT ERROR}
-A GOTO or GOSUB refers to a line number that doesn't exist.
+String data was received from an open file, but the program was expecting
+numeric data. Check that your file contains the type of data your program
+expects, and that you are reading it in the correct order.
 
-\subsection*{?TYPE MISMATCH ERROR}
-You tried to use a string where a number was expected, or vice versa.
+\subsection*{?BAD SUBSCRIPT ERROR}
+\index{Error Messages!BAD SUBSCRIPT}
 
-\subsection*{?FILE NOT FOUND ERROR}
-The file you tried to load doesn't exist on the SD card.
+The program tried to access an element of an array using a subscript (index
+number) that is outside the range specified in the {\ttfamily DIM} statement.
+For example, if you {\ttfamily DIM A(10)} and then try to access {\ttfamily A(15)},
+you will get this error. Array subscripts must be between 0 and the dimension
+you specified.
+
+\subsection*{?BREAK}
+\index{Error Messages!BREAK}
+
+Program execution was stopped because you pressed the \runstopkey key.
+This is not really an error---it's a way to interrupt a running program.
+You can use {\ttfamily CONT} to continue running the program from where
+it stopped.
+
+\subsection*{?CAN'T CONTINUE ERROR}
+\index{Error Messages!CAN'T CONTINUE}
+
+The {\ttfamily CONT} command cannot continue the program. This happens when:
+\begin{itemize}
+	\item The program was never {\ttfamily RUN}
+	\item The program stopped due to an error
+	\item You edited any line of the program (even pressing \returnkey on an unchanged line counts as editing)
+	\item You caused an error before typing {\ttfamily CONT}
+\end{itemize}
+To restart the program, use {\ttfamily RUN} instead.
+
+\subsection*{?DEVICE NOT PRESENT ERROR}
+\index{Error Messages!DEVICE NOT PRESENT}
+
+The device number you specified in an {\ttfamily OPEN}, {\ttfamily CLOSE},
+{\ttfamily CMD}, {\ttfamily PRINT\#}, {\ttfamily INPUT\#}, or {\ttfamily GET\#}
+statement is not available. Make sure the device is connected and turned on,
+and that you are using the correct device number (typically 8 for the SD card).
 
 \subsection*{?DIVISION BY ZERO ERROR}
-You attempted to divide a number by zero.
+\index{Error Messages!DIVISION BY ZERO}
 
-% TODO: Add remaining error messages
+You attempted to divide a number by zero. Division by zero is mathematically
+undefined and not allowed. Check your calculations to make sure the divisor
+is never zero. For example:
+
+\codeblock{
+	10 X = 0\\
+	20 PRINT 10/X\\
+}
+
+This will cause a {\ttfamily ?DIVISION BY ZERO ERROR} because {\ttfamily X} is zero.
+
+\subsection*{?EXTRA IGNORED}
+\index{Error Messages!EXTRA IGNORED}
+
+Too many items of data were typed in response to an {\ttfamily INPUT} statement.
+Only the first few items were accepted, and the rest were ignored. This is a
+warning rather than a fatal error---your program will continue running.
+
+\subsection*{?FILE NOT FOUND ERROR}
+\index{Error Messages!FILE NOT FOUND}
+
+The file you tried to {\ttfamily LOAD} or {\ttfamily OPEN} for reading does
+not exist on the SD card. Check the spelling of the filename and make sure
+the file is in the correct directory. You can use the {\ttfamily DOS"\$"}
+command to list the files on the SD card.
+
+\subsection*{?FILE NOT OPEN ERROR}
+\index{Error Messages!FILE NOT OPEN}
+
+The file number specified in a {\ttfamily CLOSE}, {\ttfamily CMD},
+{\ttfamily PRINT\#}, {\ttfamily INPUT\#}, or {\ttfamily GET\#} statement
+was not previously opened with an {\ttfamily OPEN} statement. Make sure you
+{\ttfamily OPEN} a file before trying to use it.
+
+\subsection*{?FILE OPEN ERROR}
+\index{Error Messages!FILE OPEN}
+
+You attempted to {\ttfamily OPEN} a file using a file number that is already
+in use. Each open file must have a unique file number. Either {\ttfamily CLOSE}
+the existing file first, or use a different file number.
+
+\subsection*{?FORMULA TOO COMPLEX ERROR}
+\index{Error Messages!FORMULA TOO COMPLEX}
+
+The expression you are trying to evaluate is too complicated for the X16 to
+handle all at once. Try breaking it into smaller parts by storing intermediate
+results in variables. This can also occur if you have too many nested
+parentheses.
+
+\subsection*{?ILLEGAL DIRECT ERROR}
+\index{Error Messages!ILLEGAL DIRECT}
+
+You tried to use a statement in direct mode (without a line number) that can
+only be used within a program. The {\ttfamily INPUT} and {\ttfamily DEF FN}
+statements cannot be used in direct mode---they must be part of a program.
+
+\subsection*{?ILLEGAL QUANTITY ERROR}
+\index{Error Messages!ILLEGAL QUANTITY}
+
+A number used as an argument to a function or statement is out of the
+allowable range. For example:
+\begin{itemize}
+	\item {\ttfamily CHR\$(300)} --- the argument must be 0--255
+	\item {\ttfamily POKE 65536,0} --- the address must be 0--65535
+	\item {\ttfamily LOG(0)} --- logarithm requires a positive number
+	\item {\ttfamily SQR(-1)} --- square root requires a non-negative number
+\end{itemize}
+
+\subsection*{?LOAD ERROR}
+\index{Error Messages!LOAD}
+
+There was a problem loading the program. The file may be corrupted or the
+wrong type. Try loading the file again, or check that the file is a valid
+BASIC program.
+
+\subsection*{?NEXT WITHOUT FOR ERROR}
+\index{Error Messages!NEXT WITHOUT FOR}
+
+A {\ttfamily NEXT} statement was encountered without a matching {\ttfamily FOR}
+statement. This is usually caused by:
+\begin{itemize}
+	\item Incorrectly nested loops
+	\item A variable name in {\ttfamily NEXT} that doesn't match any {\ttfamily FOR} loop
+	\item Jumping into the middle of a {\ttfamily FOR...NEXT} loop with {\ttfamily GOTO}
+\end{itemize}
+
+\subsection*{?NOT INPUT FILE ERROR}
+\index{Error Messages!NOT INPUT FILE}
+
+You tried to {\ttfamily INPUT} or {\ttfamily GET} data from a file that was
+opened for output only. When opening a file, you must specify the correct
+mode for how you intend to use it.
+
+\subsection*{?NOT OUTPUT FILE ERROR}
+\index{Error Messages!NOT OUTPUT FILE}
+
+You tried to {\ttfamily PRINT} data to a file that was opened for input only.
+When opening a file, you must specify the correct mode for how you intend to
+use it.
+
+\subsection*{?OUT OF DATA ERROR}
+\index{Error Messages!OUT OF DATA}
+
+A {\ttfamily READ} statement was executed, but there is no more data left
+in the {\ttfamily DATA} statements. Make sure you have enough data items
+for all your {\ttfamily READ} statements, or use {\ttfamily RESTORE} to
+start reading from the beginning again.
+
+\subsection*{?OUT OF MEMORY ERROR}
+\index{Error Messages!OUT OF MEMORY}
+
+There is no more RAM available for your program or variables. This can occur
+when:
+\begin{itemize}
+	\item Your program is too large
+	\item You have too many variables or strings
+	\item Too many {\ttfamily FOR} loops are nested
+	\item Too many {\ttfamily GOSUB}s are active (without {\ttfamily RETURN})
+\end{itemize}
+Try shortening your program, using fewer variables, or simplifying your logic.
+
+\subsection*{?OVERFLOW ERROR}
+\index{Error Messages!OVERFLOW}
+
+The result of a calculation is larger than the largest number the X16 can
+handle, which is approximately 1.70141884 $\times$ 10\textsuperscript{38}.
+Try using smaller numbers or breaking your calculation into steps.
+
+\subsection*{?REDIM'D ARRAY ERROR}
+\index{Error Messages!REDIM'D ARRAY}
+
+An array can only be dimensioned once with {\ttfamily DIM}. If you use an
+array variable before dimensioning it, BASIC automatically creates it with
+10 elements. Any later {\ttfamily DIM} for the same array causes this error.
+Put all your {\ttfamily DIM} statements at the beginning of your program
+to avoid this problem.
+
+\subsection*{?REDO FROM START}
+\index{Error Messages!REDO FROM START}
+
+You typed text when the {\ttfamily INPUT} statement was expecting a number.
+This is not a fatal error---simply retype your response with a valid number,
+and the program will continue.
+
+\subsection*{?RETURN WITHOUT GOSUB ERROR}
+\index{Error Messages!RETURN WITHOUT GOSUB}
+
+A {\ttfamily RETURN} statement was encountered, but no {\ttfamily GOSUB}
+had been executed to call a subroutine. Make sure every {\ttfamily RETURN}
+has a matching {\ttfamily GOSUB}, and avoid jumping into subroutines with
+{\ttfamily GOTO}.
+
+\subsection*{?STRING TOO LONG ERROR}
+\index{Error Messages!STRING TOO LONG}
+
+A string can contain at most 255 characters. Your string operation created
+a result longer than 255 characters. Try working with shorter strings or
+breaking your text into multiple string variables.
+
+\subsection*{?SYNTAX ERROR}
+\index{Error Messages!SYNTAX ERROR}
+
+The Commander X16 doesn't understand what you typed. Common causes include:
+\begin{itemize}
+	\item Misspelled BASIC keywords ({\ttfamily PIRNT} instead of {\ttfamily PRINT})
+	\item Missing or extra quotation marks
+	\item Missing or mismatched parentheses
+	\item Incorrect punctuation
+	\item Using a reserved word as a variable name
+\end{itemize}
+Check your line carefully for typos.
+
+\subsection*{?TYPE MISMATCH ERROR}
+\index{Error Messages!TYPE MISMATCH}
+
+You tried to use a number where a string was expected, or a string where a
+number was expected. In BASIC, string variables end with a {\ttfamily \$} sign
+(like {\ttfamily A\$}), and numeric variables don't (like {\ttfamily A}).
+Make sure you are using the right type of variable.
+
+\subsection*{?UNDEF'D FUNCTION ERROR}
+\index{Error Messages!UNDEF'D FUNCTION}
+
+You tried to use a function defined with {\ttfamily DEF FN} before the
+{\ttfamily DEF FN} statement was executed. Make sure your function
+definitions appear before the {\ttfamily FN} calls in your program.
+
+\subsection*{?UNDEF'D STATEMENT ERROR}
+\index{Error Messages!UNDEF'D STATEMENT}
+
+A {\ttfamily GOTO}, {\ttfamily GOSUB}, or {\ttfamily RUN} statement refers
+to a line number that doesn't exist in your program. Check the line number
+and make sure the target line exists. Use {\ttfamily LIST} to see all the
+line numbers in your program.
+
+\subsection*{?VERIFY ERROR}
+\index{Error Messages!VERIFY}
+
+The program on the SD card does not match the program currently in memory.
+This occurs when you use the {\ttfamily VERIFY} command to check if a program
+was saved correctly. If you get this error, try saving the program again.
+
+%----------------------------------------------------------------------------------------
+\section*{Tips for Debugging}
+%----------------------------------------------------------------------------------------
+
+When you encounter an error:
+
+\begin{enumerate}
+	\item Note the error message and line number
+	\item Use {\ttfamily LIST} followed by the line number to see the problem line:\\
+	      {\ttfamily LIST 100} shows line 100
+	\item Check for common mistakes: typos, missing quotes, wrong variable types
+	\item Fix the line by retyping it with the correct syntax
+	\item Use {\ttfamily RUN} to test your fix
+\end{enumerate}
+
+Remember, error messages are your friends---they tell you exactly where to
+look for problems in your program!

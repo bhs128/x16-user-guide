@@ -25,7 +25,6 @@ PARTS					= preface.tex \
 						  appendix/screen_codes_table.tex \
 						  appendix/petscii_codes_table.tex \
 						  appendix/memory_map.tex \
-						  appendix/65c02_op_codes.tex \
 						  appendix/patch_table.tex \
 						  appendix/music_play_macros.tex \
 						  appendix/ym2151.tex \

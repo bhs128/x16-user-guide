@@ -75,11 +75,10 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Appendix: Screen Codes** | [appendix/screen_codes_table.tex](appendix/screen_codes_table.tex) | ✅ Reference | 222 | Screen character codes |
 | **Appendix: PETSCII Codes** | [appendix/petscii_codes_table.tex](appendix/petscii_codes_table.tex) | ✅ Reference | 97 | Character code tables |
 | **Appendix: Memory Map** | [appendix/memory_map.tex](appendix/memory_map.tex) | ✅ Reference | 157 | X16 memory layout |
-| **Appendix: 65C02 Op Codes** | [appendix/65c02_op_codes.tex](appendix/65c02_op_codes.tex) | 🚧 Stub | 2 | Needs content |
 | **Appendix: Patch Table** | [appendix/patch_table.tex](appendix/patch_table.tex) | ✅ Reference | 150 | ROM patch information |
 | **Appendix: MUSIC PLAY Macros** | [appendix/music_play_macros.tex](appendix/music_play_macros.tex) | ✅ Reference | 404 | Music string notation |
 | **Appendix: YM2151** | [appendix/ym2151.tex](appendix/ym2151.tex) | ✅ Reference | 552 | FM sound chip documentation |
-| **Appendix: Error Messages** | [appendix/error_messages.tex](appendix/error_messages.tex) | 🔶 Partial | 54 | Basic structure, 7 errors listed, needs completion |
+| **Appendix: Error Messages** | [appendix/error_messages.tex](appendix/error_messages.tex) | ✅ Complete | 280+ | Full list of BASIC error messages with explanations and debugging tips |
 | **Appendix: Sample Programs** | [appendix/sample_programs.tex](appendix/sample_programs.tex) | 🚧 Placeholder | 48 | Section stubs only, no actual programs yet |
 
 ### Original VIC-20 User's Guide Chapters
@@ -129,7 +128,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | **Ch 5**: Sound and Music | Making music, piano, songs | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | ✅ Complete | None - covers PSG/FM voices, waveforms, FMPLAY/PSGPLAY, sound effects, piano, songs |
 | **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | None - follows VIC-20 structure |
 | **Ch 7**: Intro to Programming | BASIC commands, RND, IF/THEN, FOR/NEXT | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | None - covers RND, IF/THEN, FOR/NEXT, games |
-| **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | 🔶 Mixed | Error messages partial, sample programs needed |
+| **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | 🔶 Mixed | Sample programs needed |
 
 ### 📋 Priority TODO List
 
@@ -141,8 +140,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | ✅ Done | **Ch 5: Sound and Music** | Complete | PSG and FM sounds, waveforms, FMPLAY/PSGPLAY, sound effects, piano program, songs |
 | 🟢 Low | **Ch 2: Screen & Keyboard** | Complete | Add keyboard diagram illustration |
 | 🟡 Medium | **Appendix: Sample Programs** | Section stubs | Add 5-10 type-in programs |
-| 🟢 Low | **Appendix: Error Messages** | 7 errors | Complete full error list |
-| 🟢 Low | **Appendix: 65C02 Op Codes** | Empty | Add instruction reference (or remove if covered elsewhere) |
+| ✅ Done | **Appendix: Error Messages** | Complete | Full list of 26 BASIC error messages with explanations and debugging tips |
 
 ### 🆕 Suggested Future X16-Specific Content
 

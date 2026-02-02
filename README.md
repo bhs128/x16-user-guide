@@ -173,6 +173,12 @@ This section summarizes the current state of the Commander X16 User Guide, with 
 | Ch 7: Intro to Programming | ✅ Complete | 100% | Publication-ready |
 | Appendices | ✅ Complete | 100% | Publication-ready |
 
+**Appendix Notes:**
+- **BASIC Commands Reference** now includes origin tags (Commodore 64 / Commander X16 / Commodore 128) for each command, statement, function, and system variable
+- Added missing X16-specific commands: `BASLOAD`, `BSAVE`, `JOY`, `MOD`
+- Removed separate BASIC keyword table (consolidated into main reference)
+- Removed YM2151 Registers appendix (too advanced for beginner user guide)
+
 ### 🔍 Continuity & Cross-Reference Review
 
 **Strengths:**
@@ -208,7 +214,6 @@ These topics would extend the guide beyond VIC-20 parity. They could be added as
 | **SD Card & DOS Commands** | 🟡 Medium | Directory navigation, file management beyond SAVE/LOAD |
 | **Sprites via BASIC** | 🟡 Medium | X16's 128 sprites are a major feature |
 | **Bitmap Graphics (LINE, RECT, CIRCLE)** | 🟡 Medium | X16 BASIC includes drawing commands |
-| **JOY() and SNES Controllers** | 🟡 Medium | Game development capability |
 | **Using the Emulator** | 🟢 Low | Helpful for testing/development |
 
 ### Original VIC-20 User's Guide Chapters (Reference)

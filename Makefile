@@ -21,13 +21,11 @@ PARTS					= preface.tex \
 						  ch06_conversing_with_x16.tex \
 						  ch07_introduction_to_programming.tex \
 						  appendix/basic_commands.tex \
-						  appendix/basic_table.tex \
 						  appendix/screen_codes_table.tex \
 						  appendix/petscii_codes_table.tex \
 						  appendix/memory_map.tex \
 						  appendix/patch_table.tex \
 						  appendix/music_play_macros.tex \
-						  appendix/ym2151.tex \
 						  appendix/error_messages.tex \
 						  appendix/sample_programs.tex \
 

@@ -323,16 +323,48 @@ alphabetical order.\\
 
 \subsection{BANNER}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily BANNER} command displays the Commander X16 logo and boot text,
 like is automatically displayed upon boot.
 
+\subsection{BASLOAD}
+
+\textit{Origin: Commander X16 BASIC}
+
+The {\ttfamily BASLOAD} command loads a plain text file with BASLOAD source and
+converts it into a runnable program.  The device number is optional; if not
+specified, the current device is used.  The current device is set to 8 at system
+boot and may be changed with the {\ttfamily DOS} command.\\
+
+Syntax:\\
+
+{\ttfamily\bfseries BASLOAD <filename>[,<device>]}\\
+
+Example:\\
+
+\codeblock {
+	BASLOAD "MYPROG.BASL"\\
+	LOADING...\\
+	READY.\\
+	LIST\\
+	\\
+	1 PRINT "HELLO, WORLD!"\\
+	2 GOTO 1\\
+	READY.\\
+}
+
 \subsection{BOOT}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily BOOT} command loads and runs a PRG file named {\ttfamily
 AUTOBOOT.X16} from device \#8 (the SD card reader). If the file is not found,
 nothing is done and no error is printed.\\
 
 \subsection{CLR}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily CLR} command clears the BASIC variables from memory.  This
 includes variables that were assigned values while running BASIC programs as
@@ -348,6 +380,8 @@ variable state in tact.\\
 
 \subsection{CLS}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily CLS} command clears the screen. This has the same effect as
 typing {\ttfamily PRINT CHR\$(147);} or typing
 \keybackgroundcolor{gray}\keytextcolor{black}\widekey{shift}+\doublekey{clr\\home}.
@@ -356,6 +390,8 @@ and is also useful in BASIC programs to {\ttfamily PRINT}ing to an empty
 screen.\\
 
 \subsection{CONT (continue)}
+
+\textit{Origin: Commodore 64 BASIC}
 
 When a program has been stopped by either using the
 \keybackgroundcolor{gray}\doublekey{RUN\\STOP} key, a {\ttfamily STOP}
@@ -374,6 +410,8 @@ it again is to start at the beginning of the program by using the {\ttfamily
 RUN} command.\\
 
 \subsection{DOS}
+
+\textit{Origin: Commander X16 BASIC}
 
 This command works with the command/status channel or the directory of a
 Commodore DOS device and has different functionality depending on the type of
@@ -405,6 +443,8 @@ Examples:\\
 
 \subsection{HELP}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily HELP} command displays a brief summary of the current ROM build,
 VERA version, and PS/2 microcontroller code version.  It also displays some
 URLs for documentation and community support.  All of this information could be
@@ -412,6 +452,8 @@ useful in troubleshooting issues the Commander X16.\\
 
 
 \subsection{KEYMAP}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily KEYMAP} command sets the current keyboard layout. It can be put
 into an {\ttfamily AUTOBOOT.X16} file to always set the keyboard layout on
@@ -426,6 +468,8 @@ Example:\\
 }
 
 \subsection{LIST}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily LIST} command will print the currently loaded BASIC program to
 the screen, either in its entirety or only the parts specified by the user.
@@ -476,6 +520,8 @@ Examples:\\
 \vspace{16pt}
 
 \subsection{LOAD}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily LOAD} command is used when you want to use a program that is
 stored on the Commander X16's SD card\footnote{the {\ttfamily LOAD} command can
@@ -530,16 +576,22 @@ The {\ttfamily LOAD} command can be used with a BASIC program to load and
 
 \subsection{MENU}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily MENU} command presents the user with a menu of built-in programs
 stored in the X16's ROM.  The user can then select a program to run, or return
 to BASIC.\\
 
 \subsection{MON}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily MON} command causes the Commander X16 to enter the machine
 language monitor.\\
 
 \subsection{NEW} 
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily NEW} command marks the current program and its variables as
 erased, but leaves them in memory.  This behavior is so that both the program
@@ -547,6 +599,8 @@ and its variables can be restored with the {\ttfamily OLD} command.  The effect
 is that the Commander X16 is ready for a new program.\\
 
 \subsection{OLD}
+
+\textit{Origin: Commander X16 BASIC}
 
  The {\ttfamily OLD} command recovers the BASIC program in RAM that has been
  previously marked erased either by using the {\ttfamily NEW} command, by
@@ -556,10 +610,14 @@ is that the Commander X16 is ready for a new program.\\
 
 \subsection{POWEROFF}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily POWEROFF} command turns off the Commander X16.  It is equivalent
 to pressing the Power button on the motherboard or case.\\
 
 \subsection{REBOOT}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily REBOOT} command performs a software reset of the system by
 calling the ROM reset vector.  This performs all the boot routines in the
@@ -587,6 +645,8 @@ reboot:\\
 }
 
 \subsection{REN}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily REN} command renumbers a BASIC program while updating the line
 number arguments of {\ttfamily GOSUB}, {\ttfamily GOTO}, {\ttfamily RESTORE},
@@ -621,6 +681,8 @@ Example:\\
 }
 
 \subsection{RESET}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily RESET} command performs a full system reset, but does not clear
 memory.  This means that a BASIC program and its variables can be restored
@@ -658,6 +720,8 @@ line, which may be used by expansion ports to reset custom hardware.\\
 
 \subsection{RUN}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily RUN} command executes the program currently loaded into memory.
 This program could have been typed in, or it could have been loaded from the SD
 card with the {\ttfamily LOAD} command.  When called, the {\ttfamily RUN}
@@ -681,6 +745,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{SAVE}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily SAVE} command will store the the current program in memory to
 the SD card or another storage device.  The {\ttfamily SAVE} command should be
@@ -724,6 +790,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{VERIFY}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily VERIFY} command will compare the program in memory to a program
 on the SD card or other storage device.  If the programs are the same, the
@@ -770,6 +838,8 @@ programs.  They are used to define what it is that your program does.\\
 
 \subsection{BANK}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily BANK} statement sets which bank will be used when other commands
 and statements interpret addresses in the \$A000 - \$FFFF range.  Because all
 addresses from \$A000 and above are either banked "high" RAM or banked ROM,
@@ -813,6 +883,8 @@ READY} prompt:\\
 
 \subsection{BINPUT\#}
 
+\textit{Origin: Commander X16 BASIC}
+
  The {\ttfamily BINPUT\#} statement reads a block of data from an open file and
  stores the data into a string variable.  The {\ttfamily BINPUT\#} statement
  takes 3 arguments; the device number, the string variable to store the data
@@ -839,6 +911,8 @@ READY} prompt:\\
 
 \subsection{BLOAD}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily BLOAD} statement loads a headerless\footnote{typically on
 Commodore computers as well as the X16, files are expected to contain a
 two-byte header that indicates an address where they are to be loaded into
@@ -864,6 +938,8 @@ Examples:\\
 
 \subsection{BVERIFY}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily BVERIFY} statement compares a headerless file on the SD card or
 other storage device to the contents of banked RAM.  As arguments, the
 {\ttfamily BVERIFY} statement takes the name of the file, the device number,
@@ -887,7 +963,39 @@ Examples:\\
 
 \end{tabular}
 
+\subsection{BSAVE}
+
+\textit{Origin: Commander X16 BASIC}
+
+The {\ttfamily BSAVE} statement saves a region of memory to a binary file.
+The save will stop one byte before the end address.  This command does not
+allow for automatic bank advancing, but you can achieve a similar result with
+successive {\ttfamily BSAVE} invocations to append additional memory locations
+to the same file.\\
+
+Syntax:\\
+
+{\ttfamily\bfseries BSAVE <filename>, <device>, <bank>, <start address>, <end address>}\\
+
+Examples:\\
+
+\begin{tabular}{l p{0.35\linewidth}}
+
+	{\ttfamily\bfseries BSAVE "MYFILE.BIN",8,1,\$A000,\$C000}&Saves a region of
+	memory from \$A000 in bank 1 through and including \$BFFF, stopping before \$C000.\\\\
+
+	{\ttfamily\bfseries BSAVE "MYFILE.BIN,S,A",8,2,\$A000,\$B000}&Appends a region
+	of memory from \$A000 through and including \$AFFF.  Running both examples in
+	succession will result in a file 12KiB in size.\\\\
+
+\end{tabular}
+
+\textbf{Warning:} Appending to file involves a risk of corrupting the file
+system of the SD card!
+
 \subsection{BVLOAD}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily BVLOAD} statement loads a headerless file directly into the
 VERA's VRAM.  For arguments, the {\ttfamily BVLOAD} statement takes the file's
@@ -911,6 +1019,8 @@ To load a file that has a two-byte header, see the {\ttfamily VLOAD} statement.\
 
 \subsection{CHAR}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily CHAR} statement draws text to the screen at a given X,Y
 coordinate and a given color.  The {\ttfamily CHAR} statement is only available
 in graphics mode, and draws the text to the bitmap graphics layer instead of
@@ -925,6 +1035,8 @@ statement can draw in all 256 available colors.\\
 }
 
 \subsection{CLOSE}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily CLOSE} statement completes and closes any files used by
 {\ttfamily OPEN} statements.  The {\ttfamily CLOSE} statement takes a single
@@ -941,6 +1053,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{CMD}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily CMD} statement is used to send output that would normally go to
 the screen to some other device instead.  The other device could be a file on
@@ -973,6 +1087,8 @@ prior to closing the device.\\
 
 \subsection{COLOR}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily COLOR} statement sets the text mode foreground color, and
 optionally the background color.  It takes either one or two arguments, both
 are integers from 0 through 15.  The first argument sets the color of the text,
@@ -999,6 +1115,8 @@ since you can change both foreground and background colors for each individual
 charater.\\
 
 \subsection{DATA}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily DATA} statement creates a data section of a BASIC program from
 which the {\ttfamily READ} statement will read from.  The {\ttfamily DATA}
@@ -1035,6 +1153,8 @@ best to place all {\ttfamily DATA} statements at the end of program.\\
 
 \subsection{DEF}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily DEF} statement defines a calculation as a named function that
 can be called by BASIC later.  This is useful for complex calculations that a
 program does multiple times.  The {\ttfamily DEF} statement is followed by the
@@ -1070,6 +1190,8 @@ can normally be used.\\
 }
 
 \subsection{DIM}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily DIM} statement is used to \emph{dimension} an array, which means
 to allocate enough space for the data the array will hold.  An array variable
@@ -1118,6 +1240,8 @@ statements towards the beginning of a program.\\
 
 \subsection{END}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily END} statement will stop a running program just as if it had run
 out of lines.  The {\ttfamily CONT} command can then be used to start the
 program again, starting from the line after the {\ttfamily END} statement.  In
@@ -1128,6 +1252,8 @@ CONT}inuing a program, see the documentation for the {\ttfamily CONT}
 command.\\
 
 \subsection{FMCHORD}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily FMCHORD} statement instructs the FM synthesis chip to begin
 playing multiple notes at the same time.  For arguments, the {\ttfamily
@@ -1154,6 +1280,8 @@ Example:\\
 
 \subsection{FMDRUM}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMDRUM} statement plays a single percussion sound from a set of
 percussion instruments.  This set comes from the General MIDI standard
 Percussion set\footnote{see the Drum Patch Presets table in the appendix},
@@ -1178,6 +1306,8 @@ Examples:\\
 
 \subsection{FMFREQ}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMFREQ} statement plays a note on the FM synthesis chip at a
 given frequency.  This is an alternative to playing a note with {\ttfamily
 FMNOTE}, where instead of specifying a musical note, a frequency in Hertz is
@@ -1200,6 +1330,8 @@ Examples:\\
 
 \subsection{FMINIT}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMINIT} statement is used to set the FM synthesis chip to a
 known state, and takes no arugments.  It performs initializations on the YM2151
 sound chip, as well as loading default patches into all 8 channels.  In
@@ -1214,6 +1346,8 @@ the program relies on the default patches.  There's no guarantee that another
 program hasn't modified the state of the FM chip since boot.\\
 
 \subsection{FMINST}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily FMINST} statement assigns an instrument to a channel.  The first
 argument is the channel, and the second argument is a number indicating an
@@ -1233,6 +1367,8 @@ Extended FM Instrument Patch Presets table in the appendix.\\
 \end{tabular}
 
 \subsection{FMNOTE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily FMNOTE} statement plays a single note on the FM synthesis chip.
 The first argument is the channel, and the second argument specifies which
@@ -1292,6 +1428,8 @@ Examples:\\
 
 \subsection{FMPAN}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMPAN} statement is used to control the stereo output of an FM
 channel.  It takes an argument for the channel, and an argument for which
 speaker the channel should play from.  The second argument values are as
@@ -1317,6 +1455,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{FMPLAY}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily FMPLAY} statement plays a musical melody on a single channel.
 {\ttfamily FMPLAY} takes two arguments; a channel and a string of characters
@@ -1380,6 +1520,8 @@ requires the {\ttfamily >} character to be placed between the
 
 \subsection{FMPOKE}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMPOKE} statement can be used to write values directly to the
 registers of the FM sound chip.  To understand what values to write to which
 registers, see the appendix on YM2551 Registers.\\
@@ -1403,6 +1545,8 @@ Examples:\\
 
 \subsection{FMVIB}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FMVIB} statement sets the speed of the FM chip's LFO, as well as
 the depth of the amplitude modulation or phase modulation.  The first argument
 sets the speed from 0-255, and the second argument sets the depth from 0-127.
@@ -1419,6 +1563,8 @@ Example:\\
 }
 
 \subsection{FMVOL}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily FMVOL} statement sets a channel's volume.  The first argument is
 the channel, and the second argument is a value from 0 through 63.  The volume
@@ -1439,6 +1585,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{FOR}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily FOR} statement is used with the {\ttfamily TO} statement, the
 {\ttfamily NEXT} statement, and sometimes the {\ttfamily STEP} statement to
@@ -1468,6 +1616,8 @@ For example, here is a for-loop that prints the numbers {\ttfamily 1} through
 
 \subsection{FRAME}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily FRAME} statement draws a rectangle frame in graphics mode in a
 given color.  The first two arguments are the x and y coordinates for the upper
 left corner of the frame.  The third and fourth arguments are the x and y
@@ -1485,6 +1635,8 @@ The {\ttfamily FRAME} statement is similar to the {\ttfamily RECT} statment,
 except that {\ttfamily FRAME} does not fill in the rectangle.
 
 \subsection{GET}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily GET} statement gets data from the keyboard one character at a
 time.  The {\ttfamily GET} statement will read a single character from the
@@ -1530,6 +1682,8 @@ A common use for the {\ttfamily GET} statement is to pause a program in a loop u
 
 \subsection{GET\#}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily GET\#} statement reads data from a specified logical file one
 character at a time.  It is identical to the {\ttfamily GET} statement except
 that it requires a first argument to specify a logical file identifier.  The
@@ -1553,6 +1707,8 @@ Example:\\
 
 
 \subsection{GOSUB}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily GOSUB} statement transfers program execution to a specified line
 and remembers which line which called {\ttfamily GOSUB}.  This is different
@@ -1593,6 +1749,8 @@ program, which stops line 50 from executing again.\\
 
 \subsection{GOTO}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily GOTO} statement transfers program execution to the line
 specified.  Unlike the {\ttfamily GOSUB} statement, the {\ttfamily GOTO}
 statement does {\em not} remember where it was called from, and therefore the
@@ -1608,6 +1766,8 @@ Example:\\
 }
 
 \subsection{IF}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily IF} statement is how decisions are made in BASIC.  The
 {\ttfamily IF} statement is followed by an expression that evaluates to either
@@ -1643,6 +1803,8 @@ Example:\\
 
 \subsection{INPUT}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily INPUT} statement asks the user of a BASIC program for data to
 store in a variable.  The program will print an optional prompt (much like the
 {\ttfamily PRINT} statement), print a question mark (?), and then wait for the
@@ -1671,11 +1833,15 @@ Example:\\
 
 \subsection{INPUT\#}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily INPUT\#} statement works just like the {\ttfamily INPUT}
 statement, but takes the data from a previously opened file or device.  The
 device number must be specified before the optional prompt or the variables.\\
 
 \subsection{LET}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily LET} statement is an optional statement used for assigning
 variables in a BASIC program.  It is not necessary, but still exists as part of
@@ -1696,6 +1862,8 @@ that using {\ttfamily LET} on variable assignments is optional.
 
 \subsection{I2CPOKE}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily I2CPOKE} statement sets a value in a register of an
 I\textsuperscript{2}C device.  The first argument is the device, the second is
 the register on the device, and the third is the value to set.\\
@@ -1710,6 +1878,8 @@ Example:\\
 }
 
 \subsection{LINE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily LINE} statement is used to draw a line in graphics mode.  The
 {\ttfamily LINE} statement is passed the X and Y coordinates of the first
@@ -1738,6 +1908,8 @@ Draw a rainbow.\\
 }
 
 \subsection{LINPUT}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily LINPUT} statement reads input directly from the keyboard, but
 always stores the data as a string varible.  Unlike the the {\ttfamily INPUT}
@@ -1778,6 +1950,8 @@ ready by {\ttfamily LINPUT} as opposed to {\ttfamily INPUT}.\\
 
 \subsection{LINPUT\#}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily LINPUT\#} works similar to the {\ttfamily LINPUT} statement, but
 instead reads the line from an open file specified by the first argument.  When
 reading from a file, there are no "lines" to read from like there is when
@@ -1812,6 +1986,8 @@ listing.\\
 
 \subsection{LOCATE}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily LOCATE} statement moves the cursor in text mode, allowing a
 program to print text to any part of the screen.  The {\ttfamily LOCATE}
 statement takes a line as the first argument, and a column as an optional
@@ -1836,6 +2012,8 @@ Examples:
 \vspace{16pt}
 
 \subsection{MOUSE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily MOUSE} statement shows or hides the mouse cursor by passing a
 mode as an argument:\\
@@ -1892,6 +2070,8 @@ version of the default VERA palette:\\
 
 \subsection{MOVSPR}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily MOVSPR} statement moves a sprite to a location on the screen.
 The {\ttfamily MOVSPR} statement requires three integer arguments.  The first
 argument is the sprite index, the second is the location along the x-axis, and
@@ -1917,6 +2097,8 @@ The above code will create a sprite that's a 16x16 pixel version of the default
 VERA palette, and then position it at coordinates (100,100).\\
 
 \subsection{NEXT}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily NEXT} statement is used as part of a for-loop in BASIC.  Each
 use of the {\ttfamily FOR} statement will need a corresponding {\ttfamily NEXT}
@@ -1949,6 +2131,8 @@ to the next.\\
 \vspace{16pt}
 
 \subsection{ON}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily ON} statement can be used to change the target line number of a
 {\ttfamily GOTO} or {\ttfamily GOSUB} statement.  The {\ttfamily ON} statement
@@ -1987,6 +2171,8 @@ Example:\\
 }
 
 \subsection{OPEN}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily OPEN} statement can be used to access various devices from
 within a BASIC program on the Commander X16.  These devices may be the
@@ -2037,6 +2223,8 @@ Examples:\\
 
 \subsection{OVAL}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily OVAL} statement draws a filled oval in graphics mode in a given
 color.  The first two arguments are the x and y coordinates for the upper left
 corner of the bounding rectangle that contains the oval.  The third and fourth
@@ -2063,6 +2251,8 @@ The {\ttfamily OVAL} statement is similar to the {\ttfamily RING} statement,
 except that {\ttfamily RECT} fills the ellipse with the specified color.
 
 \subsection{POKE}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily POKE} statement is used to write directly to the Commander X16's
 memory or a memory-mapped device.  It is always followed by two numbers or
@@ -2092,6 +2282,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{PRINT}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily PRINT} statement is used to display text and graphic characters
 to the screen.  When it text mode, it is the most typical way to display output
@@ -2148,6 +2340,8 @@ Examples:\\
 
 \subsection{PRINT\#}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily PRINT\#} statement works nearly identically to the {\ttfamily
 PRINT} statement, except that it {\ttfamily PRINT}s to an open file or device
 instead of the screen.  The first argument to the {\ttfamily PRINT\#} statement
@@ -2197,6 +2391,8 @@ The file should contain the following pattern:\\
 
 \subsection{PSET}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily PSET} statement sets the color of a single pixel in graphics
 mode (set with {\ttfamily SCREEN \$80}).  The {\ttfamily PSET} statement is
 followed by the x and y coordinates and number from 0-255 to specify the color
@@ -2220,6 +2416,8 @@ calculate!  See the {\ttfamily RECT} statement for a much faster way to display
 the palette.  It only has to calculate the color 256 times.\\
 
 \subsection{PSGCHORD}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily PSGCHORD} statement instructs the programmable sound generator
 to begin playing multiple notes at the same time.  For arguments, the
@@ -2246,6 +2444,8 @@ Example:\\
 
 \subsection{PSGFREQ}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily PSGFREQ} statement plays a note on the programmable sound
 generator at a given frequency.  This is an alternative to playing a note with
 {\ttfamily PSGNOTE}, where instead of specifying a musical note, a frequency in
@@ -2268,6 +2468,8 @@ Examples:\\
 
 \subsection{PSGINIT}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily PSGINIT} statement initializes the VERA's programmable sound
 generator (PSG).  When the {\ttfamily PSGINIT} statement is run, it initializes
 the PSG, and does the following on all 16 channels:\\
@@ -2283,6 +2485,8 @@ the PSG, and does the following on all 16 channels:\\
 \end{itemize}
 
 \subsection{PSGNOTE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily PSGNOTE} statement plays a single note on the programmable sound
 generator.  The first argument is the channel, and the second argument
@@ -2340,6 +2544,8 @@ Example:\\
 
 \subsection{PSGPAN}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily PSGPAN} statement is used to control the stereo output of a PSG
 channel.  It takes an argument for the channel, and an argument for which
 speaker the channel should play from.  The second argument values are as
@@ -2366,6 +2572,8 @@ Examples:\\
 
 \subsection{PSGPLAY}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily PSGPLAY} statement plays a musical melody on a single channel.
 {\ttfamily PSGPLAY} takes two arguments; a channel and a string of characters
 that tells the programmable sound generator what to play.  This second argument
@@ -2383,6 +2591,8 @@ The {\ttfamily PSGPLAY} statement uses the exact same macro language as the
 information.
 
 \subsection{PSGVOL}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily PSGVOL} statement sets a channel's volume.  The first argument
 is the channel, and the second argument is a value from 0 through 63.  The
@@ -2403,6 +2613,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{PSGWAV}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily PSGWAV} statement sets the waveform of a channel on the
 programmable sound generator (PSG), which results in a different timbre.  The
@@ -2445,6 +2657,8 @@ Examples:\\
 
 \subsection{READ}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily READ} statement is used to get information that has been coded
 into the program using {\ttfamily DATA} statements.  Like the {\ttfamily INPUT}
 statement, the {\ttfamily READ} statement is followed by a variable that
@@ -2466,6 +2680,8 @@ ERROR} will occur.\\
 }
 
 \subsection{RECT}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily RECT} statement draws a filled rectangle in graphics mode in a
 given color.  The first two arguments are the x and y coordinates for the upper
@@ -2494,6 +2710,8 @@ except that {\ttfamily RECT} fills the rectangle with the specified color.
 
 \subsection{REM}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily REM} statement is used to leave a {\ttfamily REM}ark (also
 called a comment) in a BASIC program to help a programmer annotate sections of
 the program.  It could help explain how a complex section of logic works, tell
@@ -2520,6 +2738,8 @@ Example:\\
 }
 
 \subsection{RESTORE}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily RESTORE} statement resets where the {\ttfamily READ} statement
 will read from, causing the next {\ttfamily READ} to read from the first
@@ -2548,6 +2768,8 @@ enough data for two reads, it runs without error because {\ttfamily RESTORE}
 causes the first piece of data to be read twice.\\
 
 \subsection{RETURN}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily RETURN} statement is always used in conjunction with the
 {\ttfamily GOSUB} statement.  When a program encounters a {\ttfamily RETURN}
@@ -2580,6 +2802,8 @@ Example:\\
 
 \subsection{RING}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily RING} statement draws an unfilled oval in graphics mode in a
 given color.  The first two arguments are the x and y coordinates for the upper
 left corner of the bounding rectangle that contains the oval.  The third and
@@ -2604,6 +2828,8 @@ The {\ttfamily RING} statement is similar to the {\ttfamily OVAL} statement,
 except that {\ttfamily OVAL} fills the ellipse with the specified color.
 
 \subsection{SCREEN}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily SCREEN} statement is used to select a screen mode.  The screen
 mode determines how many characters can fit on the screen (both horizontally
@@ -2643,6 +2869,8 @@ In addition to the above table, the value {\ttfamily -1} can be passed to
 
 \subsection{SLEEP}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily SLEEP} statement pauses program execution for a specified time
 period.  The {\ttfamily SLEEP} statement takes a single argument which is the
 number of VSYNC interrupts to wait before continuing program execution.  These
@@ -2669,6 +2897,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{SPRITE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily SPRITE} statement enables or disables one of the VERA's 128
 hardware sprites, and allows you to set other sprite properties as well.  The
@@ -2741,6 +2971,8 @@ Here is a brief summary of each argument:\\
 
 \subsection{SPRMEM}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily SPRMEM} statement sets the VRAM address and the color mode of a
 given sprite.  The first argument is the sprite index.  The VRAM address is
 specified in two parts: the bank, and the address within the bank.  The VERA's
@@ -2775,6 +3007,8 @@ MOVESPR} statement moves the sprite's location on the screen.\\
 
 \subsection{STEP}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily STEP} statement is used with the {\ttfamily FOR}, {\ttfamily
 TO}, and{\ttfamily NEXT} statements in order to construct for-loops.  The
 {\ttfamily STEP} statement is followed by a number that will be added to the
@@ -2800,6 +3034,8 @@ Examples:\\
 \end{tabular}
 
 \subsection{STOP}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily STOP} statement will halt a program.  This can be used to help
 debug programs by causing them to stop at a certain point, and then {\ttfamily
@@ -2828,6 +3064,8 @@ statement halts the program.\\
 
 \subsection{SYS}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily SYS} statement transfers control of the X16 to a machine
 language program in memory.\\
 
@@ -2846,6 +3084,8 @@ arguments to BASIC statements, the same can be written as:\\
 }
 
 \subsection{THEN}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily THEN} statement is used with an {\ttfamily IF} statement to tell
 the program what to do when the condition of the {\ttfamily IF} statement is
@@ -2884,6 +3124,8 @@ number with {\ttfamily THEN} instead of an expression.\\
 
 \subsection{TILE}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily TILE} statement can be used to place a given tile on the VERA's
 layer 1 tile map.  This works even when the map base or map size has been
 changed, which makes it simple to place tiles in graphics modes.  Because a
@@ -2912,6 +3154,8 @@ characters (the default tile set) on a 16 by 16 grid.\\
 
 \subsection{TO}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily TO} statement is used with the {\ttfamily FOR} statement, the
 {\ttfamily NEXT} statement, and sometimes the {\ttfamily STEP} statement to
 create a for-loop.  The {\ttfamily TO} statement is used to define the range of
@@ -2924,6 +3168,8 @@ See the {\ttfamily FOR} statement for examples of using the {\ttfamily TO}
 statement.\\
 
 \subsection{VPOKE}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily VPOKE} statement sets a single byte of video RAM (VRAM) on the
 VERA's onboard memory.  This allows for directly setting the data that will be
@@ -2956,6 +3202,8 @@ forground color to black, although the character data does not change.\\
 
 \subsection{VLOAD}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily VLOAD} statement loads a file with a two-byte header directly
 into the VERA's VRAM, but without loading the header.  For arguments, the
 {\ttfamily VLOAD} statement takes the file's name, the device number where the
@@ -2978,6 +3226,8 @@ To load a file that does not have a two-byte header, see the {\ttfamily BVLOAD}
 statement.\\
 
 \subsection{WAIT}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily WAIT} statement is used to halt a program until the contents of
 a memory location changes in a specified way.  The {\ttfamily WAIT} statement
@@ -3032,6 +3282,8 @@ below the example, itself.\\
 
 \subsection{ABS}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily ABS(X)} function will return the absolute value of {\ttfamily
 X}.\\
 
@@ -3045,6 +3297,8 @@ Example:\\
 }
 
 \subsection{ASC}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily ASC} function will return an integer value representing the
 PETSCII code\footnote{See the PETSCII Codes table in the appendix} for the
@@ -3062,6 +3316,8 @@ Example:\\
 
 \subsection{ATN}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily ATN(X)} (arctangent) function will return the angle whose
 tangent is {\ttfamily X}.  This is the inverse of the {\ttfamily TAN}
 function.\\
@@ -3078,6 +3334,8 @@ Example:\\
 In the above example, the value 0 will be printed on the screen.\\
 
 \subsection{BIN\$}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily BIN\$} function returns a string of the binary representation
 (1's and 0's) of a number.  The {\ttfamily BIN\$} function will only work on
@@ -3106,6 +3364,8 @@ Examples:\\
 
 \subsection{CHR\$}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily CHR\$} function takes a number from 0-255 and returns the
 PETSCII character represted by that PETSCII code\footnote{See the PETSCII Codes
 table in the appendix}.  Floating point numbers will be truncated to integers,
@@ -3129,6 +3389,8 @@ Examples:\\
 
 \subsection{COS}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily COS(X)} (cosine) function will return the cosine of an angle
 {\ttfamily X}, measured in radians.\\
 
@@ -3142,6 +3404,8 @@ Example:\\
 }
 
 \subsection{EXP}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily EXP(X)} (exponent) function will return the value of the
 mathematical constant {\ttfamily e} (2.71828183) raised to the power of
@@ -3171,6 +3435,8 @@ See the {\ttfamily DEF} statement for details and examples.\\
 
 \subsection{FRE}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily FRE} function returns the number of unused (or {\em free}) BASIC
 bytes.  Although the {\ttfamily FRE} function requires an argument (any valid
 numeric or string will do), this argument has no effect on the function's
@@ -3191,6 +3457,8 @@ allocate some of that memory, and then again print the updated amount of free
 memory.\\
 
 \subsection{HEX\$}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily HEX\$} function takes a numeric value and returns a string of
 the {\em hexadecimal} representation of that value.  Hexadecimal is a base-16
@@ -3235,6 +3503,8 @@ the same value in hexadecimal.\\
 
 \subsection{INT}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily INT} function returns a truncated\footnote{{\em Truncated} means
 removing all decimal places to the right of the decimal point, leaving only an
 integer} integer version of the numeric argument passed to the function.  The
@@ -3260,6 +3530,8 @@ certain precision, such as to the nearest hundredth:\\
 
 \subsection{I2CPEEK}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily I2CPEEK} function returns a value from a register of an
 I\textsuperscript{2}C device.  The first argument is the device and the second
 argument is the register.\\
@@ -3275,7 +3547,63 @@ Example:\\
 	60 GOTO 20\\
 }
 
+\subsection{JOY}
+
+\textit{Origin: Commander X16 BASIC}
+
+The {\ttfamily JOY} function returns the state of a joystick.  {\ttfamily JOY(1)}
+through {\ttfamily JOY(4)} return the state of SNES controllers connected to the
+system, and {\ttfamily JOY(0)} returns the state of the ``keyboard joystick,'' a
+set of keyboard keys that map to the SNES controller layout.\\
+
+If no controller is connected to the SNES port (or no keyboard is connected),
+the function returns -1.  Otherwise, the result is a bit field, with pressed
+buttons ORed together:\\
+
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Value} & \textbf{Button} \\
+\hline
+\$800 & A \\
+\$400 & X \\
+\$200 & L \\
+\$100 & R \\
+\$080 & B \\
+\$040 & Y \\
+\$020 & SELECT \\
+\$010 & START \\
+\$008 & UP \\
+\$004 & DOWN \\
+\$002 & LEFT \\
+\$001 & RIGHT \\
+\hline
+\end{tabular}
+\\
+
+Note that the keyboard joystick will allow LEFT and RIGHT as well as UP and DOWN
+to be pressed at the same time, while controllers usually prevent this
+mechanically.\\
+
+Example:\\
+
+\codeblock {
+	10 REM DETECT CONTROLLER, FALL BACK TO KEYBOARD\\
+	20 J = 0: FOR I=1 TO 4: IF JOY(I) >= 0 THEN J = I: GOTO40\\
+	30 NEXT\\
+	40 :\\
+	50 V=JOY(J)\\
+	60 PRINT CHR\$(147);V;": ";\\
+	70 IF V = -1 THEN PRINT"DISCONNECTED ": GOTO50\\
+	80 IF V AND 8 THEN PRINT"UP ";\\
+	90 IF V AND 4 THEN PRINT"DOWN ";\\
+	100 IF V AND 2 THEN PRINT"LEFT ";\\
+	110 IF V AND 1 THEN PRINT"RIGHT ";\\
+	120 GOTO50\\
+}
+
 \subsection{LEFT\$}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily LEFT\$} function takes a string and number and returns a
 substring containing the specified number of leftmost characters.\\
@@ -3289,6 +3617,8 @@ Example:\\
 
 \subsection{LEN}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily LEN} function returns the length of a string.  Because a string
 in BASIC can never exceed a length of 255 characters, the {\ttfamily LEN}
 function will always return values between 0-255.\\
@@ -3301,6 +3631,8 @@ Example:\\
 }
 
 \subsection{LOG}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily LOG} function will return the natural log of the given numeric
 value.  The natural log is the log to the base of {\ttfamily e} (see {\ttfamily
@@ -3326,6 +3658,8 @@ Examples:\\
 }
 
 \subsection{MID\$}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily MID\$} function takes a string, a start position, and an
 optional number of characters, and returns a substring of the original string.
@@ -3353,6 +3687,8 @@ Examples:\\
 
 \subsection{PEEK}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily PEEK} function returns the contents of the Commander X16's
 memory at a given address.  This includes reading the values from any of the
 X16's memory mapped hardware devices (if they are readable) such as the VERA or
@@ -3374,6 +3710,8 @@ has special purposes on the 65C02 processor.}.\\
 
 \subsection{POINTER}
 
+\textit{Origin: Commodore 128 BASIC}
+
 The {\ttfamily POINTER} function returns the memory address of the data
 structure where a BASIC variable is stored.\\
 
@@ -3384,6 +3722,8 @@ structure where a BASIC variable is stored.\\
 }
 
 \subsection{POS}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily POS} function returns the current column of the text cursor.
 The {\ttfamily POS} function takes a single argument that is unused.  Due to
@@ -3400,6 +3740,8 @@ to always call the {\ttfamily POS} function as {\ttfamily POS(π)}.\\
 
 \subsection{RIGHT\$}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily RIGHT\$} function takes a string and number and returns a
 substring containing the specified number of rightmost characters.\\
 
@@ -3411,6 +3753,8 @@ Example:\\
 }
 
 \subsection{RND}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily RND} function generates pseudo-random floating-point numbers in
 the range of 0 to 1 (exclusive), such as 0.153632167, 0.567453436,
@@ -3454,6 +3798,8 @@ than) 40. When repeated, you might see numbers like 13.3567377, 24.5913944,
 
 \subsection{RPT\$}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily RPT\$} function returns a string of repeated PETSCII characters.
 Like the {\ttfamily CHR\$} function, the {\ttfamily RPT\$} function takes a
 PETSCII code\footnote{See the PETSCII Codes table in the appendix}, but also
@@ -3471,6 +3817,8 @@ Example:\\
 }
 
 \subsection{SGN}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily SGN} function returns the sign of a numeric value.\\
 
@@ -3491,6 +3839,8 @@ Examples:\\
 
 \subsection{SIN}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily SIN(X)} (sine) function will return the sine of an angle
 {\ttfamily X}, measured in radians.\\
 
@@ -3504,6 +3854,8 @@ Example:\\
 }
 
 \subsection{SPC}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily SPC} function can be used to set a number of spaces, either
 printed to the screen or written to a file.  It takes a numeric value for the
@@ -3534,6 +3886,8 @@ Examples:\\
 
 \subsection{SQR}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily SQR} function returns the square root of a non-zero number.  If
 the number given is negative, the {\ttfamily SQR} function will return an
 {\ttfamily ILLEGAL QUANTITY ERROR}.\\
@@ -3550,6 +3904,8 @@ Examples:\\
 
 \subsection{STR\$}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily STR\$} function converts a numeric value to a string value using
 the same methodology as {\ttfamily PRINT}ing a numeric value.  This means that
 {\ttfamily 0} and positive numbers converted to strings will begin with a
@@ -3565,6 +3921,8 @@ Example:\\
 }
 
 \subsection{STRPTR}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily STRPTR} function returns the memory address of the first
 character of a given string variable.  If the string variable passed to
@@ -3588,6 +3946,8 @@ Example:\\
 
 \subsection{TAB}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily TAB} is used as part of a {\ttfamily PRINT} statement to advance
 the cursor to a given column.  If the cursor is already at or beyond the given
 column, it simply continues printing from the current position.  The {\ttfamily
@@ -3607,6 +3967,8 @@ Example:\\
 
 \subsection{TAN}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily TAN(X)} (tangent) function will return the tangent of an angle
 {\ttfamily X}, measured in radians.\\
 
@@ -3620,6 +3982,8 @@ Example:\\
 }
 
 \subsection{TATTR}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily TATTR} function retrieves the tile attribute byte of a given X/Y
 coordinate on layer 1 of the VERA.  This attribute carries different
@@ -3643,6 +4007,8 @@ Example:\\
 
 \subsection{TDATA}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily TDATA} function retrieves the tile index of the tile used on a
 given X/Y coordinate of the layer 1 tile map.  This is the same tile index
 value that can be set to the tile map with the {ttfamily TILE} statement.\\
@@ -3662,6 +4028,8 @@ Example:\\
 }
 
 \subsection{USR}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily USR} function calls a user-defined assembly routine from BASIC.
 It can accept any valid BASIC expression as an argument, as long as the
@@ -3697,6 +4065,8 @@ number in the FACC and adds {\ttfamily 0.5} to it.  The program then calls the
 function.  The program should print a result of {\ttfamily 4.7}.
 
 \subsection{VAL}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily VAL} function returns a numeric value representing the
 characters in a string argument.  Often a string variable is passed to the
@@ -3759,6 +4129,8 @@ The exponential notation string is returned as a simplified number.\\
 
 \subsection{VPEEK}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily VPEEK} function gets a single byte of vidoe RAM (VRAM) from the
 VERA's onboard memory.  The allows a BASIC program to read the data being
 interpreted by the VERA to produce graphics and sound.  The {\ttfamily VPEEK}
@@ -3786,6 +4158,8 @@ values from the X16 hardware.\\
 
 \subsection{DA\$}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily DA\$} system variable returns the current time on the Real Time
 Clock (RTC) as a string formatted as YYYYMMDD.\\
 
@@ -3797,6 +4171,8 @@ Example:\\
 }
 
 \subsection{MWHEEL}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily MWHEEL} special variable holds the movement of the mouse wheel
 as a value from {\ttfamily -128} to {\ttfamily 127}.  This value represents how
@@ -3821,6 +4197,8 @@ screen.\\
 
 \subsection{MX/MY}
 
+\textit{Origin: Commander X16 BASIC}
+
 The {\ttfamily MX} and {\ttfamily MY} special variables hold the current X and
 Y position of the mouse cursor.  Unlike the {\ttfamily MWHEEL} variable,
 {\ttfamily MX} and {\ttfamily MY} will retain their values even when the mouse
@@ -3838,6 +4216,8 @@ Example:\\
 Run the above program and move the mouse around.\\
 
 \subsection{MB}
+
+\textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily MB} system variable holds the states of the 3 mouse buttons by
 storing them in a value between {\ttfamily 0} and {\ttfamily 7}.  This value is
@@ -3902,6 +4282,8 @@ Example:\\
 
 \subsection{\ttfamily π}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily π} variable holds the value of pi and can be used just like any
 other floating point variable or literal.\\
 
@@ -3912,6 +4294,8 @@ other floating point variable or literal.\\
 }
 
 \subsection{ST}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily ST} system variable holds the status of various input or output
 operations, including DOS commands.  The status is stored as a {\emph bitmask},
@@ -3951,6 +4335,8 @@ executed:\\
 
 \subsection{TI}
 
+\textit{Origin: Commodore 64 BASIC}
+
 The {\ttfamily TI} system variable returns the number of "jiffies" since the
 Commander X16 was booted.  A "jiffie" is a single refresh cycle of the video
 signal, so 1/60\textsuperscript{th} of a second for NTSC video modes.  The
@@ -3966,6 +4352,8 @@ Example:\\
 }
 
 \subsection{TI\$}
+
+\textit{Origin: Commodore 64 BASIC}
 
 The {\ttfamily TI\$} system variable returns a string value of the current time
 according to the Real Time Clock (RTC)\footnote{Unlike the Commodore 64, the

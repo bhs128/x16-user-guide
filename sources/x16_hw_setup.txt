@@ -1,0 +1,158 @@
+1.0 X16 Motherboard and Case Setup
+Carefully remove the X16 mainboard from any
+packaging padding.
+IF YOU DON’T YET HAVE A CASE:
+The X16 board can safely sit atop the thin padding
+that it came with. Avoid “flexing” or twis􀆟ng the
+board (keep it flat).
+IF YOU NEED A CASE:
+Seek an “ATX” case. The ATX standard for computer
+cases has been around since 1995. The
+standard mostly helps establish the spots for
+“stand-off” screws to mount a motherboard to a
+chassis, along with standard holes for moun􀆟ng
+an “ATX-style” power supply unit (PSU). ATX
+cases are plen􀆟ful to find (new or used) and are
+available in “desktop” (lower profile) or
+“tower” (upright) styles.
+Most new-cases will come with a set of stand-off
+screws. But if not, “computer screw assortment
+kits” can be found online. The rubber washer sits
+below the screw, to help make it easier to remove
+those screws in the future. The X16 motherboard
+has 9x stand-off holes.
+Remember to
+ground yourself or
+touch metal (keys
+or paperclip) before
+handling
+electronic equipment.
+Some ATX cases
+have built-in
+stand-offs.
+IF YOU HAVE THE OFFICIAL CASE:
+The Lazer3D case comes pre-fi􀆩ed with the 9x stand-off
+screws, but does not include the rubber washers (they
+aren’t really necessary). The assembly of the case takes
+about 20-40 minutes and requires only a regular sized
+Philips head screwdriver.
+
+1.1 Keyboard and Mouse Connec􀆟ons
+The X16 uses PS/2 style mouse and keyboard
+connec􀆟ons. These type of connec􀆟ons are
+simpler and have less overhead to implement
+than USB. And, arguably, PS/2 connec􀆟ons
+are more reliable (par􀆟cularly at very early
+stages of the system startup process) and
+more secure (also offering more equalized
+performance in tournaments) than USB.
+Because PS/2 style connectors are rela􀆟vely
+easy to make, they remain widely supported
+worldwide, making them very affordable.
+The PS/2 Keyboard connector is typically iden-
+􀆟fied with a purple connector end, with an
+embedded keyboard-icon iden􀆟fying the
+“top” posi􀆟on. The PS/2 mouse connector
+typically has a green connector end, with a
+mouse-icon. These connectors are at the rear
+-right corner of the mainboard.
+PS/2 style
+connec􀆟ons
+were introduced
+by IBM
+in 1987, replacing
+the
+aging DIN
+style.
+CA-2014RB (non-USB)
+4W Peak Output
+Op􀆟onal Cables (may be necessary
+if using a stereo receiver)
+1.2 Audio Connec􀆟on
+For audio output, the X16 includes a two-ring “stereo jack” located next to the keyboard
+and mouse connectors. This jack can use headphones or amplified stereo
+speakers. Some speakers or stereo equipment may use the red/white RCA style
+inputs. In that case, the stereo-output cable of the X16 can be adapted to a Yspli
+􀆩er (or “stereo to dual mono” adapters).
+There are countless desktop stereo speaker op􀆟ons, just avoid the ones with USB
+connec􀆟ons. More expensive speaker op􀆟ons may include a sub-woofer. 4Wa􀆩s
+power output is sufficient for a small room.
+
+1.3 Video Connec􀆟ons
+The X16 supports three video output op􀆟ons:
+· VGA (DB15)
+· S-Video
+· Composite (RCA)
+While all three connectors can be connected
+at the same 􀆟me, the system will only have
+one ac􀆟ve video output at a 􀆟me.
+In general, VGA provides the best quality and
+is easiest to adapt to modern video-display
+equipment. Modern VGA cables typically
+have a blue connector end, but some can
+also have black.
+S-Video is technically be􀆩er quality than
+Composite video. Some􀆟mes VCR’s will have
+an S-Video input. Take care to avoid bending
+the 4-pins within the connector end.
+Composite video (or also called RCA) typically
+has a yellow end connector. It is the easiest
+to connect because the orienta􀆟on of the
+cable does not ma􀆩er.
+S-Video and Composite is intended for older
+CRT type displays. To go really old-school,
+you can also find Composite to RF or BNC
+adapters!
+
+1.4 Adap􀆟ng to HDMI
+Each of the X16 video outputs (VGA, S-Video,
+Composite) can be adapted to HDMI. Many
+modern televisions and display devices will
+use HDMI. Smaller or thinner devices (such
+as portable LCD screens) may use mini-HDMI
+or micro-HDMI.
+The HDMI
+standard was
+first introduced
+in
+2002.
+Adap􀆟ng VGA to HDMI requires a “VGA to HDMI” adapter (or some vendors will use
+the term “converter” or “dongle”). Look for one that is “ac􀆟ve” (powered by 5V USB)
+and also “with audio.” Then consider the cable length you want: short (for a display
+that is on a desktop) or long (such as a larger display that is up on a wall). The 5V
+USB source will not go into the X16— instead use a suitable USB wall adapter (and a
+USB extension if necessary).
+Composite Video Cable S-Video Cable
+Stereo Audio Cable
+(two rings)
+VGA to HDMI Adapter
+(ac􀆟ve, with audio)
+USB Wall Outlet
+Charge Adapter USB Extension Cable
+Stereo Audio Spli􀆩er
+HDMI
+Adap􀆟ng Composite or S-Video to HDMI is the same idea, but will generally require a
+larger “box” type adapter that also requires its own DC power source. If you have an
+HDMI display available, there is li􀆩le reason to use these op􀆟ons over VGA. The
+Composite and S-Video output of the X16 is generally used to connect older CRT displays
+that s􀆟ll have these as na􀆟ve inputs (which gives a more “vintage experience”).
+
+1.5 Power Supply Connec􀆟on
+The X16 motherboard has a standard ATX
+power connector. This can use a regular full
+size ATX power supply unit (PSU) that is typically
+in the 300W-600W range, or use a simpler
+ATX picoPSU in the 70-160W range.
+Make sure the ATX connector is fully seated.
+The connector should only fit one way, per the
+shape of the connector itself. The older 20-pin
+ATX connector can be used, but more modern
+PSUs will have a 24-pin connector (also some-
+􀆟mes called “20+4”).
+If using a picoATX, a wall AC adapter to 12VDC
+is needed (with about 800mA to 2A).
+
+If you don’t yet have the Front Panel
+(FP) connectors in place, then press the
+red POWER bu􀆩on here to toggle the
+system on and off.

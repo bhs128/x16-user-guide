@@ -1,0 +1,226 @@
+All ye' about to receive their X16's for the first time: Welcome to the party!
+
+Most consumers/users aren't electrical engineers, they just want to plug in their "appliance computer" and go. Setting up a retro-computer is part of the fun - and a good way to learn A/V hookup and cable management. So, here are some of my notes and suggestions on setting up an X16 (a guide to those new to setting up a mainboard, or those who have been away from it for a while).
+
+EDIT 1/9/2024 added some info about FP (Front Panel) connections.
+EDIT 1/11/2024 added info about SNES gamepads
+EDIT 1/12/2024 correction on USB to PS/2 keyboard adapters
+EDIT 1/17/2024 revised some display notes (you can find 4:3's at VCF free pile, if you come early!)
+EDIT 2/16/2025 few updates pertinent to Feb 2025 X16 orders
+
+NOTE: This is a compilation of "lessons learned" by many folks (mostly from Discord). And yes, this will be mostly biased towards North America (NTSC) area and what is available here.
+
+CASE
+- If you don't have a case: as you'll see in various videos, you can run the X16 (like any motherboard) without a case. Mainly just avoid flexing (bending) the board, keep it flat. This isn't the best long term solution - things could fall on the board or dust accumulates. So a case should be obtained eventually, to keep it protected. And yes, static electricty is a real thing, so "officially" I don't think anyone would actually recommend running without a case. But reality is, these are bench tested outside of a case - you can search and read up on ways to prevent static electricity discharge (like stop dragging your feet across the carpet! :) ).
+NOTE: The X16 has onboard buttons for Power and Reset, to use temporarily until you get a proper case setup.
+
+- Finding a case: As everyone should know, the X16 DevBoard uses a "standard ATX form factor". The first time I heard of ATX was mid-1990s, so it has been a standard for several decades now. This standard includes specific locations for "stand off" points, to secure the motherboard in place so that the back of the board "stands off" away from the metal surface of the case (and also a bit of room to run any cabling behind the board, if needed). What this means is there are oodles of ATX cases out in the world, used and brand new, and of both small (desktop) and large (tower) sizes. Note, you probably don't need a case that has any fans (or if it has any fans, you can remove them or not power them on). I'll talk about power supplies in the next section.
+NOTE: You can use a "mATX" (microATX) case as well, but they might not include front panel adapters for the "activity LED" (HDD light) or reset switch (at a minimum they'll just have the power-on switch).
+
+- The "official" case: The "official" X16 case has become known as the "pizza box" as it is a somewhat square low-profile ("half height") shape. Lazer3D ( https://lazer3d.com/ ) still hasn't yet announced an updated run on producing the X16 "official case." Keep in mind they make many other cases (some of which are ATX standards that could fit an X16 but aren't "pizza box"), they are based in the UK (so shipping could be costly and delayed), and they haven't yet gotten updated specs on the revised X16 board (where the edge connector was rotated 90 degrees to accommodate side inserted cartridges). Word on the street is that they are also debating whether to continue the "pizza box" design or to go to a larger "full height" design (with pros and cons of both). See "cases" in the Discord if want to participate in the discussion - I suspect some decision will be presented before February.
+
+NOTE: While personalizing a "personal computer" with a custom case is nice, there is something to be said about "product identity" and consistency. Consoles (like SNES, PS) still have that and so did all the 8-bits back in the 80's. So having some kind of "official case" to rally around helps give the X16 that identity. That said, modern CNC and 3DPrinters offer a lot more creativity with cases than we had back in the 80s!! Some very neat samples have been presented in the X16 Discord.
+
+FRONT PANEL ("FP") (also covered in 2nd page of the X16 included manual)
+Another aspect of the "ATX standard" is that it defines pins for the typical connectors: Power On/Off, Reset, HardDrive/Activity light (and "beep" speaker, on some systems). In the corner of the X16 board you'll see a group of pins called "FP" for "Front Panel" connections. Since we're dealing with a switch and LED lights here, don't worry about getting the + and - backwards.
+
+HDD LED is Activity Light (of the SD card)
+RESET BUT aka Reset Switch
+POW LED is the Power On indicator Light
+POW BUT is the Power Switch itself
+(NC means NOT CONNECTED)
+and note this FP header has an extra +5VDC if you need, like for some internal case lights or something.
+
+PR16_FP.jpg
+    PR16_FP.jpg (155.91 KiB) Viewed 159166 times
+
+The I2C header to the right of the FP header is for the SMC bootstrap (or something like that). You generally don't have to mess with this, unless something goes really wrong related to ROM updates. But if interested, the following gizmo is an example of what you'd connect to this header:
+Sparkfun Pocket AVR Programmer
+https://www.amazon.com/gp/product/B004G54E9I
+
+
+POWER SUPPLY
+
+- You CAN use a "full sized" traditional ATX power supply with the X16! This wasn't obvious to me at first. I tried everything from a 250W to an 800W ATX power supply, they all ran the X16 just fine. There is a suggestion that some larger power supplies might require some minimum current draw and won't start until that minimum is reached, so that could be a reason some 600-1000W supply might not appear to work. On top of that, the ATX standard changed over time to have 20-pin and then 24-pin (or "20+4" connectors). The X16 has a 24-pin power connector but you can use older 20-pin ATX power supplies also. Of course, most traditional ATX power supplies will have a fan and be noisy. Hence, the following is a better alternative...
+
+- Most X16 buyers will notice the picoPSU was offered by texelec.com and probably got one. Or if not, there are many other sources/places to get them. I'm not sure what the "official" name of these is (i.e. I'm not sure who/what the official body is that created these as a standard; they are also used in cars and might be referred to as "mini ITX PSU"), but basically just searching "ATX picoPSU" will find what you need. They use the same standard ATX pinout in their power distribution. The difference is they use a newer modern component to make them super small, don't need a fan, but then you need to figure out a way to feed this picoPSU 12V DC. This is the part that might not be quite standard (which is why a "standards body" would be nice to know) - how to power it with 12V may vary depending on what brand or vendor you get your picoPSU from. MOST sources seems to have settled on a 5.5 x 2.5mm plug barrel "wall wart" to do AC to DC conversion (a common size used for security cameras).
+
+Here is one ATX picoPSU that should work: (I've seen them as low as 80W but most seem to be 150W or 160W; I don't think you really "save energy" with the 80W version -- the connected devices will still draw whatever current they draw)
+https://www.amazon.com/PSU-150-Computer ... B08F57GKCL
+Here is an 80W version (also a 20-pin; not sure why it is more expensive, but confirmed it does work):
+https://www.amazon.com/Mini-Box-picoPSU ... 005TWE5E6/
+
+Here are two 12V adapters that I've used with the picoPSU:
+https://www.amazon.com/gp/product/B09ST95SW5
+https://www.amazon.com/dp/B0BYJMQV3P
+
+Typically you won't use the SATA connector that comes with these picoPSU. BUT - you can! If you have a small screen that takes a DC-input, you can use the SATA connector as a 12V source. Or some picoPSU might come with Molex connectors (that should have both 5V/red and 12V/yellow wires) - or adapt the SATA to Molex (those exist) - which could be used to power a VGA to HDMI adapter (for example), or as a general USB charger source. This power source can also be used to run small DC powered speakers. That's out of scope for here, but are some ideas for how you can tinker with the system just by this ATX connector. Here is an example of one I used to run a flat panel display:
+https://www.amazon.com/gp/product/B08HMY7QRJ
+(in the application use inside a car, the SATA power connector would likely power a small data drive -- like for a nav or video system)
+
+NOTE: The ATX power connector is "keyed" such that it is "impossible" to insert it in the wrong way (some of the pegs are house shaped, round, and square). That is, if the connector doesn't connect easily, it might be the wrong direction.
+
+
+MONITOR / DISPLAY
+
+IMPORTANT: By default, the X16 will start with VGA output mode. Change the output mode by pressing SHIFT+SCROLL LOCK. It is good to have speakers connected, since you'll hear a brief tone that signals your video output mode request was received. To make the selection permanent, you can save the current settings to NVRAM using the "MENU" command.
+
+Like the classic systems of the 1980s, the X16 VERA outputs to a 4:3 aspect ratio (also known as "fullscreen", as opposed to modern 16:9 widescreen). I won't get into the specific reasons for this (it was a change right around 2000 up until the mandated migration to digital television in circa 2009- during that analog to digital migration, it was around this time that most standard screens also switched from fullscreen to widescreen). For here, the focus is "what is the best display I can get for the X16?" But, "best" will be subjective - if you want an "authentic" 1980s experience, you probably want to seek out an old CRT with Composite input. If you want crisp 80 column font, you'll want a VGA screen. If you want "easy to connect" to a modern display then you'll need some HDMI converter (which will have varying quality to up-convert). Ultimately, it comes down to what you can find available in your area - because shipping CRTs or even modern displays also has a risk. It took me months to finally find an 18" flat panel 4:3 with VGA input, that still had decent contrast (but it requires its own 19V DC adapter that also took awhile to track down).
+
+NOTE: I refer to "RCA" or "Composite" as all the same thing (not to be confused with "component" video, that is something else). Typically RCA connectors have a "yellow" connector end (as a more modern convention; older ones might not follow this convention). "RCA" apparently invented the standard long ago, perhaps as early as the 1950s.
+
+NOTE: I don't really mess with S-Video (maybe it was more popular in Japan). I did for a bit, to verify it does work on the VERA output. S-Video is annoying to connect and prone to bending pins (sort of like PS/2 style connectors). If I were inling a VCR or something, I might use S-Video. So, I don't have much advise about S-Video based displays. That said, if the Composite connector broke, then the S-Video connector is a good backup (and there are S-Video to Composite adapters). I personally never saw S-Video as an improved quality - but per spec, it is suppose to be. S-Video and VGA came out at about the same year c. 1987.
+
+- Why doesn't the VERA just have a native HDMI output? It could, but my brief understanding is there is actually a licensing (and therefore cost) associated with a device to officially support HDMI. There may be some other technical reasons, but in any case the classic connector styles of the 1980s is part of the retro-charm here.
+
+As an initial example of 4:3 screen: the Eyoyo 12". It is not "the best" but it is currently easy-to-obtain:
+https://www.amazon.com/gp/product/B01N6B5EA5
+Pros: Easy to find as a 4:3, light (cheaper for shipping too). Versatile (can try Composite or VGA, or adapt to HDMI). The onboard USB can be used as a 5V source.
+Cons: Contrast ratio is 450:1, a good bright screen should probably be at least 800:1 at a minimum. Only 12". Crappy onboard speakers.
+
+As a VGA-only option, consider the following 19" Acer 4:3 fullscreen. I trust Acer, I've used many of their screens over the years. But this one is very bare bones. It's at least light and could sit atop the "pizza box" case easily.
+https://www.amazon.com/dp/B01LJUNTZC/
+
+Also, I've verified a number of DELL 4:3 monitors work with the X16.
+DELL 2000FP 20" (excellent choice, no reflection)
+Dell UltraSharp 1908FPI 19"
+DELL 1704 FPVs 17"
+DELL E197FPF
+(some come with "sound bars" that are decent enough for a small room)
+
+
+The following is not super recommended, but listing this as a "verified it does work with X16": Tyler 13.3"
+https://www.amazon.com/Tyler-TTV707-13- ... B07T9197KQ
+This is what I used until I found an 18" 4:3. I don't know the exact contrast spec, but it was decent enough. Again, the USB input can be used as a 5V source (like for an HDMI adapter). The main positive is it is compact and light (more portable), so it is a good test display. The main negative (to me) was the VGA input doesn't actually work - the pins are there (the manual actually comes with a wiring diagram of the whole system!), but the unit doesn't come with a necessary "miniVGA" adapter to connect to normal 9-pin VGA (so you have to use an HDMI adapter or Composite input). (apparently "mini-VGA" is a nebulous standard, perhaps better defined outside the North America region; Apple at some point defined their own "mini-VGA" but this Tyler screen doesn't use that)
+
+One nice thing about the panels under about 15" is that they can often be powered by 12V or less. So you could power those right from the X16 itself, as an interesting more self contained setup (a kind of tribute to the original PET design, where one plug powers up everything you need; story goes that this design was more appropriate for schools, so that individual components of the system didn't walk away over time)
+
+
+Glass CRTs are no longer being made. There was a kick starter to make newer high-contrast 4:3 flat panels, which seems to have been successful - they have a waitlist setup at their site: https://www.checkmate1500plus.com
+
+UPDATE: EIZO and Beetronics offer some high contrast 4:3 VGA's (as far back as 2002). These have often been used by medical related businesses (so brand new ones can be expensive).
+
+Aside from that, you'll have to try your luck on glass 4:3's from eBay (or a flat panel). The glass ones do have a distinctive character to them. Anytime you use a CRT, appreciate the time - they'll eventually wear out, and be too cost prohibitive to repair (such as to maintain the vacuum tube itself. And do be careful on any open CRT, there is a lot of voltage involved inside - it's one place you really don't want to joke around. If a CRT is working but isn't centered or scrolling right, sometimes there are additional adjustment knobs inside.
+
+NOTE: You can use most widescreen 16:9 VGA's (though I did come across one LG VGA flat panel screen that did not work with the X16). Just, of course, the image may appear stretched wide. Some VGA flat panels may have a menu option to switch to a 4:3 mode. These are still plentiful to find on eBay and Amazon. Some modern TVs or display may still have a VGA input port (which you'll then need to order a 9-pin VGA cable of the appropriate length).
+
+NOTE: Younger people can "hear" CRT's. Their ears can still hear a frequency at about 15KHz. It can be quite loud and distracting (it is for my daughter, even across the house). This is just something to keep in mind - I now avoid turning on any CRT when she's home, since she said it gives her a headache.
+
+
+You can also get Composite to BNC adapters to try even older JVC or Sony black and white monitors (some as old at 1970s, but some were also made as late at mid-1990s). You'll need a coaxial cable to go along with them. Examples:
+https://www.amazon.com/Adapter-Connecto ... B08LD6W2FV
+https://www.amazon.com/dp/B09TR6ZFGL/re ... B09TR6ZFGL
+
+
+Lastly, for displays, is HDMI converters. Technically you can find Composite and S-Video to HDMI converters. But if you're going to HDMI, I can't think of any reason to use those over a VGA to HDMI adapter (other than the VGA connector itself has broken off or doesn't work, perhaps). There are many such adapters. One I've used and that seems to work well with the X16:
+FOINNEX VGA to HDMI Cable with Audio, 1080P VGA to HDMI Adapter Cable VGA Computer/Laptop to HDMI Monitor/TV, VGA Male to HDMI Male Converter Cord for Desktop Laptop Projector to Monitor HDTV, 6FT
+https://www.amazon.com/gp/product/B071SHJ1S3
+
+I used the 6ft, but they have longer lengths that may be more appropriate to your setup.
+
+Also, you might consider a HDMI 90-degree adapter. These seemed silly to me a long time ago, but I've grown to appreciate hidden cables as much as possible (and avoiding possible stresses that might break a connector internally). This applies to USB connections also.
+https://www.amazon.com/gp/product/B0BN697DWH
+
+
+If a particular resolution isn't working for you and your output display, you can try further adjustments by using the "MENU" command from CMDR-DOS (BASIC) - there is a Screen Geometry section (select the option to change and press WASD keys to make the changes). These can also be saved to NVRAM.
+
+NOTE: The "real vintage enthusiasts" way to get a suitable screen is to hunt for one at one of the VCF. Quite often you'll find a still-working 4:3 full screen flat panel, or even some CRTs, in the *free pile* at VCF (but come early!!). There are several regional VCF conferences around the US throughout the year.
+
+
+
+KEYBOARD
+
+I do recommend the texelec X16 keyboard, the printed labels are nice when you get to working with PETSCII. The extra labels on the keyboard help remind about CMDR-DOS codes for color changes or using CTRL or ALT to enter various PETSCII symbols (like when in quote mode or in the X16EDIT program). But these are text mode things, and maybe you don't intend to use text-mode that often (or perhaps you just don't like the "melted keys" style of that keyboard - there are many other options).
+
+If you didn't get the texelec keyboard - it's no secret that they are just special printed PERIXX keyboards, available in either black or white:
+https://www.amazon.com/gp/product/B09296SM7H
+
+You can also get their matching PS/2 style mouse (in black or white):
+https://www.amazon.com/gp/product/B07WV55HZD
+
+As a general warning, some USB keyboards will not work with the X16 via a USB to PS/2 adapter. The firmware or build of some newer USB keyboards omit support for the legacy PS/2 protocol. So older USB keyboards might have a higher chance of adapting. Here is an example of what those adapters look like:
+https://www.amazon.com/DKARDU-Adapter-F ... B09WV5JMKS
+Some USB keyboards will work via this adapter, but for overall less hassle, I'd suggest just getting a keyboard that natively has a PS/2 style connector.
+
+
+There is the deluxe X16 keyboard (which are nice and solid similar to old IBM keyboards). I don't have advise on the Switch Type options - I recall there was a nice chart somewhere to show the differences, but can't find it at the moment:
+https://www.wasdkeyboards.com/commander ... t-guy.html
+it's a decent keyboard, but I was disappointed it didn't have a PS/2 connector; you have to use an adapter - which is fine, but those do take up space and stick out further; in tight spaces that can be a hazard to bending/flexing the connector; again, this keyboard is confirmed to work with a USB to PS/2 adapter on the X16).
+
+
+You can also adapt old IBM Type-M keyboards to PS/2 (search "DIN to PS/2 adapter"):
+https://www.amazon.com/KENTEK-Female-Ke ... B07KVDZWBX
+(these do not work for the older Type-F keyboards; there may be an exception, but they didn't work for the couple of early 1980s Type-F's that I tried; recall Type-F has the Function key on the left side of the keyboard, newer Type-M has them along the top)
+
+NOTE: "officially" I don't think PS/2 connectors are hot-swappable - though, it may happen to work. In general, I wouldn't recommend risking it - if you have to change keyboard or mouse (or forgot to plug one in), I'd suggest powering the system down before doing so. Note that the SD-card is hot-swappable (when the activity light is not on) and the SNES gamepads can also be attached whenever. Speaking of gamepads...
+
+
+GAMEPADS (note that the X16 KERNAL uses the term "joystick" instead of "gamepad"; some places use "game controller")
+
+The X16 DevBoard supports up to FOUR SuperNintendo (SNES) style gamepads. If you don't have any gamepads, the system has an "implied GamePad0" that is mapped to the keyboard. The keyboard mapping of this gamepad0 is described in the API documentation of the KERNAL routine "joystick_get" here:
+
+Gamepad ports 1 and 2 are at the back of the system. Gamepad port 3 and 4 are on pins towards the center of the board, that don't yet have a standardized header (so a custom wiring is needed here). Note that in the emulator you must pass "-joy1" (or "-joy2" etc) to emulate a gamepad being attached.
+
+While the inexpensive "under $10" SNES gamepads do work - I've found that a lot of them might only partially work on the X16. Specifically, for a great many of them, the SELECT button seems to be interpreted as always being pressed. For this reason, we can't point to a single SNES Gamepad vendor and say use that one. Even the sources that those vendor use might be inconsistent on which ones have issue or not.
+
+But as a general idea of what you're looking for:
+https://www.amazon.com/Controller-Origi ... B0C73WKYJM
+https://www.amazon.com/Classic-Controll ... B07MFHD815
+
+That is, get ones with the original 7-pin SNES-style connector end, do not get the USB style ones.
+
+I have used a wireless set of SNES gamepads without issue, such as:
+https://www.amazon.com/MODESLAB-Control ... B09ZHDDJ2T
+
+
+I can say that so far, all of the original Nintendo brand SNES gamepad controllers have worked. So, if you can find an affordable one, just go with that to save any hassle. Just be cautious about the cable length. I've found some that only had 3' length cable. Since the X16 gamepad connectors are at the back of the system, you'll spend 1' just reaching that. They do make SNES gamepad cable extensions, such as:
+https://www.amazon.com/2Pack-Controller ... B075K4R86R
+
+To test your controller, there is a very nice gamepad test program that comes with the system (known as "CONTEST" or "Controller Tester"). Access it by:
+
+Code: Select all
+
+@CD:/SYSTEM
+LOAD"CONTEST.PRG"
+RUN
+
+
+
+SPEAKERS
+
+I'm not an audiophile or audio expert, so I can't really advise on what brands or size of speakers is best. But I will say a good set of speakers is worthwhile! Especially for the X16.
+
+In general, for the X16, be sure to avoid USB speakers (instead you want the classic old regular 3.5" stereo-audio jack, popularized by Sony in the 1970s). The stereo jacks has only recently started to become less common, in terms of not being available on laptops, phones, or action cameras anymore (with those devices now just standardizing on USB-C).
+
+A starter set of 4W speakers would be like this:
+https://www.amazon.com/Cyber-Acoustics- ... B00008MN45
+
+For me, the next step up was some 4" Edifier ~40W "bookshelf speakers" (large enough to store stuff on top of them). But "the skies the limit" in terms of getting even better speakers. I haven't tried any soundbars or wireless audio options on the X16.
+
+The audio line noise might depend on other EMI you have going on in the room or around the speakers themselves (or in combination with the components of your particular X16). So, the following is an inline gizmo that is a "noise isolator" that can clean up that noise (it's made a huge difference to me - not always in every room, but when it did help, the difference was very noticeable):
+
+BESIGN Ground Loop Noise Isolator for Car Audio/Home Stereo System with 3.5mm Audio Cable
+https://www.amazon.com/gp/product/B06XQYN77L
+
+Of course, you can also use headphones plugged directly into the back of the X16 (again with 3.5" stereo audio jack). Most decent speakers will also have a headphone pass-thru port.
+
+
+
+OTHER TIPS:
+
+- Avoid SD cards under 8GB. To avoid a frustrating experience, stick with 8GB or larger SD media. There is a reason the "launch SD" card is 8GB.
+
+- Caution about SD cards larger than 32GB: Windows may try to force SD cards larger than 32GB to be exFAT format which is not compatible with the X16. There is a "FAT32 Formatter" utility that can get around this.
+https://www.softpedia.com/get/System/Ha ... -GUI.shtml
+
+Some version of Windows may support a "format /fs:fat32" command to also work around this issue.
+
+- There is no network or Bluetooth stuff here (not yet!). You'll need to manually copy new software to the SD card. Once install in a case, removing the SD card at the rear can get tiresome. So, you might like an SD extender, like this:
+https://www.amazon.com/gp/product/B01M22RI5U
+
+- For other tips, like IEC connection and a brief assembler MONITOR intro, see my IntroX16 Guide here:
+https://github.com/voidstar78/X16_MANUA ... T_REV9.pdf
+
+SD2IEC options:
+https://nc92.eu/products/sd2iec-lcd-sd- ... -c16-plus4
+https://www.tfw8b.com/product/sd2iec-vi ... ight-grey/

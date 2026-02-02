@@ -62,7 +62,7 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | Chapter | File | Status | Lines | Description |
 |---------|------|--------|-------|-------------|
 | **Preface** | [preface.tex](preface.tex) | ✅ Complete | 48 | Introduction to the X16 and manual philosophy |
-| **Setup** | [ch00_setup.tex](ch00_setup.tex) | 🚧 Placeholder | 58 | Lorem ipsum only - needs hardware setup content |
+| **Setup** | [ch00_setup.tex](ch00_setup.tex) | ✅ Complete | 240+ | Unpacking, picoPSU power, VGA/S-Video/Composite video, PS/2 keyboard/mouse, video mode switching, SNES controllers, troubleshooting |
 | **Ch 1: Getting to Know Your X16** | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | 506 | Start screen, PRINT, GOTO, first program, errors |
 | **Ch 2: Using Screen & Keyboard** | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | ✅ Complete | 680+ | PRINT statement, graphic characters, colors, screen modes, full screen editor, LOAD/SAVE files |
 | **Ch 3: Color and Graphics** | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | 545 | COLOR, TILE commands, color keys, screen locations, PETSCII graphics |
@@ -121,7 +121,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | VIC-20 Chapter | VIC-20 Content | X16 File | X16 Status | Work Needed |
 |----------------|----------------|----------|------------|-------------|
 | **Preface** | Welcome, philosophy | [preface.tex](preface.tex) | ✅ Complete | None |
-| **Setup** | Hardware setup, TV hookup | [ch00_setup.tex](ch00_setup.tex) | 🚧 Placeholder | HDMI/VGA, SD card, USB, controllers, audio |
+| **Setup** | Hardware setup, TV hookup | [ch00_setup.tex](ch00_setup.tex) | ✅ Complete | None - covers VGA, PS/2, SD card, troubleshooting, accessories |
 | **Ch 1**: Getting to Know | First program, PRINT/GOTO | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Good | Minor polish |
 | **Ch 2**: Screen & Keyboard | Printing, keyboard tour, calculator | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | ✅ Complete | Minor polish, keyboard diagram |
 | **Ch 3**: Color and Graphics | COLOR, screen colors, PETSCII art | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | None - covers COLOR, TILE, color keys, screen locations, keyboard graphics |
@@ -135,11 +135,11 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 
 | Priority | Chapter/Section | Current State | Work Required |
 |----------|-----------------|---------------|---------------|
-| 🔴 High | **Ch 0: Setup** | Lorem ipsum | Write HDMI/VGA/composite setup, SD card prep, controller connection |
+| ✅ Done | **Ch 0: Setup** | Complete | ATX power supply, VGA/S-Video/Composite video, PS/2 keyboard/mouse, audio, case options, HDMI adapters, troubleshooting |
 | ✅ Done | **Ch 3: Color and Graphics** | Complete | COLOR, TILE, color keys, screen modes, PETSCII graphics, example programs |
 | ✅ Done | **Ch 4: Animation** | Complete | Bouncing ball, cursor control, VPOKE animation, flying objects, starfield |
 | ✅ Done | **Ch 5: Sound and Music** | Complete | PSG and FM sounds, waveforms, FMPLAY/PSGPLAY, sound effects, piano program, songs |
-| � Low | **Ch 2: Screen & Keyboard** | Complete | Add keyboard diagram illustration |
+| 🟢 Low | **Ch 2: Screen & Keyboard** | Complete | Add keyboard diagram illustration |
 | 🟡 Medium | **Appendix: Sample Programs** | Section stubs | Add 5-10 type-in programs |
 | 🟢 Low | **Appendix: Error Messages** | 7 errors | Complete full error list |
 | 🟢 Low | **Appendix: 65C02 Op Codes** | Empty | Add instruction reference (or remove if covered elsewhere) |

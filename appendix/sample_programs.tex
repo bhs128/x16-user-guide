@@ -5,44 +5,452 @@
 \chapter*{Sample Programs}\index{Sample Programs}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Sample Programs}
 
-% TODO: This appendix needs content covering:
-% - Collection of type-in programs
-% - Games, utilities, and demonstrations
-% - Programs that showcase X16 capabilities
-% - Progressive difficulty (simple to complex)
-
 \section*{Introduction}
 
 This appendix contains a collection of programs for you to type in and enjoy.
-Each program demonstrates different capabilities of the Commander X16. Feel free
-to modify these programs and experiment with changes to see what happens!
+Each program demonstrates different capabilities of the Commander X16.  Feel
+free to modify these programs and experiment with changes to see what happens!
 
-% TODO: Add sample programs
-% Suggested programs:
-% - Simple number guessing game
-% - Reaction time tester
-% - Drawing program
-% - Music player
-% - Simple animation
-% - Calculator
-% - Text adventure game starter
+These programs range from simple games to useful utilities.  They are designed
+to be typed in exactly as shown, but don't be afraid to experiment once you have
+them working.  Try changing numbers, colors, or messages to see what happens.
+That's how programmers learn!
 
-\section*{Game: Number Guessing}
+\tip{Saving Your Work}{
+	After typing in a long program, save it to your SD card before running it!
+	Use {\ttfamily SAVE "FILENAME"} to save your work.  That way, if something
+	goes wrong, you won't have to type it all in again.
+}
 
-% TODO: Add number guessing game listing
+%----------------------------------------------------------------------------------------
+%	PROGRAM 1 - HI-LO GUESSING GAME
+%----------------------------------------------------------------------------------------
+
+\section*{Game: Hi-Lo}
+\index{Sample Programs!Hi-Lo}
+
+This classic guessing game challenges you to find the computer's secret number.
+The X16 picks a random number between 1 and 100, and you try to guess it.  After
+each guess, the computer tells you if your guess was too high or too low.  See
+how few guesses you can make!
+
+\codeblock{
+	100 REM ** HI-LO GUESSING GAME **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** HI-LO **"\\
+	130 PRINT "I'M THINKING OF A NUMBER"\\
+	140 PRINT "BETWEEN 1 AND 100."\\
+	150 PRINT\\
+	160 N = INT(RND(1)*100)+1\\
+	170 G = 0\\
+	180 PRINT "YOUR GUESS";\\
+	190 INPUT W\\
+	200 G = G + 1\\
+	210 IF W < N THEN PRINT "TOO LOW!": GOTO 180\\
+	220 IF W > N THEN PRINT "TOO HIGH!": GOTO 180\\
+	230 PRINT\\
+	240 PRINT "YOU GOT IT IN"; G; "GUESSES!"\\
+	250 PRINT\\
+	260 IF G <= 7 THEN PRINT "EXCELLENT!"\\
+	270 IF G > 7 AND G <= 10 THEN PRINT "GOOD JOB!"\\
+	280 IF G > 10 THEN PRINT "YOU CAN DO BETTER!"\\
+	290 PRINT\\
+	300 PRINT "PLAY AGAIN (Y/N)";\\
+	310 GET A\$: IF A\$ = "" THEN 310\\
+	320 IF A\$ = "Y" THEN 110\\
+	330 IF A\$ <> "N" THEN 310\\
+	340 PRINT\\
+	350 PRINT "THANKS FOR PLAYING!"\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Line 160 picks a random number between 1 and 100 and stores it in
+		{\ttfamily N}.
+	\item Line 170 initializes the guess counter {\ttfamily G} to zero.
+	\item Lines 180--220 form the main game loop: get a guess, count it, and
+		check if it's too low, too high, or correct.
+	\item Lines 260--280 rate your performance based on number of guesses.
+	\item Lines 300--330 use {\ttfamily GET} to ask if you want to play again.
+\end{itemize}
+
+\tryit{
+	Can you modify the program to let the player choose the range?  Try adding
+	an {\ttfamily INPUT} at the beginning to ask for the maximum number!
+}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAM 2 - REACTION TIMER
+%----------------------------------------------------------------------------------------
 
 \section*{Game: Reaction Timer}
+\index{Sample Programs!Reaction Timer}
 
-% TODO: Add reaction timer game
+How fast are your reflexes?  This program tests your reaction time by displaying
+a message at a random moment and measuring how quickly you press a key.  The X16
+uses its built-in timer ({\ttfamily TI}) to measure time in ``jiffies''---60ths
+of a second.
 
-\section*{Utility: Simple Calculator}
+\codeblock{
+	100 REM ** REACTION TIMER **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** REACTION TIMER **"\\
+	130 PRINT\\
+	140 PRINT "WHEN YOU SEE 'GO!', PRESS"\\
+	150 PRINT "ANY KEY AS FAST AS YOU CAN!"\\
+	160 PRINT\\
+	170 PRINT "PRESS ANY KEY TO START..."\\
+	180 GET A\$: IF A\$ = "" THEN 180\\
+	190 PRINT "\shiftkey\clrhomekey"\\
+	200 PRINT "GET READY..."\\
+	210 W = INT(RND(1)*180)+60\\
+	220 FOR D = 1 TO W: NEXT D\\
+	230 PRINT\\
+	240 PRINT "     **** GO! ****"\\
+	250 TI\$ = "000000"\\
+	260 GET A\$: IF A\$ = "" THEN 260\\
+	270 T = TI\\
+	280 PRINT\\
+	290 MS = INT(T * 16.67)\\
+	300 PRINT "YOUR TIME:"; MS; "MILLISECONDS"\\
+	310 PRINT\\
+	320 IF MS < 200 THEN PRINT "INCREDIBLE!"\\
+	330 IF MS >= 200 AND MS < 300 THEN PRINT "EXCELLENT!"\\
+	340 IF MS >= 300 AND MS < 400 THEN PRINT "GOOD!"\\
+	350 IF MS >= 400 THEN PRINT "KEEP PRACTICING!"\\
+	360 PRINT\\
+	370 PRINT "TRY AGAIN (Y/N)";\\
+	380 GET A\$: IF A\$ = "" THEN 380\\
+	390 IF A\$ = "Y" THEN 110\\
+	400 PRINT\\
+}
 
-% TODO: Add calculator program
+\textbf{How It Works:}
 
-\section*{Graphics: Pattern Generator}
+\begin{itemize}
+	\item Line 210 picks a random delay (60--240 jiffies, or 1--4 seconds) so
+		you can't predict when ``GO!'' will appear.
+	\item Line 250 resets the system timer by setting {\ttfamily TI\$} to all
+		zeros.
+	\item Line 270 captures the timer value immediately after you press a key.
+	\item Line 290 converts jiffies to milliseconds (each jiffy is about 16.67
+		milliseconds).
+\end{itemize}
 
-% TODO: Add pattern generation program
+\note{
+	The {\ttfamily TI} variable is a special system variable that counts up
+	automatically, 60 times per second.  Setting {\ttfamily TI\$} to
+	{\ttfamily "000000"} resets it to zero.  This is a handy way to measure
+	elapsed time in your programs!
+}
 
-\section*{Sound: Music Player}
+%----------------------------------------------------------------------------------------
+%	PROGRAM 3 - DICE ROLLER
+%----------------------------------------------------------------------------------------
 
-% TODO: Add music playing program
+\section*{Game: Dice Roller}
+\index{Sample Programs!Dice Roller}
+
+This program simulates rolling dice with a fun animated display.  You can
+choose how many dice to roll (1 to 5), and watch them ``tumble'' before showing
+the final result.  Great for board games!
+
+\codeblock{
+	100 REM ** DICE ROLLER **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** DICE ROLLER **"\\
+	130 PRINT\\
+	140 PRINT "HOW MANY DICE (1-5)";\\
+	150 INPUT ND\\
+	160 IF ND < 1 OR ND > 5 THEN 140\\
+	170 PRINT\\
+	180 PRINT "PRESS SPACE TO ROLL..."\\
+	190 GET A\$: IF A\$ <> " " THEN 190\\
+	200 PRINT\\
+	210 REM ANIMATE THE ROLL\\
+	220 FOR R = 1 TO 10\\
+	230 PRINT "\clrhomekey";\\
+	240 FOR I = 1 TO 5: PRINT: NEXT I\\
+	250 PRINT "ROLLING: ";\\
+	260 FOR I = 1 TO ND\\
+	270 PRINT INT(RND(1)*6)+1; " ";\\
+	280 NEXT I\\
+	290 FOR D = 1 TO 30: NEXT D\\
+	300 NEXT R\\
+	310 REM SHOW FINAL RESULT\\
+	320 PRINT "\clrhomekey";\\
+	330 FOR I = 1 TO 5: PRINT: NEXT I\\
+	340 PRINT "RESULT:  ";\\
+	350 T = 0\\
+	360 FOR I = 1 TO ND\\
+	370 V = INT(RND(1)*6)+1\\
+	380 PRINT V; " ";\\
+	390 T = T + V\\
+	400 NEXT I\\
+	410 PRINT\\
+	420 PRINT\\
+	430 PRINT "TOTAL:"; T\\
+	440 PRINT\\
+	450 PRINT "ROLL AGAIN (Y/N)";\\
+	460 GET A\$: IF A\$ = "" THEN 460\\
+	470 IF A\$ = "Y" THEN 170\\
+	480 IF A\$ <> "N" THEN 460\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Lines 220--300 create the ``tumbling'' animation by rapidly
+		displaying random numbers.
+	\item Line 290 is a short delay loop that makes the animation visible.
+	\item Lines 350--400 generate and display the final dice values while
+		adding them up in {\ttfamily T}.
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAM 4 - MINI CALCULATOR
+%----------------------------------------------------------------------------------------
+
+\section*{Utility: Mini Calculator}
+\index{Sample Programs!Calculator}
+
+This handy calculator lets you perform basic math operations.  Enter two numbers
+and choose an operation, and the X16 gives you the answer.  It even handles
+errors gracefully!
+
+\codeblock{
+	100 REM ** MINI CALCULATOR **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** MINI CALCULATOR **"\\
+	130 PRINT\\
+	140 PRINT "ENTER FIRST NUMBER";\\
+	150 INPUT A\\
+	160 PRINT "ENTER SECOND NUMBER";\\
+	170 INPUT B\\
+	180 PRINT\\
+	190 PRINT "CHOOSE OPERATION:"\\
+	200 PRINT "1) ADD"\\
+	210 PRINT "2) SUBTRACT"\\
+	220 PRINT "3) MULTIPLY"\\
+	230 PRINT "4) DIVIDE"\\
+	240 PRINT "5) POWER"\\
+	250 PRINT\\
+	260 PRINT "YOUR CHOICE";\\
+	270 INPUT C\\
+	280 PRINT\\
+	290 IF C = 1 THEN PRINT A; "+"; B; "="; A + B\\
+	300 IF C = 2 THEN PRINT A; "-"; B; "="; A - B\\
+	310 IF C = 3 THEN PRINT A; "*"; B; "="; A * B\\
+	320 IF C = 4 AND B <> 0 THEN PRINT A; "/"; B; "="; A / B\\
+	330 IF C = 4 AND B = 0 THEN PRINT "ERROR: DIVIDE BY ZERO!"\\
+	340 IF C = 5 THEN PRINT A; "\^{}"; B; "="; A \^{} B\\
+	350 PRINT\\
+	360 PRINT "ANOTHER CALCULATION (Y/N)";\\
+	370 GET A\$: IF A\$ = "" THEN 370\\
+	380 IF A\$ = "Y" THEN 110\\
+	390 IF A\$ <> "N" THEN 370\\
+	400 PRINT\\
+	410 PRINT "GOODBYE!"\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Lines 140--170 get the two numbers to work with.
+	\item Lines 190--270 display a menu and get the user's choice.
+	\item Lines 290--340 perform the selected operation and display the result.
+	\item Line 330 checks for division by zero before it happens!
+\end{itemize}
+
+\tryit{
+	Can you add more operations?  Try adding square root ({\ttfamily SQR(A)}),
+	absolute value ({\ttfamily ABS(A)}), or modulo (remainder after division).
+}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAM 5 - PATTERN MAKER
+%----------------------------------------------------------------------------------------
+
+\section*{Graphics: Pattern Maker}
+\index{Sample Programs!Pattern Maker}
+
+This program creates colorful patterns on the screen using PETSCII graphics
+characters.  Watch as the X16 fills the screen with an ever-changing display of
+shapes and colors!
+
+\codeblock{
+	100 REM ** PATTERN MAKER **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 REM PETSCII SHAPE CHARACTERS\\
+	130 DIM S\$(5)\\
+	140 S\$(1) = "*"\\
+	150 S\$(2) = "+"\\
+	160 S\$(3) = "O"\\
+	170 S\$(4) = "X"\\
+	180 S\$(5) = "@"\\
+	190 REM MAIN LOOP\\
+	200 C = INT(RND(1)*15)+1\\
+	210 PRINT CHR\$(28+C);\\
+	220 X = INT(RND(1)*40)\\
+	230 Y = INT(RND(1)*30)\\
+	240 P = INT(RND(1)*5)+1\\
+	250 PRINT CHR\$(19);\\
+	260 FOR I = 1 TO Y: PRINT: NEXT I\\
+	270 PRINT TAB(X); S\$(P);\\
+	280 GET A\$: IF A\$ <> "" THEN 300\\
+	290 GOTO 200\\
+	300 PRINT "\shiftkey\clrhomekey"\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Lines 130--180 set up an array of different characters to display.
+	\item Line 200 picks a random color (1--15).
+	\item Line 210 uses {\ttfamily CHR\$(28+C)} to change the text color.
+	\item Lines 220--230 pick a random screen position.
+	\item Line 250 uses {\ttfamily CHR\$(19)} to move the cursor home without
+		clearing the screen.
+	\item Line 280 checks if a key was pressed to exit the program.
+\end{itemize}
+
+\note{
+	The color codes for {\ttfamily CHR\$} range from 29 to 43.  By adding a
+	random number (1--15) to 28, we get a random color each time!
+}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAM 6 - SIMPLE MELODY PLAYER
+%----------------------------------------------------------------------------------------
+
+\section*{Sound: Simple Melody Player}
+\index{Sample Programs!Melody Player}
+
+This program plays a simple melody using the X16's FM sound chip.  It
+demonstrates how to use the {\ttfamily FMPLAY} command to create music with
+note strings.  The program plays ``Twinkle, Twinkle, Little Star''!
+
+\codeblock{
+	100 REM ** MELODY PLAYER **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** MELODY PLAYER **"\\
+	130 PRINT\\
+	140 PRINT "TWINKLE TWINKLE LITTLE STAR"\\
+	150 PRINT\\
+	160 REM INITIALIZE FM CHIP\\
+	170 FMINIT\\
+	180 FMINST 0, 16: REM ORGAN SOUND\\
+	190 REM PLAY THE MELODY\\
+	200 PRINT "PLAYING..."\\
+	210 FMPLAY 0, "T120 L4"\\
+	220 FMPLAY 0, "C C G G A A G2"\\
+	230 FMPLAY 0, "F F E E D D C2"\\
+	240 FMPLAY 0, "G G F F E E D2"\\
+	250 FMPLAY 0, "G G F F E E D2"\\
+	260 FMPLAY 0, "C C G G A A G2"\\
+	270 FMPLAY 0, "F F E E D D C2"\\
+	280 PRINT\\
+	290 PRINT "DONE!"\\
+	300 PRINT\\
+	310 PRINT "PLAY AGAIN (Y/N)";\\
+	320 GET A\$: IF A\$ = "" THEN 320\\
+	330 IF A\$ = "Y" THEN 110\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Line 170 initializes the FM sound chip.
+	\item Line 180 loads instrument 16 (organ) into channel 0.
+	\item Line 210 sets the tempo (120 beats per minute) and default note
+		length (quarter notes).
+	\item Lines 220--270 play the melody using note letters.  The number after
+		a note (like {\ttfamily G2}) makes it a half note (twice as long).
+\end{itemize}
+
+\tryit{
+	Try changing instrument 16 to other numbers (0--47) to hear different
+	sounds!  You can also change the tempo by adjusting the number after
+	{\ttfamily T} in line 210.
+}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAM 7 - NUMBER MEMORY GAME
+%----------------------------------------------------------------------------------------
+
+\section*{Game: Number Memory}
+\index{Sample Programs!Number Memory}
+
+Test your memory with this challenging game!  The computer displays a sequence
+of numbers, then hides them.  Can you remember what they were and type them back
+in the correct order?  The sequences get longer as you succeed!
+
+\codeblock{
+	100 REM ** NUMBER MEMORY **\\
+	110 PRINT "\shiftkey\clrhomekey"\\
+	120 PRINT "** NUMBER MEMORY GAME **"\\
+	130 PRINT\\
+	140 PRINT "MEMORIZE THE NUMBERS,"\\
+	150 PRINT "THEN TYPE THEM BACK!"\\
+	160 PRINT\\
+	170 DIM N(10)\\
+	180 LV = 3: REM STARTING LENGTH\\
+	190 SC = 0: REM SCORE\\
+	200 REM GENERATE SEQUENCE\\
+	210 PRINT "LEVEL"; LV - 2\\
+	220 PRINT "MEMORIZE: ";\\
+	230 FOR I = 1 TO LV\\
+	240 N(I) = INT(RND(1)*10)\\
+	250 PRINT N(I);\\
+	260 NEXT I\\
+	270 PRINT\\
+	280 REM PAUSE TO MEMORIZE\\
+	290 FOR D = 1 TO LV * 60: NEXT D\\
+	300 PRINT "\shiftkey\clrhomekey"\\
+	310 PRINT "NOW TYPE THEM BACK:"\\
+	320 PRINT\\
+	330 REM CHECK ANSWERS\\
+	340 FOR I = 1 TO LV\\
+	350 PRINT "NUMBER"; I;\\
+	360 INPUT G\\
+	370 IF G <> N(I) THEN 430\\
+	380 NEXT I\\
+	390 PRINT\\
+	400 PRINT "CORRECT! WELL DONE!"\\
+	410 SC = SC + LV\\
+	420 LV = LV + 1: IF LV > 10 THEN LV = 10\\
+	425 PRINT "SCORE:"; SC\\
+	426 PRINT\\
+	427 PRINT "PRESS ANY KEY..."\\
+	428 GET A\$: IF A\$ = "" THEN 428\\
+	429 GOTO 200\\
+	430 PRINT\\
+	440 PRINT "WRONG! THE SEQUENCE WAS:"\\
+	450 FOR I = 1 TO LV\\
+	460 PRINT N(I);\\
+	470 NEXT I\\
+	480 PRINT\\
+	490 PRINT "FINAL SCORE:"; SC\\
+	500 PRINT\\
+	510 PRINT "PLAY AGAIN (Y/N)";\\
+	520 GET A\$: IF A\$ = "" THEN 520\\
+	530 IF A\$ = "Y" THEN 110\\
+}
+
+\textbf{How It Works:}
+
+\begin{itemize}
+	\item Line 170 creates an array to store the number sequence.
+	\item Line 180 starts with 3 numbers to memorize.
+	\item Lines 230--260 generate and display random numbers.
+	\item Line 290 pauses for a time proportional to the sequence length.
+	\item Lines 340--380 check each answer against the stored sequence.
+	\item Line 420 increases difficulty (up to 10 numbers maximum).
+\end{itemize}
+
+\tip{Memory Tip}{
+	Try grouping the numbers in your mind.  For example, ``3 7 2 5'' might be
+	easier to remember as ``37'' and ``25'' --- two two-digit numbers instead
+	of four single digits!
+}

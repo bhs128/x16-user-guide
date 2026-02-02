@@ -79,7 +79,7 @@ This section summarizes the current state of the Commander X16 User Guide, compa
 | **Appendix: MUSIC PLAY Macros** | [appendix/music_play_macros.tex](appendix/music_play_macros.tex) | ✅ Reference | 404 | Music string notation |
 | **Appendix: YM2151** | [appendix/ym2151.tex](appendix/ym2151.tex) | ✅ Reference | 552 | FM sound chip documentation |
 | **Appendix: Error Messages** | [appendix/error_messages.tex](appendix/error_messages.tex) | ✅ Complete | 280+ | Full list of BASIC error messages with explanations and debugging tips |
-| **Appendix: Sample Programs** | [appendix/sample_programs.tex](appendix/sample_programs.tex) | 🚧 Placeholder | 48 | Section stubs only, no actual programs yet |
+| **Appendix: Sample Programs** | [appendix/sample_programs.tex](appendix/sample_programs.tex) | ✅ Complete | 460+ | 7 type-in programs: Hi-Lo, Reaction Timer, Dice Roller, Calculator, Pattern Maker, Melody Player, Number Memory |
 
 ### Original VIC-20 User's Guide Chapters
 
@@ -128,7 +128,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | **Ch 5**: Sound and Music | Making music, piano, songs | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | ✅ Complete | None - covers PSG/FM voices, waveforms, FMPLAY/PSGPLAY, sound effects, piano, songs |
 | **Ch 6**: Conversing | INPUT, variables, GET | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | None - follows VIC-20 structure |
 | **Ch 7**: Intro to Programming | BASIC commands, RND, IF/THEN, FOR/NEXT | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | None - covers RND, IF/THEN, FOR/NEXT, games |
-| **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | 🔶 Mixed | Sample programs needed |
+| **Appendices** | BASIC ref, screen codes, samples, errors | [appendix/](appendix/) | ✅ Complete | All appendices complete |
 
 ### 📋 Priority TODO List
 
@@ -139,7 +139,7 @@ The C64 User Guide built on the VIC-20's approach, with expanded coverage for th
 | ✅ Done | **Ch 4: Animation** | Complete | Bouncing ball, cursor control, VPOKE animation, flying objects, starfield |
 | ✅ Done | **Ch 5: Sound and Music** | Complete | PSG and FM sounds, waveforms, FMPLAY/PSGPLAY, sound effects, piano program, songs |
 | 🟢 Low | **Ch 2: Screen & Keyboard** | Complete | Add keyboard diagram illustration |
-| 🟡 Medium | **Appendix: Sample Programs** | Section stubs | Add 5-10 type-in programs |
+| ✅ Done | **Appendix: Sample Programs** | Complete | 7 type-in programs: Hi-Lo, Reaction Timer, Dice Roller, Calculator, Pattern Maker, Melody Player, Number Memory |
 | ✅ Done | **Appendix: Error Messages** | Complete | Full list of 26 BASIC error messages with explanations and debugging tips |
 
 ### 🆕 Suggested Future X16-Specific Content

@@ -316,18 +316,156 @@ The color value is calculated by putting the background color in the upper 4
 bits and the foreground color in the lower 4 bits.  For example, \$61 means
 background color 6 (blue) and foreground color 1 (white).\\
 
+
+\section{Direct Screen Memory with VPOKE}
+
+For programmers who want maximum control, you can write
+directly to the Commander X16's video memory using the {\ttfamily VPOKE}
+command.  This bypasses the normal {\ttfamily PRINT} or {\ttfamily TILE} routines and lets you put
+characters and colors anywhere on the screen almost instantly.\\
+
+\subsection{Understanding Video Memory}
+
+The Commander X16's video chip is called VERA (Video Enhanced Retro Adapter).
+Unlike the Commodore 64 where screen memory was part of the main RAM, the X16
+has separate video memory inside VERA.  The {\ttfamily VPOKE} command lets you
+write directly to this video memory.\\
+
+Since the screen is capable of holding 4800 characters in 80-column mode (80
+columns by 60 rows), there are memory locations set aside for each position on
+the screen.  Think of the screen as a grid, with each square representing a
+memory location.\\
+
+In the standard text modes, each character on screen takes up \emph{two bytes}
+in VERA memory:\\
+
+\begin{itemize}
+	\item The first byte is the \emph{screen code} --- which character to display
+	\item The second byte is the \emph{color} --- foreground and background colors combined
+\end{itemize}
+
+\subsection{Screen Memory Map}
+
+Screen memory begins at address {\ttfamily \$1B000} in VERA memory (bank 1,
+address {\ttfamily \$B000}).  The VERA's tile map is organized with 256 bytes
+per row (128 character positions $\times$ 2 bytes each), though only the first
+80 characters are visible (or fewer, depending on your selected screen mode).\\
+
+Here's how the screen memory is laid out for 80-column mode:\\
+
+\begin{verbatim}
+                              COLUMN
+     0             20             40             60          79
+    +----------------------------------------------------------+
+    |                                                          |  0
+    | $1B000                                             $1B09E|
+    |                                                          |
+    | $1B100                                             $1B19E| 10
+    |                                                          |
+    |                                                          |  ROW
+    | $1B200                                             $1B29E| 20
+    |                                                          |
+    | $1B300                                             $1B39E| 30
+    |                                                          |
+    | $1B400                                             $1B49E| 40
+    |                                                          |
+    | $1B500                                             $1B59E| 50
+    |                                                          |
+    | $1B600                                       $1B676      | 59
+    +----------------------------------------------------------+
+\end{verbatim}
+
+\subsection{Calculating Screen Positions}
+
+To find the address of any character at column X (0-79) and row Y (0-59), use
+this formula:\\
+
+\begin{center}
+	\fbox{\ttfamily ADDRESS = \$B000 + (Y * 256) + (X * 2)}
+\end{center}
+
+The color byte is always at ADDRESS + 1.\\
+
+For example, to place a character in the center of the screen (column 40, row
+30), the calculation is:\\
+
+\begin{center}
+	{\ttfamily \$B000 + (30 * 256) + (40 * 2) = \$B000 + \$1E00 + \$50 = \$CE50}
+\end{center}
+
+So the character goes at {\ttfamily \$CE50} and its color goes at {\ttfamily \$CE51}.\\
+
+\subsection{Using VPOKE}
+
+The {\ttfamily VPOKE} command takes three numbers: the VERA bank, the address
+within that bank, and the value to write:\\
+
+\codeblock{
+	VPOKE bank, address, value\\
+}
+
+For the text screen, we always use bank 1 with addresses starting at {\ttfamily
+\$B000}.  Clear the screen and try this example:\\
+
+\codeblock{
+	VPOKE 1,\$B000,1\\
+	VPOKE 1,\$B001,\$02\\
+}
+
+The first line puts screen code 1 (the letter ``A'') at the top-left corner.
+The second line sets its color to {\ttfamily \$02} (red on black).  You have
+placed a character directly into screen memory without using {\ttfamily PRINT}!\\
+
+\subsection{Color Memory}
+
+For every character on screen, the color byte determines both the foreground
+and background colors.  The upper 4 bits set the background color, and the
+lower 4 bits set the foreground color:\\
+
+\begin{center}
+	{\ttfamily COLOR = (background * 16) + foreground}
+\end{center}
+
+So to display a yellow character (color 7) on a blue background (color 6), the
+color byte would be:\\
+
+\begin{center}
+	{\ttfamily (6 * 16) + 7 = 96 + 7 = 103 = \$67}
+\end{center}
+
+Try it! Clear the screen, then type:\\
+
+\codeblock{
+	VPOKE 1,\$B000,1\\
+	VPOKE 1,\$B001,\$67\\
+}
+
+You should see a yellow ``A'' on a blue background in the top-left corner!\\
+
+\subsection{A Complete Example}
+
+Here's a program that places a ball (screen code 81) in the middle of the
+screen, just like the classic C64 example:\\
+
+\codeblock{
+	10 PRINT "\shiftkey\clrhomekey"\\
+	20 X=40:Y=30\\
+	30 ADDR=\$B000+(Y*256)+(X*2)\\
+	40 VPOKE 1,ADDR,81\\
+	50 VPOKE 1,ADDR+1,\$01\\
+}
+
+Line 30 calculates the address for column 40, row 30 (the center of an
+80$\times$60 screen).  Line 40 puts screen code 81 (a filled circle) at that
+location.  Line 50 sets the color to white (\$01) on black (\$00).\\
+
 \note{
-
-	On the original Commodore 64, programmers used {\ttfamily POKE} commands to
-	write characters and colors directly to screen memory.  The Commander X16
-	can do this too using {\ttfamily VPOKE} to write to the VERA's video memory,
-	but the memory addresses and organization are different from the C64.  The
-	good news is that the {\ttfamily COLOR} and {\ttfamily TILE} statements make
-	this much easier!  Instead of calculating memory addresses and remembering
-	offsets, you can simply tell the X16 \emph{where} you want something and
-	\emph{what color} it should be.  The X16 handles all the complicated memory
-	details for you.\\
-
+	The {\ttfamily TILE} statement is usually easier to use than {\ttfamily
+	VPOKE}, but {\ttfamily VPOKE} gives you more control and can be faster
+	for complex programs.  When you're starting out, stick with {\ttfamily
+	TILE}.  As you become more advanced, you might want to experiment with
+	{\ttfamily VPOKE} for special effects.  See the {\ttfamily VPOKE} entry
+	in the BASIC Commands appendix for more details.\\
 }
 
 %----------------------------------------------------------------------------------------
@@ -510,35 +648,491 @@ This uses the {\ttfamily TILE} statement to display all 256 characters in a
 chart of all characters and their codes in the appendix.\\
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER - Combining Color and Sound
+%	CHAPTER - VERA Graphics Mode
 %----------------------------------------------------------------------------------------
 
-\chapter*{Combining Color and Sound}\index{Color and Sound}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Combining Color and Sound}
+\chapter*{VERA Graphics Mode}\index{Graphics Mode}\index{VERA}\index{LINE}\index{RECT}\index{FRAME}\index{OVAL}
+\addcontentsline{toc}{chapter}{\protect\numberline{}VERA Graphics Mode}
 
-Colors and sounds go great together!  Here's a simple program that makes random
-colors and plays random notes at the same time:\\
+So far we've been using text mode, where we draw pictures using characters.
+But the Commander X16 can also draw real graphics --- lines, rectangles, and
+circles --- pixel by pixel!  This is called \emph{graphics mode}.\\
+
+\section{Entering Graphics Mode}
+
+To use graphics commands, you first need to switch to graphics mode using the
+{\ttfamily SCREEN} command with mode {\ttfamily \$80} (128 in decimal):\\
 
 \codeblock{
-	10 COLOR RND(1)*16,RND(1)*16\\
-	20 PRINT "\shiftkey\key{Q}";\\
-	30 N\$="CDEFGAB"\\
-	40 PSGPLAY 0,"O3"+MID\$(N\$,RND(1)*7+1,1)\\
-	50 SLEEP 10\\
-	60 GOTO 10\\
+	SCREEN \$80\\
 }
 
-This program fills the screen with colorful circles while playing random
-musical notes.  You'll learn more about making music in Chapter 5 --- for now,
-just enjoy the colorful noise!\\
+This gives you a 320 by 240 pixel screen with 256 colors.  You can still use
+text commands in this mode --- they'll appear in a 40 by 30 character area
+overlaid on the graphics.\\
 
-\tip{Making Your Own Light Show}{
+To return to normal text mode, use:\\
 
-	Try modifying the program above to create your own audio-visual experience!
-	Change the graphic character to something else, adjust the {\ttfamily SLEEP}
-	time to speed up or slow down the show, or use {\ttfamily TILE} to place
-	characters in specific patterns while the music plays.\\
+\codeblock{
+	SCREEN 0\\
+}
+
+\section{Drawing Lines}
+
+The {\ttfamily LINE} statement draws a straight line between two points.  You
+specify the starting point (X1, Y1), the ending point (X2, Y2), and the color:\\
+
+\codeblock{
+	LINE X1, Y1, X2, Y2, color\\
+}
+
+Here's a simple example that draws some colorful lines:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 LINE 0,0,319,239,2\\
+	30 LINE 319,0,0,239,5\\
+	40 LINE 160,0,160,239,7\\
+	50 LINE 0,120,319,120,14\\
+}
+
+This draws a red diagonal from top-left to bottom-right, a green diagonal from
+top-right to bottom-left, a yellow vertical line down the center, and a light
+blue horizontal line across the middle.\\
+
+\section{Drawing Rectangles}
+
+The Commander X16 has two commands for drawing rectangles.  {\ttfamily RECT}
+draws a filled rectangle, while {\ttfamily FRAME} draws just the outline:\\
+
+\codeblock{
+	RECT X1, Y1, X2, Y2, color\\
+	FRAME X1, Y1, X2, Y2, color\\
+}
+
+The coordinates specify two opposite corners of the rectangle.  Try this
+example:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 RECT 50,50,150,100,6\\
+	30 FRAME 100,80,250,180,1\\
+	40 RECT 200,150,280,200,2\\
+}
+
+Line 20 draws a filled blue rectangle.  Line 30 draws a white rectangle outline
+that overlaps it.  Line 40 draws another filled rectangle in red.\\
+
+\section{Drawing Ovals and Circles}
+
+Just like rectangles, you can draw filled ovals with {\ttfamily OVAL} or oval
+outlines with {\ttfamily RING}.  The coordinates define a ``bounding box'' ---
+the oval will fit inside this rectangle:\\
+
+\codeblock{
+	OVAL X1, Y1, X2, Y2, color\\
+	RING X1, Y1, X2, Y2, color\\
+}
+
+To draw a circle, make the width and height equal:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 OVAL 110,70,210,170,7\\
+	30 RING 50,50,130,130,1\\
+	40 RING 190,50,270,130,2\\
+}
+
+Line 20 draws a filled yellow circle.  Lines 30 and 40 draw white and red
+circle outlines.\\
+
+\section{Setting Individual Pixels}
+
+If you want to set just one pixel at a time, use the {\ttfamily PSET} command:\\
+
+\codeblock{
+	PSET X, Y, color\\
+}
+
+Here's a program that fills the screen with random colored dots:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 PSET RND(1)*320, RND(1)*240, RND(1)*256\\
+	30 GOTO 20\\
+}
+
+\section{A Graphics Demo}
+
+Here's a fun program that draws a colorful spiral pattern:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 FOR A=0 TO 6.28 STEP 0.02\\
+	30 R=A*15\\
+	40 X=160+COS(A)*R\\
+	50 Y=120+SIN(A)*R\\
+	60 LINE 160,120,X,Y,A*4\\
+	70 NEXT A\\
+}
+
+This draws lines from the center of the screen outward, rotating around in a
+spiral pattern.  Each line is a different color.\\
+
+\note{
+	Graphics mode uses more of the VERA's memory and processing power than text
+	mode.  For simple programs, text mode with {\ttfamily TILE} and graphic
+	characters is often easier and faster.  Use graphics mode when you need
+	smooth lines, curves, or precise pixel control.\\
+}
+
+\tip{Combining Text and Graphics}{
+
+	In graphics mode ({\ttfamily SCREEN \$80}), you can still use {\ttfamily
+	PRINT} and other text commands.  The text appears on top of your graphics
+	in a 40 by 30 character area.  This is great for adding labels, scores, or
+	messages to your graphics programs!  Note that the tile map base address
+	remains at {\ttfamily \$1B000}, so your {\ttfamily VPOKE} commands for text
+	will work the same way in graphics mode as in text mode.\\
 
 }
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Introduction to Sprites
+%----------------------------------------------------------------------------------------
+
+\chapter*{Introduction to Sprites}\index{Sprites}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Introduction to Sprites}
+
+In the previous sections, we learned how to draw characters and graphics on the
+screen using {\ttfamily PRINT}, {\ttfamily TILE}, and commands like
+{\ttfamily LINE} and {\ttfamily RECT}.  These are great for simple shapes, but
+what if you want to display a detailed spaceship, a colorful character, or a
+company logo?  Building complex images pixel by pixel with dozens of
+{\ttfamily PSET} commands --- or combining many {\ttfamily LINE} and
+{\ttfamily RECT} calls --- quickly becomes tedious and hard to manage.
+Wouldn't it be wonderful if you could design a picture once and display it
+with a single command?\\
+
+That's exactly what \emph{sprites} are for!  A sprite is a special graphical
+object that the VERA video chip handles independently from the rest of the
+screen.  You design what the sprite looks like, tell the computer where you
+want it to appear, and the hardware takes care of the rest.  Moving a sprite is
+as simple as giving it new coordinates --- no erasing, no redrawing!\\
+
+The Commander X16 can display up to \emph{128 sprites} at the same time!
+Compare that to the Commodore 64's 8 sprites, and you can see how much more
+powerful the X16 is.  Each sprite can be:\\
+
+\begin{itemize}
+	\item Up to 64 pixels wide and 64 pixels tall
+	\item Positioned anywhere on the screen (even partially off-screen)
+	\item Displayed in front of or behind the background
+	\item Flipped horizontally or vertically
+	\item Any of 256 colors (using 8-bit color mode)
+\end{itemize}
+
+\section{How Sprites Work}
+
+Sprites on the Commander X16 work differently than on older computers like the
+Commodore 64.  Instead of POKEing values into complicated memory locations, the
+X16 provides easy-to-use BASIC commands:\\
+
+\begin{itemize}
+	\item {\ttfamily SPRITE} --- Configure a sprite's size, visibility, and appearance
+	\item {\ttfamily SPRMEM} --- Tell the sprite where to find its picture data
+	\item {\ttfamily MOVSPR} --- Move a sprite to a new position
+\end{itemize}
+
+The basic process for using a sprite is:\\
+
+\begin{enumerate}
+	\item Load or create the sprite's image data in VERA memory
+	\item Use {\ttfamily SPRMEM} to point the sprite at that image data
+	\item Use {\ttfamily SPRITE} to set the sprite's size and make it visible
+	\item Use {\ttfamily MOVSPR} to position the sprite on the screen
+\end{enumerate}
+
+\section{Creating Your First Sprite: The Rainbow X}
+
+Let's create a colorful 16x16 pixel sprite --- a stylized Commander X16 rainbow
+``X'' logo!  Unlike the circles and lines we drew with graphics commands, this
+sprite is a custom bitmap image defined pixel by pixel.  A 16x16 sprite in
+8-bit color mode uses 256 bytes of memory (one byte per pixel).\\
+
+First, we need to understand how sprite data is stored.  Each byte represents
+one pixel, and the value is the color number (0-255).  A value of 0 is
+transparent (you can see through it), which lets the background show through
+the empty parts of our X shape.\\
+
+Here's a program that creates our rainbow X logo and displays it:\\
+
+\codeblock{
+	10 REM COMMANDER X16 RAINBOW X LOGO\\
+	20 REM 16X16 SPRITE AT VRAM \$4000\\
+	30 FOR I=0 TO 255\\
+	40 READ D:VPOKE 0,\$4000+I,D\\
+	50 NEXT I\\
+	60 REM SET UP THE SPRITE\\
+	70 SPRMEM 1,0,\$4000,1\\
+	80 SPRITE 1,3,0,0,1,1,1\\
+	90 MOVSPR 1,152,112\\
+	100 GOTO 100\\
+}
+
+\codeblock{
+	200 REM ROW 0-3: RED/PURPLE CORNERS\\
+	210 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+	220 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	230 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	240 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	300 REM ROW 4-7: ORANGE/BLUE SECTION\\
+	310 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	320 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	330 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	340 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	400 REM ROW 8-11: CENTER AND SPREAD\\
+	410 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	420 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	430 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	440 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	500 REM ROW 12-15: BACK TO CORNERS\\
+	510 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	520 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	530 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	540 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+}
+
+Let's examine what each part does:\\
+
+\begin{itemize}
+	\item Lines 30-50 read the 256 bytes of sprite data and store them in VERA
+	      memory at address {\ttfamily \$4000} in bank 0.
+	\item Line 70 tells sprite \#1 to use the image data at bank 0, address
+	      {\ttfamily \$4000}, with 8-bit color depth.
+	\item Line 80 configures sprite \#1: priority 3 (in front of everything),
+	      palette offset 0, no flip, 16x16 pixels (the ``1,1''), 8-bit color.
+	\item Line 90 positions the sprite at coordinates (152, 112) --- roughly
+	      the center of the screen.
+	\item Line 100 keeps the program running so we can see the sprite.
+\end{itemize}
+
+The DATA statements define our rainbow X pixel by pixel.  Notice the colors:
+red (2) in the top-left and bottom-left, purple (4) in the top-right and
+bottom-right, orange (8) and blue (6) in the middle arms, with yellow (7) and
+green (5) at the center crossing.  This creates a beautiful rainbow effect!\\
+
+Run the program and you should see the colorful X logo appear in the center of
+the screen!  This is a \emph{bitmap sprite} --- a custom image that would be
+difficult to draw with \texttt{LINE} or \texttt{RECT} commands.\\
+
+\section{The SPRITE Command}
+
+The {\ttfamily SPRITE} command has several parameters that control how the
+sprite appears:\\
+
+\codeblock{
+	SPRITE spritenum, priority, palette, flip, width, height, colordepth\\
+}
+
+\begin{itemize}
+	\item {\bfseries spritenum} --- Which sprite (0-127) to configure
+	\item {\bfseries priority} --- Controls visibility: 0=off, 1=behind
+	      background, 2=between layers, 3=in front
+	\item {\bfseries palette} --- Palette offset (0-15), multiplied by 16
+	\item {\bfseries flip} --- 0=normal, 1=flip horizontal, 2=flip vertical,
+	      3=flip both
+	\item {\bfseries width/height} --- 0=8px, 1=16px, 2=32px, 3=64px
+	\item {\bfseries colordepth} --- 0=4-bit (16 colors), 1=8-bit (256 colors)
+\end{itemize}
+
+\section{Positioning Sprites}
+
+The {\ttfamily MOVSPR} command positions a sprite at any location on the
+screen:\\
+
+\codeblock{
+	MOVSPR spritenum, x, y\\
+}
+
+The X coordinate can range from 0 to about 640 (depending on screen mode), and
+Y from 0 to about 480.  The coordinates refer to the sprite's upper-left
+corner.  You can even use negative values to move a sprite partially off the
+screen!\\
+
+After running the rainbow X program, try positioning the sprite in different
+places.  In direct mode (without line numbers), type:\\
+
+\codeblock{
+	MOVSPR 1,0,0\\
+}
+
+The X logo jumps to the top-left corner!  Now try:\\
+
+\codeblock{
+	MOVSPR 1,600,400\\
+}
+
+The sprite moves to the lower-right area of the screen.  You can position
+sprites anywhere instantly --- the VERA handles all the drawing for you.\\
+
+\section{Sprite Layers and Priority}
+
+One of the most powerful features of sprites is controlling which objects
+appear in front of others.  The \emph{priority} parameter in the {\ttfamily
+SPRITE} command controls this:\\
+
+\begin{itemize}
+	\item {\bfseries 0} --- Sprite is invisible (turned off)
+	\item {\bfseries 1} --- Sprite appears behind the background layer
+	\item {\bfseries 2} --- Sprite appears between layers
+	\item {\bfseries 3} --- Sprite appears in front of everything
+\end{itemize}
+
+Try this experiment after running the rainbow X program:\\
+
+\codeblock{
+	SPRITE 1,0,0,0,1,1,1\\
+}
+
+The X logo disappears!  Priority 0 turns the sprite off.  Now bring it back:\\
+
+\codeblock{
+	SPRITE 1,3,0,0,1,1,1\\
+}
+
+The X logo reappears in front of everything.  This is useful in games where
+you want characters to walk behind trees or buildings!\\
+
+\section{Flipping Sprites}
+
+The \emph{flip} parameter lets you mirror a sprite horizontally, vertically,
+or both --- without needing separate sprite data for each direction!  This is
+perfect for game characters that need to face left or right.\\
+
+The flip values are:\\
+
+\begin{itemize}
+	\item {\bfseries 0} --- Normal (no flip)
+	\item {\bfseries 1} --- Flip horizontally (mirror left-right)
+	\item {\bfseries 2} --- Flip vertically (mirror top-bottom)
+	\item {\bfseries 3} --- Flip both ways
+\end{itemize}
+
+Try these commands after running the rainbow X program:\\
+
+\codeblock{
+	SPRITE 1,3,0,1,1,1,1\\
+}
+
+The X logo flips horizontally --- notice the red and purple sides swap!  Now
+try:\\
+
+\codeblock{
+	SPRITE 1,3,0,2,1,1,1\\
+}
+
+The X flips vertically.  And finally:\\
+
+\codeblock{
+	SPRITE 1,3,0,3,1,1,1\\
+}
+
+Both flips at once!  This feature saves memory --- you only need one sprite
+image to show a character facing any direction.\\
+
+\note{
+	You can load sprite images from files using the {\ttfamily BVLOAD} command,
+	which loads binary data directly into VERA memory.  This is much easier than
+	typing in all the data values by hand!  Many graphics programs can export
+	sprite data in formats compatible with the Commander X16.\\
+}
+
+\section{Detecting Sprite Collisions}
+
+When two sprites overlap on the screen, we say they have \emph{collided}.
+Detecting collisions is essential for games --- you need to know when a
+spaceship hits an asteroid, or when a player touches a coin!  The Commander X16
+provides the {\ttfamily SPRCOL} function to check for sprite collisions.\\
+
+Let's create a fun interactive demonstration!  The Commander X16 can display a
+mouse pointer using {\ttfamily MOUSE 1}, which uses sprite \#0.  We'll set up
+our rainbow X logo and make it say ``OUCH!'' whenever you poke it with the
+mouse cursor.\\
+
+First, run the rainbow X program from earlier to create sprite \#1.  Then
+enable the mouse pointer and try this program:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 MOUSE 1\\
+	30 REM LOAD THE X LOGO INTO SPRITE 1\\
+	40 FOR I=0 TO 255\\
+	50 READ D:VPOKE 0,\$4000+I,D\\
+	60 NEXT I\\
+	70 SPRMEM 1,0,\$4000,1\\
+	80 SPRITE 1,3,0,0,1,1,1\\
+	90 MOVSPR 1,152,112\\
+	100 REM CHECK FOR COLLISION\\
+	110 IF SPRCOL(1)=0 THEN PRINT "\clrhomekey                 ";\\
+	120 IF SPRCOL(1)>0 THEN PRINT "\clrhomekey\shiftkey\key{/}- OUCH!      ";\\
+	130 GOTO 110\\
+}
+
+Add the DATA statements from the earlier rainbow X program (lines 200-540),
+then run it.  Move the mouse around the screen.  When the mouse pointer touches
+the X logo --- ``OUCH!''  Move it away, and the message disappears.  You're
+detecting sprite collisions!\\
+
+The {\ttfamily SPRCOL(1)} function checks if sprite \#1 (our X logo) is
+colliding with any lower-numbered sprite.  Since the mouse pointer is sprite
+\#0, the function returns 0 when they're not touching, and returns the
+colliding sprite number (which would be 0, but since we check {\ttfamily >0}
+we're really checking if \emph{any} collision occurred).\\
+
+\note{
+	Wait --- if the mouse is sprite \#0, and {\ttfamily SPRCOL(1)} returns 0 for
+	no collision, how do we tell them apart?  Good catch!  In this simple demo,
+	we only have two sprites, so any non-zero collision count means the mouse
+	touched our X.  For more complex programs with many sprites, you'd need to
+	check the actual collision value or use coordinates.\\
+}
+
+\subsection{How SPRCOL Works}
+
+The {\ttfamily SPRCOL} function checks whether a sprite's \emph{bounding box}
+overlaps with any other sprite's bounding box.  The bounding box is the
+rectangle that contains the sprite (16x16 pixels for our X logo).\\
+
+\codeblock{
+	result = SPRCOL(spritenum)\\
+}
+
+\begin{itemize}
+	\item Returns 0 if the sprite is not colliding with any other sprite
+	\item Returns the sprite number of the first collision detected
+	\item Only checks sprites with lower numbers than the one specified
+\end{itemize}
+
+\tip{Collision Detection Tips}{
+
+	The bounding box collision means sprites don't need to actually touch pixels
+	to register a collision --- their rectangular boundaries just need to
+	overlap.  For our X logo, this means a collision might register even when
+	the transparent corners are overlapping.  For more precise collision
+	detection in games, you might check if sprites are within a smaller distance
+	of each other using their coordinates.\\
+
+}
+
+\section{What's Next?}
+
+This chapter introduced the basics of sprites: loading custom bitmap graphics,
+positioning them on screen, controlling their layer priority, and flipping
+them.  In Chapter 4 (Animation), we'll bring sprites to life with movement!
+You'll learn how to make sprites glide across the screen, bounce off walls,
+and create smooth animations.  The combination of 128 hardware sprites and fast
+BASIC commands makes the Commander X16 an excellent platform for creating
+animated graphics and games!\\
 
 \@openrighttrue\makeatother

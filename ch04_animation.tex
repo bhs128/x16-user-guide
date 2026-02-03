@@ -8,13 +8,12 @@
 \chaptertypein{
 	\keybackgroundcolor{gray}
 	\keytextcolor{black}
-	10 PRINT "\shiftkey\clrhomekey"\\
-	20 FOR X=1 TO 38\\
-	30 PRINT "\clrhomekey";\\
-	40 PRINT TAB(X);"*"\\
-	50 FOR D=1 TO 50:NEXT D\\
-	60 NEXT X\\
-	70 GOTO 20
+	10 FOR X=1 TO 38\\
+	20 CLS\\
+	30 PRINT TAB(X);"*"\\
+	40 FOR D=1 TO 50:NEXT D\\
+	50 NEXT X\\
+	60 GOTO 10
 }
 
 %----------------------------------------------------------------------------------------
@@ -51,47 +50,40 @@ Let's take a close look at the program from the beginning of this chapter to
 understand how it makes the asterisk move across the screen:\\
 
 \codeblock{
-	10 PRINT "\shiftkey\clrhomekey"\\
-	20 FOR X=1 TO 38\\
-	30 PRINT "\clrhomekey";\\
-	40 PRINT TAB(X);"*"\\
-	50 FOR D=1 TO 50:NEXT D\\
-	60 NEXT X\\
-	70 GOTO 20\\
+	10 FOR X=1 TO 38\\
+	20 CLS\\
+	30 PRINT TAB(X);"*"\\
+	40 FOR D=1 TO 50:NEXT D\\
+	50 NEXT X\\
+	60 GOTO 10\\
 }
 
-Line 10 clears the screen at the start of the program.  This gives us a nice
-blank canvas to work with.\\
-
-Line 20 starts a {\ttfamily FOR...NEXT} loop.  The variable {\ttfamily X} will
+Line 10 starts a {\ttfamily FOR...NEXT} loop.  The variable {\ttfamily X} will
 count from 1 to 38, and we'll use this number to control where the asterisk
 appears.  Why 38?  Because the standard screen is 40 characters wide, and we
 want to leave a little room at the edges.\\
 
-Line 30 moves the cursor to the home position (top-left corner) without
-clearing the screen.  The \clrhomekey key by itself (without \shiftkey) just
-moves the cursor home.  The semicolon at the end keeps the cursor on that
-line.\\
+Line 20 clears the screen using the {\ttfamily CLS} command.  You could also
+print \shiftkey\clrhomekey to do the same thing.  Clearing the screen each time
+through the loop erases the old asterisk before we draw the new one.\\
 
-Line 40 is where the magic happens!  The {\ttfamily TAB(X)} function moves to
-column {\ttfamily X}, and then we print the asterisk.  Each time through the
-loop, {\ttfamily X} is one bigger, so the asterisk appears one position further
-to the right.\\
+Line 30 draws the asterisk!  {\ttfamily TAB(X)} moves the cursor to column X,
+and then we print the asterisk there.\\
 
-Line 50 is a \emph{delay loop}.  It counts from 1 to 50, doing nothing useful
+Line 40 is a \emph{delay loop}.  It counts from 1 to 50, doing nothing useful
 --- just wasting a little time.  Without this delay, the asterisk would zoom
 across the screen so fast you could barely see it!\\
 
-Line 60 completes the {\ttfamily FOR...NEXT} loop, sending us back to line 20
+Line 50 completes the {\ttfamily FOR...NEXT} loop, sending us back to line 10
 with a new value of {\ttfamily X}.\\
 
-Line 70 sends us back to line 20 to start the whole animation over again.\\
+Line 60 sends us back to line 10 to start the whole animation over again.\\
 
 \note{
-	The delay loop in line 50 is a classic technique from early computers.  The
+	The delay loop in line 40 is a classic technique from early computers.  The
 	Commander X16 also has a {\ttfamily SLEEP} command that pauses for a
 	specified number of ``jiffies'' (60ths of a second), which can be easier to
-	use.  Try replacing line 50 with {\ttfamily 50 SLEEP 1} and see if you like
+	use.  Try replacing line 40 with {\ttfamily 40 SLEEP 1} and see if you like
 	the timing better!\\
 }
 
@@ -100,21 +92,21 @@ Line 70 sends us back to line 20 to start the whole animation over again.\\
 Here's what happens each time through the loop:\\
 
 \begin{enumerate}
-	\item The cursor moves to the home position (top-left corner)
-	\item The {\ttfamily TAB} function moves to column X
+	\item {\ttfamily CLS} clears the screen, erasing the old asterisk
+	\item {\ttfamily TAB(X)} moves the cursor to column X
 	\item The asterisk is printed at that position
-	\item The delay loop pauses briefly
+	\item The delay loop pauses briefly so we can see it
 	\item X increases by 1, and we repeat
 \end{enumerate}
 
-But wait --- why don't we see a trail of asterisks across the screen?  Look
-carefully at line 30 again.  The \clrhomekey moves the cursor to the top-left,
-and then when we print the asterisk with {\ttfamily TAB(X)}, the spaces from
-column 1 to column X automatically erase any previous asterisk!  The {\ttfamily
-TAB} function fills in spaces as it moves across.\\
+This is the fundamental principle of all animation: \emph{erase, draw, pause,
+move, repeat}.  Because the Commander X16's {\ttfamily CLS} command is so fast,
+we can simply clear the entire screen each frame without any visible flicker.
+If we skipped line 20 and didn't clear the screen, we'd see a trail of
+asterisks growing across the screen instead of a single moving one.\\
 
 \tryit{
-	Change line 40 to use a different character instead of the asterisk.  Try a
+	Change line 30 to use a different character instead of the asterisk.  Try a
 	ball ({\ttfamily \shiftkey\key{Q}}), a heart ({\ttfamily \shiftkey\key{S}}),
 	or your favorite graphic character from Chapter 3!\\
 }
@@ -130,16 +122,15 @@ Now let's make something that moves in \emph{two} directions --- the classic
 bouncing ball!  Type {\ttfamily NEW} and enter this program:\\
 
 \codeblock{
-	10 PRINT "\shiftkey\clrhomekey"\\
-	20 X=1:Y=1\\
-	30 DX=1:DY=1\\
+	10 X=1:Y=1\\
+	20 DX=1:DY=1\\
+	30 CLS\\
 	40 TILE X,Y,81\\
 	50 SLEEP 2\\
-	60 TILE X,Y,32\\
-	70 X=X+DX:Y=Y+DY\\
-	80 IF X<1 OR X>38 THEN DX=-DX\\
-	90 IF Y<1 OR Y>28 THEN DY=-DY\\
-	100 GOTO 40\\
+	60 X=X+DX:Y=Y+DY\\
+	70 IF X<1 OR X>38 THEN DX=-DX\\
+	80 IF Y<1 OR Y>28 THEN DY=-DY\\
+	90 GOTO 30\\
 }
 
 Run this program and watch the ball bounce around the screen!  It moves
@@ -148,11 +139,15 @@ stop the program when you've seen enough.\\
 
 Let's look at how this program works:\\
 
-Lines 20-30 set up our \emph{variables}.  {\ttfamily X} and {\ttfamily Y} are
+Lines 10-20 set up our \emph{variables}.  {\ttfamily X} and {\ttfamily Y} are
 the ball's position on the screen.  {\ttfamily DX} and {\ttfamily DY} are the
 ball's \emph{direction} --- how much to move each step.  When {\ttfamily DX} is
 1, the ball moves right; when it's -1, the ball moves left.  The same is true
 for {\ttfamily DY} and up/down movement.\\
+
+Line 30 clears the screen using {\ttfamily CLS}.  Just like in our first
+animation, clearing the screen each frame erases the old ball before we draw
+the new one.\\
 
 Line 40 draws the ball using the {\ttfamily TILE} statement.  The number 81 is
 the screen code for a filled circle ({\ttfamily \shiftkey\key{Q}}).  Remember
@@ -162,21 +157,17 @@ character code.\\
 Line 50 pauses for a tiny moment so we can see the ball.  {\ttfamily SLEEP 2}
 waits for 2 ``jiffies'' (about 1/30th of a second).\\
 
-Line 60 erases the ball by putting a space (screen code 32) at the ball's
-current position.  This is important!  If we didn't erase the old ball, we'd
-see a trail of balls instead of one moving ball.\\
-
-Line 70 moves the ball by adding the direction values to the position.  If
+Line 60 moves the ball by adding the direction values to the position.  If
 {\ttfamily DX} is 1, then {\ttfamily X=X+DX} makes {\ttfamily X} one bigger,
 moving the ball to the right.\\
 
-Lines 80-90 check if the ball has hit an edge.  If {\ttfamily X} is less than 1
+Lines 70-80 check if the ball has hit an edge.  If {\ttfamily X} is less than 1
 or greater than 38, we've hit the left or right edge, so we reverse the
 horizontal direction by making {\ttfamily DX=-DX}.  The same logic applies for
 the top and bottom edges with {\ttfamily Y} and {\ttfamily DY}.\\
 
-Line 100 goes back to line 40 to draw the ball in its new position and continue
-the animation.\\
+Line 90 goes back to line 30 to clear the screen, draw the ball in its new
+position, and continue the animation.\\
 
 \section{Adding Color to the Ball}
 
@@ -191,21 +182,23 @@ The {\ttfamily \$71} sets the color to white (1) on a yellow (7) background.
 But why stop at one color?  Let's make the ball change colors as it bounces!\\
 
 \codeblock{
-	10 PRINT "\shiftkey\clrhomekey"\\
-	20 X=1:Y=1:C=1\\
-	30 DX=1:DY=1\\
-	40 TILE X,Y,81,C*16+C\\
+	10 X=1:Y=1:C=0\\
+	20 DX=1:DY=1\\
+	30 CLS\\
+	40 TILE X,Y,81,\$60+C\\
 	50 SLEEP 2\\
-	60 TILE X,Y,32\\
-	70 X=X+DX:Y=Y+DY\\
-	80 IF X<1 OR X>38 THEN DX=-DX:C=C+1\\
-	90 IF Y<1 OR Y>28 THEN DY=-DY:C=C+1\\
-	95 IF C>15 THEN C=1\\
-	100 GOTO 40\\
+	60 X=X+DX:Y=Y+DY\\
+	70 IF X<1 OR X>38 THEN DX=-DX:C=C+1\\
+	80 IF Y<1 OR Y>28 THEN DY=-DY:C=C+1\\
+	85 IF C=6 THEN C=7\\
+	86 IF C>15 THEN C=0\\
+	90 GOTO 30\\
 }
 
-Now the ball changes color every time it bounces!  Line 95 makes sure the color
-stays in the valid range of 1-15 (we skip 0, which is black on black).\\
+Now the ball changes color every time it bounces!  The {\ttfamily \$60+C} keeps
+the blue background (6) while changing the foreground color.  Line 85 skips
+blue (which would be invisible on the blue background), and line 86 wraps the
+color back to 0 after reaching 15.\\
 
 \tip{Making it Faster or Slower}{
 	The {\ttfamily SLEEP 2} in line 50 controls the speed of the animation.
@@ -255,15 +248,15 @@ Here's a program that moves a star across the screen using cursor control:\\
 
 \codeblock{
 	10 PRINT "\shiftkey\clrhomekey"\\
-	20 PRINT "\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}\key{CrsrDn}";\\
+	20 PRINT "\key{$\downarrow$}\key{$\downarrow$}\key{$\downarrow$}\key{$\downarrow$}\key{$\downarrow$}";\\
 	30 FOR I=1 TO 35\\
-	40 PRINT " *\key{CrsrLt}";\\
+	40 PRINT " *\key{$\leftarrow$}";\\
 	50 FOR D=1 TO 50:NEXT D\\
 	60 NEXT I\\
 	70 GOTO 10\\
 }
 
-In line 20, you would press the cursor-down key five times while inside the
+In line 20, you would press the down arrow key five times while inside the
 quotation marks.  This moves the cursor down five rows so the star doesn't
 appear at the very top of the screen.\\
 
@@ -272,7 +265,7 @@ we print:\\
 \begin{itemize}
 	\item A space (to erase the previous star)
 	\item An asterisk (the new star)
-	\item A cursor-left (to position for the next erase)
+	\item A left arrow (to position for the next erase)
 \end{itemize}
 
 Each time through the loop, the space erases the old star, a new star is
@@ -294,14 +287,14 @@ screen, using only cursor control and {\ttfamily PRINT} statements:\\
 \codeblock{
 	10 REM BOUNCING BALL\\
 	20 PRINT "\shiftkey\clrhomekey"\\
-	25 FOR X=1 TO 10:PRINT "\key{CrsrDn}":NEXT\\
+	25 FOR X=1 TO 10:PRINT "\key{$\downarrow$}":NEXT\\
 	30 FOR BL=1 TO 38\\
-	40 PRINT " \shiftkey\key{Q}\key{CrsrLt}";\\
+	40 PRINT " \shiftkey\key{Q}\key{$\leftarrow$}";\\
 	50 FOR TM=1 TO 50:NEXT TM\\
 	60 NEXT BL\\
 	70 REM MOVE BALL RIGHT TO LEFT\\
 	80 FOR BL=38 TO 1 STEP -1\\
-	90 PRINT " \key{CrsrLt}\key{CrsrLt}\shiftkey\key{Q}\key{CrsrLt}";\\
+	90 PRINT " \key{$\leftarrow$}\key{$\leftarrow$}\shiftkey\key{Q}\key{$\leftarrow$}";\\
 	100 FOR TM=1 TO 50:NEXT TM\\
 	110 NEXT BL\\
 	120 GOTO 20\\
@@ -313,107 +306,17 @@ Lines 30-60 move the ball to the right, and lines 80-110 move it back to the
 left.\\
 
 The trick in line 40 is printing a space first (to erase the old ball), then
-the ball character (\shiftkey + \key{Q}), and finally a cursor-left to position
+the ball character (\shiftkey + \key{Q}), and finally a left arrow to position
 for the next erase.\\
 
 Line 90 is a bit different because we're moving left.  We print a space, then
-two cursor-lefts (to move past where the ball was), the ball, and then one more
-cursor-left.\\
+two left arrows (to move past where the ball was), the ball, and then one more
+left arrow.\\
 
 \tryit{
 	Try changing line 25 to position the ball at different heights on the
 	screen.  What happens if you use more or fewer cursor-down characters?  Can
 	you make the ball bounce along the top of the screen?\\
-}
-
-%----------------------------------------------------------------------------------------
-%	CHAPTER - Animation with VPOKE
-%----------------------------------------------------------------------------------------
-
-\chapter*{Animation with VPOKE}\index{Animation!VPOKE}\index{VPOKE}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Animation with VPOKE}
-
-For the fastest possible animation, you can write directly to the Commander
-X16's video memory using the {\ttfamily VPOKE} command.  This bypasses the
-normal {\ttfamily PRINT} routines and lets you put characters and colors
-anywhere on the screen almost instantly.\\
-
-The Commander X16's video chip is called VERA (Video Enhanced Retro Adapter).
-VERA has its own memory that holds the screen contents, and {\ttfamily VPOKE}
-lets you write directly to that memory.\\
-
-\section{Understanding Screen Memory}
-
-In the default text mode, each character on screen takes up two bytes in VERA
-memory:\\
-
-\begin{itemize}
-	\item The first byte is the \emph{screen code} --- which character to display
-	\item The second byte is the \emph{color} --- foreground and background colors
-\end{itemize}
-
-The screen memory starts at address {\ttfamily \$1B000} in VERA memory, which
-means bank 1 at address {\ttfamily \$B000}.  Each row of 80 characters takes up
-160 bytes (80 characters × 2 bytes each).  To find the address of any character
-at column X and row Y, use this formula:\\
-
-\begin{center}
-	{\ttfamily ADDRESS = \$B000 + (Y * 160) + (X * 2)}
-\end{center}
-
-The color byte is at ADDRESS + 1.\\
-
-\section{Using VPOKE}
-
-The {\ttfamily VPOKE} command takes three numbers: the VERA bank, the address,
-and the value to write.  For the text screen, we use bank 1 with addresses
-starting at {\ttfamily \$B000}:\\
-
-\codeblock{
-	VPOKE 1, \$B000 + offset, value\\
-}
-
-Here's a simple example that puts a red ``A'' at the top-left corner of the
-screen:\\
-
-\codeblock{
-	10 VPOKE 1,\$B000,1\\
-	20 VPOKE 1,\$B001,\$02\\
-}
-
-Line 10 puts screen code 1 (the letter A) at address {\ttfamily \$B000} in bank
-1.  Line 20 puts color {\ttfamily \$02} (red foreground, black background) at
-address {\ttfamily \$B001}.\\
-
-\section{A Fast Bouncing Ball}
-
-Here's a bouncing ball program using {\ttfamily VPOKE} for faster animation:\\
-
-\codeblock{
-	10 PRINT "\shiftkey\clrhomekey"\\
-	20 X=0:Y=0\\
-	30 DX=1:DY=1\\
-	40 A=\$B000+(Y*160)+(X*2)\\
-	50 VPOKE 1,A,81:VPOKE 1,A+1,\$71\\
-	60 SLEEP 1\\
-	70 VPOKE 1,A,32\\
-	80 X=X+DX:Y=Y+DY\\
-	90 IF X<0 OR X>78 THEN DX=-DX\\
-	100 IF Y<0 OR Y>58 THEN DY=-DY\\
-	110 GOTO 40\\
-}
-
-This program works just like our earlier bouncing ball, but uses {\ttfamily
-VPOKE} instead of {\ttfamily TILE}.  Line 40 calculates the memory address for
-position X,Y.  Line 50 writes both the character (81 = ball) and the color
-(\$71 = white on yellow).  Line 70 erases the ball by writing a space (32).\\
-
-\note{
-	The {\ttfamily TILE} statement is usually easier to use than {\ttfamily
-	VPOKE}, but {\ttfamily VPOKE} gives you more control and can be slightly
-	faster for complex animations.  When you're starting out, stick with
-	{\ttfamily TILE}.  As you become more advanced, you might want to experiment
-	with {\ttfamily VPOKE} for special effects.\\
 }
 
 %----------------------------------------------------------------------------------------
@@ -539,6 +442,395 @@ a little scene:\\
 This creates a simple scene with a ``ground'' line (made of horizontal
 lines) and a bird flying across the sky.  When the bird goes off the right
 edge, it reappears on the left at a random height.\\
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Graphics Mode Animation
+%----------------------------------------------------------------------------------------
+
+\chapter*{Graphics Mode Animation}\index{Animation!Graphics Mode}\index{LINE}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Graphics Mode Animation}
+
+In Chapter 3, you learned about the Commander X16's graphics mode, where you
+can draw lines, rectangles, and circles pixel by pixel.  Now let's combine
+graphics mode with animation techniques!\\
+
+\section{A Bouncing Line}
+
+Here's a program that draws a line that bounces around the screen.  The line
+has two endpoints, and each endpoint bounces independently:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 X1=50:Y1=50\\
+	30 X2=200:Y2=150\\
+	40 DX1=3:DY1=2\\
+	50 DX2=-2:DY2=3\\
+	60 REM ANIMATION LOOP\\
+	70 LINE X1,Y1,X2,Y2,0\\
+	80 X1=X1+DX1:Y1=Y1+DY1\\
+	90 X2=X2+DX2:Y2=Y2+DY2\\
+	100 IF X1<0 OR X1>319 THEN DX1=-DX1\\
+	110 IF Y1<0 OR Y1>239 THEN DY1=-DY1\\
+	120 IF X2<0 OR X2>319 THEN DX2=-DX2\\
+	130 IF Y2<0 OR Y2>239 THEN DY2=-DY2\\
+	140 LINE X1,Y1,X2,Y2,1\\
+	150 GOTO 70\\
+}
+
+This program works by erasing the old line (drawing it in black, color 0) and
+then drawing the new line in white (color 1).  Each endpoint has its own
+position (X1,Y1 and X2,Y2) and velocity (DX1,DY1 and DX2,DY2).  Lines 100-130
+check if each endpoint has hit a screen edge and reverse its direction if so.\\
+
+\section{A Line Trail Effect}
+
+For a more dramatic effect, try leaving trails instead of erasing!  This
+creates beautiful patterns:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 X1=160:Y1=120\\
+	30 X2=160:Y2=120\\
+	40 DX1=4:DY1=3\\
+	50 DX2=-3:DY2=4\\
+	60 C=1\\
+	70 X1=X1+DX1:Y1=Y1+DY1\\
+	80 X2=X2+DX2:Y2=Y2+DY2\\
+	90 IF X1<0 OR X1>319 THEN DX1=-DX1\\
+	100 IF Y1<0 OR Y1>239 THEN DY1=-DY1\\
+	110 IF X2<0 OR X2>319 THEN DX2=-DX2\\
+	120 IF Y2<0 OR Y2>239 THEN DY2=-DY2\\
+	130 LINE X1,Y1,X2,Y2,C\\
+	140 C=C+1:IF C>255 THEN C=1\\
+	150 GOTO 70\\
+}
+
+This version cycles through all 256 colors and never erases, creating an
+ever-changing geometric pattern.  Let it run for a while and watch the
+beautiful designs emerge!\\
+
+\section{Bouncing Ball in Graphics Mode}
+
+You can also animate shapes in graphics mode.  Here's a bouncing circle:\\
+
+\codeblock{
+	10 SCREEN \$80\\
+	20 X=160:Y=120\\
+	30 DX=4:DY=3\\
+	40 OVAL X-10,Y-10,X+10,Y+10,0\\
+	50 X=X+DX:Y=Y+DY\\
+	60 IF X<10 OR X>309 THEN DX=-DX\\
+	70 IF Y<10 OR Y>229 THEN DY=-DY\\
+	80 OVAL X-10,Y-10,X+10,Y+10,7\\
+	90 GOTO 40\\
+}
+
+Line 40 erases the old circle by drawing it in black (color 0).  Line 80 draws
+the new circle in yellow (color 7).  The boundary checks in lines 60-70 account
+for the circle's radius so it bounces off the edges properly.\\
+
+\tryit{
+	Try combining multiple bouncing shapes!  Create an array to store positions
+	and velocities for several circles or lines, just like we did with the
+	multiple birds example.  What happens when shapes overlap?\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Sprite Animation
+%----------------------------------------------------------------------------------------
+
+\chapter*{Sprite Animation}\index{Animation!Sprites}\index{Sprites!Animation}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Sprite Animation}
+
+In Chapter 3, you learned the basics of sprites.  Now let's put that knowledge
+to work and create some amazing animations!  Sprites are perfect for animation
+because the VERA handles all the drawing --- you just tell it where to put
+things, and it does the hard work.\\
+
+\section{A Bouncing Rainbow X}
+
+Let's animate the rainbow X logo from Chapter 3!  We'll load the sprite data
+using \texttt{DATA} statements, then make it bounce around the screen:\\
+
+\codeblock{
+	10 REM BOUNCING RAINBOW X SPRITE\\
+	20 REM LOAD 16X16 X LOGO DATA\\
+	30 FOR I=0 TO 255\\
+	40 READ D:VPOKE 0,\$4000+I,D\\
+	50 NEXT I\\
+	60 REM SET UP SPRITE 1\\
+	70 SPRMEM 1,0,\$4000,1\\
+	80 SPRITE 1,3,0,0,1,1,1\\
+	90 REM ANIMATION VARIABLES\\
+	100 X=100:Y=100\\
+	110 VX=4:VY=3\\
+	120 REM MAIN ANIMATION LOOP\\
+	130 MOVSPR 1,X,Y\\
+	140 X=X+VX:Y=Y+VY\\
+	150 IF X<0 OR X>620 THEN VX=-VX\\
+	160 IF Y<0 OR Y>460 THEN VY=-VY\\
+	170 GOTO 130\\
+}
+
+\codeblock{
+	200 REM RAINBOW X SPRITE DATA\\
+	210 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+	220 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	230 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	240 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	250 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	260 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	270 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	280 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	290 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	300 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	310 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	320 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	330 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	340 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	350 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	360 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+}
+
+Lines 30-50 load the 256 bytes of sprite data --- our rainbow X logo with red,
+orange, yellow, green, blue, and purple colors.  Unlike the circles we drew
+with \texttt{OVAL}, this is a custom bitmap with pixel-perfect control over
+every color.\\
+
+Line 80 sets the sprite to 16x16 pixels (the ``1,1'' for width and height).
+The main loop (lines 130-170) moves the sprite and bounces it off the edges.
+Notice how smooth the motion is!  No flickering, no erasing --- the VERA
+handles all the drawing for you.\\
+
+\section{Multiple Bouncing X Logos}
+
+One of the Commander X16's great advantages is having 128 sprites available.
+Let's fill the screen with bouncing X logos!\\
+
+\codeblock{
+	10 REM MULTIPLE BOUNCING X LOGOS\\
+	20 NX=15:REM NUMBER OF X SPRITES\\
+	30 DIM SX(NX),SY(NX),VX(NX),VY(NX)\\
+	40 REM LOAD RAINBOW X SPRITE DATA\\
+	50 FOR I=0 TO 255:READ D\\
+	60 VPOKE 0,\$4000+I,D:NEXT I\\
+	70 REM INITIALIZE ALL SPRITES\\
+	80 FOR I=1 TO NX\\
+	90 SX(I)=RND(1)*600\\
+	100 SY(I)=RND(1)*440\\
+	110 VX(I)=RND(1)*6-3\\
+	120 VY(I)=RND(1)*6-3\\
+	130 IF VX(I)=0 THEN VX(I)=2\\
+	140 IF VY(I)=0 THEN VY(I)=2\\
+	150 SPRMEM I,0,\$4000,1\\
+	160 SPRITE I,3,I-1,0,1,1,1\\
+	170 NEXT I\\
+	180 REM MAIN ANIMATION LOOP\\
+	190 FOR I=1 TO NX\\
+	200 MOVSPR I,SX(I),SY(I)\\
+	210 SX(I)=SX(I)+VX(I)\\
+	220 SY(I)=SY(I)+VY(I)\\
+	230 IF SX(I)<0 OR SX(I)>620 THEN VX(I)=-VX(I)\\
+	240 IF SY(I)<0 OR SY(I)>460 THEN VY(I)=-VY(I)\\
+	250 NEXT I\\
+	260 GOTO 190\\
+}
+
+\codeblock{
+	500 REM RAINBOW X SPRITE DATA\\
+	510 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+	520 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	530 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	540 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	550 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	560 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	570 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	580 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	590 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
+	600 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
+	610 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
+	620 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
+	630 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
+	640 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
+	650 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
+	660 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+}
+
+This program creates 15 bouncing X logos, all sharing the same sprite image
+data but each with its own position and velocity.  Line 160 gives each sprite a
+different palette offset, which shifts the colors slightly.  All 15 logos
+bounce around independently with perfectly smooth animation!\\
+
+\tryit{
+	Change {\ttfamily NX=15} to {\ttfamily NX=50} and watch 50 rainbow X logos
+	bouncing at once!  The Commander X16 handles it easily.  Try going even
+	higher --- you can have up to 127 sprites (sprite 0 is often reserved for
+	the mouse pointer).\\
+}
+
+\section{Animated Sprite Graphics}
+
+So far, our sprites have been static images that we move around.  But you can
+also animate the sprite itself by changing which image it displays.  This is
+how you create walking characters, spinning objects, and other animated
+effects.\\
+
+The trick is to store multiple frames of animation in VERA memory, then change
+which frame the sprite points to using {\ttfamily SPRMEM}.  Here's an example
+with a simple two-frame animation:\\
+
+\codeblock{
+	10 REM ANIMATED SPRITE - BLINKING\\
+	20 REM FRAME 1: EYES OPEN\\
+	30 FOR I=0 TO 63:READ D\\
+	40 VPOKE 0,\$4000+I,D:NEXT I\\
+	50 REM FRAME 2: EYES CLOSED\\
+	60 FOR I=0 TO 63:READ D\\
+	70 VPOKE 0,\$4040+I,D:NEXT I\\
+	80 REM SET UP SPRITE\\
+	90 SPRMEM 1,0,\$4000,1\\
+	100 SPRITE 1,3,0,0,0,0,1\\
+	110 MOVSPR 1,160,120\\
+	120 REM ANIMATION LOOP\\
+	130 FRAME=0\\
+	140 FOR T=1 TO 30:NEXT T\\
+	150 IF FRAME=0 THEN SPRMEM 1,0,\$4000,1\\
+	160 IF FRAME=1 THEN SPRMEM 1,0,\$4040,1\\
+	170 FRAME=1-FRAME\\
+	180 GOTO 140\\
+	200 REM FRAME 1 DATA - EYES OPEN\\
+	210 DATA 0,0,7,7,7,7,0,0\\
+	220 DATA 0,7,7,7,7,7,7,0\\
+	230 DATA 7,7,0,7,7,0,7,7\\
+	240 DATA 7,7,7,7,7,7,7,7\\
+	250 DATA 7,7,7,7,7,7,7,7\\
+	260 DATA 7,0,7,7,7,7,0,7\\
+	270 DATA 0,7,0,0,0,0,7,0\\
+	280 DATA 0,0,7,7,7,7,0,0\\
+	300 REM FRAME 2 DATA - EYES CLOSED\\
+	310 DATA 0,0,7,7,7,7,0,0\\
+	320 DATA 0,7,7,7,7,7,7,0\\
+	330 DATA 7,7,7,7,7,7,7,7\\
+	340 DATA 7,7,0,0,0,0,7,7\\
+	350 DATA 7,7,7,7,7,7,7,7\\
+	360 DATA 7,0,7,7,7,7,0,7\\
+	370 DATA 0,7,0,0,0,0,7,0\\
+	380 DATA 0,0,7,7,7,7,0,0\\
+}
+
+This creates a smiley face that blinks!  Frame 1 has eyes open, Frame 2 has
+eyes closed.  The {\ttfamily SPRMEM} command switches between frames, creating
+the illusion of animation.\\
+
+\section{A Walking Character}
+
+Let's combine movement and frame animation to create a character that walks
+across the screen:\\
+
+\codeblock{
+	10 REM WALKING CHARACTER\\
+	20 REM CREATE 2 WALKING FRAMES\\
+	30 FOR F=0 TO 1\\
+	40 FOR Y=0 TO 15:FOR X=0 TO 15\\
+	50 READ D:VPOKE 0,\$4000+F*256+Y*16+X,D\\
+	60 NEXT X,Y,F\\
+	70 REM SET UP SPRITE\\
+	80 SPRMEM 1,0,\$4000,1\\
+	90 SPRITE 1,3,0,0,1,1,1\\
+	100 X=0:FRAME=0\\
+	110 REM WALK LOOP\\
+	120 MOVSPR 1,X,200\\
+	130 IF FRAME=0 THEN SPRMEM 1,0,\$4000,1\\
+	140 IF FRAME=1 THEN SPRMEM 1,0,\$4100,1\\
+	150 X=X+2\\
+	160 IF X>640 THEN X=0\\
+	170 FRAME=1-FRAME\\
+	180 FOR T=1 TO 5:NEXT T\\
+	190 GOTO 120\\
+	500 REM FRAME 1 - LEFT LEG FORWARD\\
+	510 DATA 0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0\\
+	520 DATA 0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0\\
+	530 DATA 0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0\\
+	540 DATA 0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0\\
+	550 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	560 DATA 0,0,0,7,7,7,7,7,7,0,0,0,0,0,0,0\\
+	570 DATA 0,0,0,7,7,7,7,7,7,0,0,0,0,0,0,0\\
+	580 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	590 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	600 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	610 DATA 0,0,0,0,6,6,6,6,0,0,0,0,0,0,0,0\\
+	620 DATA 0,0,0,6,6,0,0,6,6,0,0,0,0,0,0,0\\
+	630 DATA 0,0,6,6,0,0,0,0,6,6,0,0,0,0,0,0\\
+	640 DATA 0,0,6,6,0,0,0,0,6,6,0,0,0,0,0,0\\
+	650 DATA 0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0\\
+	660 DATA 0,9,9,0,0,0,0,0,0,9,9,0,0,0,0,0\\
+	700 REM FRAME 2 - RIGHT LEG FORWARD\\
+	710 DATA 0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0\\
+	720 DATA 0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0\\
+	730 DATA 0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0\\
+	740 DATA 0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0\\
+	750 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	760 DATA 0,0,0,7,7,7,7,7,7,0,0,0,0,0,0,0\\
+	770 DATA 0,0,0,7,7,7,7,7,7,0,0,0,0,0,0,0\\
+	780 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	790 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	800 DATA 0,0,0,0,7,7,7,7,0,0,0,0,0,0,0,0\\
+	810 DATA 0,0,0,0,6,6,6,6,0,0,0,0,0,0,0,0\\
+	820 DATA 0,0,0,6,6,0,0,6,6,0,0,0,0,0,0,0\\
+	830 DATA 0,0,0,6,6,0,0,6,6,0,0,0,0,0,0,0\\
+	840 DATA 0,0,0,6,6,0,0,6,6,0,0,0,0,0,0,0\\
+	850 DATA 0,0,0,9,9,0,0,9,9,0,0,0,0,0,0,0\\
+	860 DATA 0,0,9,9,0,0,0,0,9,9,0,0,0,0,0,0\\
+}
+
+This creates a simple stick figure that walks across the screen.  The two
+frames show the legs in different positions, creating a walking motion.  The
+character has a white head (color 1), yellow body (color 7), blue pants (color
+6), and brown shoes (color 9).\\
+
+\section{Sprite Collision Detection}
+
+When making games, you often need to know when sprites touch each other.  While
+the VERA has hardware collision detection, a simple way in BASIC is to check
+if the sprites' positions overlap.  Here's an example:\\
+
+\codeblock{
+	10 REM SIMPLE COLLISION CHECK\\
+	20 REM ASSUME SPRITES ARE 16X16\\
+	30 X1=100:Y1=100:REM SPRITE 1 POS\\
+	40 X2=200:Y2=100:REM SPRITE 2 POS\\
+	50 REM CHECK IF THEY OVERLAP\\
+	60 IF ABS(X1-X2)<16 AND ABS(Y1-Y2)<16 THEN PRINT "COLLISION!"\\
+}
+
+The {\ttfamily ABS} function gives the absolute value (always positive).  If
+both the X and Y distances are less than the sprite size, they're overlapping!\\
+
+\section{Sprites vs. Other Animation Methods}
+
+You've now learned several ways to create animation on the Commander X16:\\
+
+\begin{tabular}{|l|l|l|}
+	\hline
+	{\bfseries Method} & {\bfseries Pros} & {\bfseries Cons}\\ \hline
+	PRINT/CLS & Simple, works anywhere & Flickers, slow\\ \hline
+	TILE/VPOKE & Fast, no flicker & Limited to character grid\\ \hline
+	Graphics mode & Smooth shapes, any position & Uses more memory, slower\\ \hline
+	Sprites & Very fast, no flicker & Need to load sprite data\\ \hline
+\end{tabular}
+
+\vspace{16pt}
+
+For most animation needs, especially games, sprites are the best choice.  They
+provide smooth, flicker-free motion with minimal BASIC code.  The Commander
+X16's 128 sprites give you plenty of room for complex animated scenes!\\
+
+\tryit{
+	Create your own animated sprite!  Design a simple 8x8 or 16x16 character
+	using graph paper.  Number each pixel with its color (0 for transparent,
+	1-15 for colors).  Then type in the data values and watch your creation
+	come to life!\\
+}
 
 \tip{Making Your Own Animations}{
 	The key to good animation is practice!  Start with simple programs like

@@ -438,28 +438,34 @@ anything that was displayed before will be erased.\\
 
 \section{Available Screen Modes}
 
-The Commander X16 supports many different text modes.  Here are the most useful
+The Commander X16 provides 12 standard text modes.  Here are the most common
 ones:\\
 
 \begin{tabular}{|c|c|l|}
 	\hline
 	{\bfseries Mode} & {\bfseries Size} & {\bfseries Description}\\ \hline
 	0 & 80 $\times$ 60 & Default mode, lots of room for text\\ \hline
-	1 & 80 $\times$ 30 & Wide but shorter\\ \hline
-	2 & 40 $\times$ 60 & Big text, tall screen\\ \hline
 	3 & 40 $\times$ 30 & Big text, like classic computers\\ \hline
+	11 & 32 $\times$ 25 & Wide margins, great for TVs\\ \hline
 \end{tabular}
 
 \vspace{16pt}
 
-Mode 3 (40 $\times$ 30) is especially nice if you're connecting your X16 to an
-older television or CRT monitor, because the larger characters are easier to
-read on those displays.\\
+Mode 11 (32 $\times$ 25) is especially useful if you're connecting your X16 to an
+older television or CRT monitor, because the larger characters and wide border are easier to
+see on those displays.\\
+
+\note{
+	The {\ttfamily SCREEN} statement can also be used to switch into graphics
+	mode, where you can draw pictures, create animations, and display colorful
+	images.  We'll explore graphics mode in detail in Chapter 3 (Color and
+	Graphics) and Chapter 4 (Animation).\\
+}
 
 \tryit{
-	Write a program that prints your name in each of the four screen modes
+	Write a program that prints your name in each of the screen modes
 	listed above.  Use {\ttfamily SLEEP 60} between each mode change so you
-	have time to see the result!\\
+	have time to see the result! Explore some of the other text modes not listed above- how do they look? \\
 }
 
 \section{A Quick Mode Toggle}
@@ -747,6 +753,84 @@ program and switch to 40 column mode!\\
 	Practice your editing skills by typing in a short program with some
 	intentional mistakes, then use the cursor keys, \insertkey, and \deletekey
 	to fix them without retyping the whole line.\\
+}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER - Using the Mouse
+%----------------------------------------------------------------------------------------
+
+\chapter*{Using the Mouse}\index{Mouse}\index{MOUSE}
+\addcontentsline{toc}{chapter}{\protect\numberline{}Using the Mouse}
+
+If you have a mouse connected to your Commander X16, you can use it in your
+programs!  The X16 supports standard PS/2 mice, and enabling the mouse cursor is
+as simple as typing a single command.\\
+
+\section{Enabling the Mouse Cursor}
+
+To turn on the mouse cursor, use the {\ttfamily MOUSE} command with the number
+{\ttfamily 1}:\\
+
+\codeblock{
+	MOUSE 1\\
+}
+
+A small arrow pointer appears on the screen!  Move your mouse around and watch
+the cursor follow.  This cursor is actually a \emph{sprite} --- a special
+graphical object that the video chip can move around independently of
+everything else on screen.  You'll learn much more about sprites in Chapters 3
+and 4.\\
+
+To turn off the mouse cursor, use:\\
+
+\codeblock{
+	MOUSE 0\\
+}
+
+The cursor disappears.  You can turn it on and off as many times as you like.\\
+
+\section{Reading the Mouse Position}
+
+Once the mouse is enabled, you can find out where the cursor is on the screen
+using the {\ttfamily MX} and {\ttfamily MY} variables.  These give you the X
+(horizontal) and Y (vertical) coordinates of the mouse pointer:\\
+
+\codeblock{
+	10 MOUSE 1\\
+	20 PRINT MX,MY\\
+	30 GOTO 20\\
+}
+
+Run this program and move the mouse around.  You'll see the coordinates change
+as you move!  The numbers scroll by quickly because the program keeps printing
+them over and over.  Press \runstopkey to stop the program.\\
+
+\section{Detecting Mouse Clicks}
+
+The {\ttfamily MB} variable tells you which mouse buttons are currently being
+pressed.  It returns 0 if no buttons are pressed, 1 if the left button is
+pressed, 2 if the right button is pressed, or 3 if both buttons are pressed.\\
+
+Here's a simple program that waits for you to click the mouse:\\
+
+\codeblock{
+	10 MOUSE 1\\
+	20 PRINT "\shiftkey\clrhomekey"\\
+	30 PRINT "CLICK THE MOUSE!"\\
+	40 IF MB=0 THEN GOTO 40\\
+	50 PRINT "YOU CLICKED AT";MX;",";MY\\
+}
+
+This program enables the mouse, then waits in a loop until you press a button.
+When you click, it reports where you clicked!\\
+
+\note{
+	The mouse cursor uses sprite \#0, which is the first of the Commander X16's
+	128 available sprites.  When you enable the mouse with {\ttfamily MOUSE 1},
+	the system automatically sets up this sprite with the arrow pointer image
+	and moves it to follow your mouse movements.  If you want to use sprite \#0
+	for something else, you'll need to disable the mouse first with
+	{\ttfamily MOUSE 0}.\\
 }
 
 \@openrighttrue\makeatother

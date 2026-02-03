@@ -1524,7 +1524,7 @@ requires the {\ttfamily >} character to be placed between the
 
 The {\ttfamily FMPOKE} statement can be used to write values directly to the
 registers of the FM sound chip.  To understand what values to write to which
-registers, see the appendix on YM2551 Registers.\\
+registers, see the Commander X16 Programmer's Reference Guide on GitHub.\\
 
 Using {\ttfamily FMPOKE}, it is possible to directly interface with the FM chip
 and make it do things that are not possible by using the other FM BASIC
@@ -2927,7 +2927,7 @@ disabling the mouse and sprite 0 with {\ttfamily MOUSE 0}, and then
 re-displaying sprite 0 (without enabling the mouse) with {\ttfamily SPRITE
 0,3}.\\
 
-The first argument to the {\ttfamily MOUSE} statement is the hardware sprite
+The first argument to the {\ttfamily SPRITE} statement is the hardware sprite
 index.  With 128 hardware sprites, this number can be from 0 to 127.  The
 second argument sets the layer the sprite renders to, including disabling the
 sprite completely with 0.  The third argument is the palette offset used in 4
@@ -3152,6 +3152,16 @@ Example:\\
 The above example uses the {\ttfamily TILE} statement to display all the
 characters (the default tile set) on a 16 by 16 grid.\\
 
+\note{
+
+	The {\ttfamily TILE} statement handles all the memory address calculations
+	for you, making it much simpler than using {\ttfamily VPOKE} directly.  If
+	you need to understand the underlying screen memory layout (for example,
+	when converting Commodore 64 programs), see the {\ttfamily VPOKE} entry
+	for details on the tile map organization.
+
+}
+
 \subsection{TO}
 
 \textit{Origin: Commodore 64 BASIC}
@@ -3195,8 +3205,37 @@ forground color to black, although the character data does not change.\\
 
 \note{
 
-	In screen mode 0, the tile map is stored in the VERA at VRAM address
-	\$1B000, and is 128 tiles wide by 64 tiles tall.
+	When using text screen modes, the tile map is stored in the VERA at VRAM address
+	\$1B000, and is 128 tiles wide by 64 tiles tall.  The tile map data is interleaved: each
+	character location on screen is represented by two consecutive bytes.
+	The first byte is the screen code (which character to display), and the
+	second byte contains the color and attribute information.  Each row of
+	the tile map is 256 bytes long (128 characters $\times$ 2 bytes each),
+	regardless of how many characters are visible on screen.\\
+
+	This differs significantly from the Commodore 64, where screen memory and
+	color memory were stored at two separate base addresses.  On the X16, both
+	character and color data share the same base address with interleaved bytes:\\
+
+	\begin{center}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		& {\bfseries C64} & {\bfseries X16} \\ \hline
+		Screen Base & \$0400 & \$1B000 \\ \hline
+		Color Base & \$D800 & \$1B000 \\ \hline
+		Row Length & \$28 (40) & \$100 (256) \\ \hline
+	\end{tabular}
+	\end{center}
+
+	To convert classic C64 BASIC screen {\ttfamily POKE} commands to Commander
+	X16 {\ttfamily VPOKE} commands, you need to account for the interleaved
+	format and the different row length.  For example, on the C64, {\ttfamily
+	POKE 1024+X+Y*40,C} would place character code {\ttfamily C} at column
+	{\ttfamily X} and row {\ttfamily Y} on the screen.  On the X16, the
+	equivalent would be {\ttfamily VPOKE 1,\$B000+X*2+Y*256,C} for the character
+	code, and {\ttfamily VPOKE 1,\$B000+X*2+Y*256+1,COL} for the color attribute.
+	The color byte uses the upper nibble for the background color and the lower
+	nibble for the foreground color (e.g., \$61 for white text on blue background).
 
 }
 

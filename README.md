@@ -9,7 +9,7 @@ Commander X16 project team.
 
 ## Download the User Guide
 
-**Just want the PDF?** Head over to the [**GitHub Releases**](https://github.com/X16Community/x16-user-guide/releases) page to download the latest version of the Commander X16 User's Guide.
+**Just want the PDF?** Head over to the Releases page to download the latest version of the Commander X16 User's Guide.
 
 ---
 
@@ -49,6 +49,15 @@ for diving into the specifics.  Each of these chapters begins with a short
 type-in BASIC program that gives the user a preview of what they are going to
 learn, and then the rest of the chapter explains what they did in detail.  This
 pattern should be followed all througout the book.
+
+---
+
+## Building & Contributing
+
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for:
+- Build dependencies and instructions
+- How to submit contributions (LaTeX knowledge not required!)
+- LaTeX formatting guide (keys, screen boxes, bubbles, tips, notes, etc.) 
 
 ---
 
@@ -169,51 +178,12 @@ The following Commander X16 features have no VIC-20 equivalent and represent new
 11. **TILE Statement** — Direct character/color placement
 12. **Screen Modes** — Multiple display modes via SCREEN command
 
----
-
-## Building & Contributing
-
-See **[CONTRIBUTING.md](CONTRIBUTING.md)** for:
-- Build dependencies and instructions
-- How to submit contributions (LaTeX knowledge not required!)
-- LaTeX formatting guide (keys, screen boxes, bubbles, tips, notes, etc.) 
-
----
-
-## 📊 Chapter Status Summary
-
-All chapters are **publication-ready** and follow the VIC-20 User Guide structure.
-
-| Chapter | File | Status | Key Content |
-|---------|------|--------|-------------|
-| Preface | [preface.tex](preface.tex) | ✅ Complete | Philosophy, welcome message |
-| Setup | [ch00_setup.tex](ch00_setup.tex) | ✅ Complete | Hardware connections, troubleshooting |
-| Ch 1 | [ch01_getting_to_know_commanderx16.tex](ch01_getting_to_know_commanderx16.tex) | ✅ Complete | PRINT, GOTO, RUN, LIST, first program |
-| Ch 2 | [ch02_using_screen_and_keyboard.tex](ch02_using_screen_and_keyboard.tex) | ✅ Complete | PETSCII, colors, screen modes, file I/O, mouse |
-| Ch 3 | [ch03_color_and_graphics.tex](ch03_color_and_graphics.tex) | ✅ Complete | COLOR, TILE, VPOKE, graphics mode, sprites |
-| Ch 4 | [ch04_animation.tex](ch04_animation.tex) | ✅ Complete | Bouncing ball, flying birds, sprite animation |
-| Ch 5 | [ch05_sound_and_music.tex](ch05_sound_and_music.tex) | ✅ Complete | PSG/FM sound, piano program, songs |
-| Ch 6 | [ch06_conversing_with_x16.tex](ch06_conversing_with_x16.tex) | ✅ Complete | INPUT, variables, GET statement |
-| Ch 7 | [ch07_introduction_to_programming.tex](ch07_introduction_to_programming.tex) | ✅ Complete | RND, IF/THEN, FOR/NEXT, guessing game |
-
-### Appendices
-
-| Appendix | File | Content |
-|----------|------|---------|
-| BASIC Commands | [appendix/basic_commands.tex](appendix/basic_commands.tex) | Complete reference with origin tags (C64/X16/C128) |
-| Screen Codes | [appendix/screen_codes_table.tex](appendix/screen_codes_table.tex) | Full character set table |
-| PETSCII Codes | [appendix/petscii_codes_table.tex](appendix/petscii_codes_table.tex) | ASCII/PETSCII code reference |
-| Memory Map | [appendix/memory_map.tex](appendix/memory_map.tex) | VERA and system memory layout |
-| Music Macros | [appendix/music_play_macros.tex](appendix/music_play_macros.tex) | FMPLAY/PSGPLAY string reference |
-| Patch Table | [appendix/patch_table.tex](appendix/patch_table.tex) | YM2151 FM instrument presets |
-| Error Messages | [appendix/error_messages.tex](appendix/error_messages.tex) | All BASIC error codes explained |
-| Sample Programs | [appendix/sample_programs.tex](appendix/sample_programs.tex) | 8 complete type-in programs |
 
 ---
 
 ## Reference Materials
 
-The following source documents in the `sources/` folder inform this guide:
+The following source documents in the `sources/` folder informed the writing of this guide:
 
 | File | Description |
 |------|-------------|
@@ -221,6 +191,6 @@ The following source documents in the `sources/` folder inform this guide:
 | `c64ug.txt` | Commodore 64 User Guide (tone and content reference) |
 | `X16_ref_guide.md` | Commander X16 Reference Guide (technical accuracy) |
 | `x16_hw_setup.txt` | X16 hardware setup notes |
-| `x16_xiphod_faq.txt` | Community FAQ reference |
+| `x16_xiphod_faq.txt` | FAQ reference |
 
 ---

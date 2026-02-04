@@ -1,4 +1,4 @@
-\chapter*{Commander X16 BASIC}
+\chapter*{Commander X16 BASIC}\index{BASIC}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Commander X16 BASIC}
 
 This manual has introduced you to the BASIC language and many of the commands,
@@ -321,14 +321,14 @@ X16 to do things, such as {\ttfamily LIST} the contents of the SD card,
 loaded program.  This section contains a description of each command in
 alphabetical order.\\
 
-\subsection{BANNER}
+\subsection{BANNER}\index{BANNER}
 
 \textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily BANNER} command displays the Commander X16 logo and boot text,
 like is automatically displayed upon boot.
 
-\subsection{BASLOAD}
+\subsection{BASLOAD}\index{BASLOAD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -354,7 +354,7 @@ Example:\\
 	READY.\\
 }
 
-\subsection{BOOT}
+\subsection{BOOT}\index{BOOT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -362,7 +362,7 @@ The {\ttfamily BOOT} command loads and runs a PRG file named {\ttfamily
 AUTOBOOT.X16} from device \#8 (the SD card reader). If the file is not found,
 nothing is done and no error is printed.\\
 
-\subsection{CLR}
+\subsection{CLR}\index{CLR}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -378,7 +378,7 @@ variables state.  {\ttfamily CLR} is \emph{not} called when the {\ttfamily
 CONT} command is run, so that a prgram can continue where it left off with the
 variable state in tact.\\
 
-\subsection{CLS}
+\subsection{CLS}\index{CLS}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -389,7 +389,7 @@ This command is useful when programs and commands have cluttered up the screen,
 and is also useful in BASIC programs to {\ttfamily PRINT}ing to an empty
 screen.\\
 
-\subsection{CONT (continue)}
+\subsection{CONT (continue)}\index{CONT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -409,7 +409,7 @@ X16, this is still considered a change to the program, so the only way to run
 it again is to start at the beginning of the program by using the {\ttfamily
 RUN} command.\\
 
-\subsection{DOS}
+\subsection{DOS}\index{DOS}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -441,7 +441,7 @@ Examples:\\
 	DOS             : REM PRINTS DOS STATUS\\
 }
 
-\subsection{HELP}
+\subsection{HELP}\index{HELP}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -451,7 +451,7 @@ URLs for documentation and community support.  All of this information could be
 useful in troubleshooting issues the Commander X16.\\
 
 
-\subsection{KEYMAP}
+\subsection{KEYMAP}\index{KEYMAP}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -467,7 +467,7 @@ Example:\\
 	SAVE"AUTOBOOT.X16"  :REM SAVE AS AUTOBOOT FILE\\
 }
 
-\subsection{LIST}
+\subsection{LIST}\index{LIST}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -519,7 +519,7 @@ Examples:\\
 
 \vspace{16pt}
 
-\subsection{LOAD}
+\subsection{LOAD}\index{LOAD}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -574,7 +574,7 @@ tasks when used with {\ttfamily LOAD}:\\
 The {\ttfamily LOAD} command can be used with a BASIC program to load and
 {\ttfamily RUN} another program.\\
 
-\subsection{MENU}
+\subsection{MENU}\index{MENU}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -582,14 +582,14 @@ The {\ttfamily MENU} command presents the user with a menu of built-in programs
 stored in the X16's ROM.  The user can then select a program to run, or return
 to BASIC.\\
 
-\subsection{MON}
+\subsection{MON}\index{MON}
 
 \textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily MON} command causes the Commander X16 to enter the machine
 language monitor.\\
 
-\subsection{NEW} 
+\subsection{NEW}\index{NEW}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -598,7 +598,7 @@ erased, but leaves them in memory.  This behavior is so that both the program
 and its variables can be restored with the {\ttfamily OLD} command.  The effect
 is that the Commander X16 is ready for a new program.\\
 
-\subsection{OLD}
+\subsection{OLD}\index{OLD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -608,14 +608,14 @@ is that the Commander X16 is ready for a new program.\\
  \keybackgroundcolor{gray}\keytextcolor{black}\widekey{ctrl}+\widekey{alt}+\widekey{del}
  key combination on the keyboard.\\
 
-\subsection{POWEROFF}
+\subsection{POWEROFF}\index{POWEROFF}
 
 \textit{Origin: Commander X16 BASIC}
 
 The {\ttfamily POWEROFF} command turns off the Commander X16.  It is equivalent
 to pressing the Power button on the motherboard or case.\\
 
-\subsection{REBOOT}
+\subsection{REBOOT}\index{REBOOT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -644,7 +644,7 @@ reboot:\\
 	\cursor
 }
 
-\subsection{REN}
+\subsection{REN}\index{REN}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -680,7 +680,7 @@ Example:\\
 	115 PRINT "UP"\\
 }
 
-\subsection{RESET}
+\subsection{RESET}\index{RESET}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -718,7 +718,7 @@ line, which may be used by expansion ports to reset custom hardware.\\
 	completely lost and they cannot be restored with the {\ttfamily OLD}
 	command.  }
 
-\subsection{RUN}
+\subsection{RUN}\index{RUN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -744,7 +744,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{SAVE}
+\subsection{SAVE}\index{SAVE}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -789,7 +789,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{VERIFY}
+\subsection{VERIFY}\index{VERIFY}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -836,7 +836,7 @@ Examples:\\
 \emph{Statements} are the instructions used in BASIC on numbered lines of
 programs.  They are used to define what it is that your program does.\\
 
-\subsection{BANK}
+\subsection{BANK}\index{BANK}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -881,7 +881,7 @@ READY} prompt:\\
 	SYS \$C000\\
 }
 
-\subsection{BINPUT\#}
+\subsection{BINPUT\#}\index{BINPUT\#}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -909,7 +909,7 @@ READY} prompt:\\
 
  }
 
-\subsection{BLOAD}
+\subsection{BLOAD}\index{BLOAD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -936,7 +936,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{BVERIFY}
+\subsection{BVERIFY}\index{BVERIFY}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -963,7 +963,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{BSAVE}
+\subsection{BSAVE}\index{BSAVE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -993,7 +993,7 @@ Examples:\\
 \textbf{Warning:} Appending to file involves a risk of corrupting the file
 system of the SD card!
 
-\subsection{BVLOAD}
+\subsection{BVLOAD}\index{BVLOAD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1017,7 +1017,7 @@ Examples:\\
 
 To load a file that has a two-byte header, see the {\ttfamily VLOAD} statement.\\
 
-\subsection{CHAR}
+\subsection{CHAR}\index{CHAR}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1034,7 +1034,7 @@ statement can draw in all 256 available colors.\\
 	30 CHAR 180,100,2,"X16"\\
 }
 
-\subsection{CLOSE}
+\subsection{CLOSE}\index{CLOSE}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1052,7 +1052,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{CMD}
+\subsection{CMD}\index{CMD}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1085,7 +1085,7 @@ side effect that space characters will be send to the logical file of the
 selected device.  This is why the {\ttfamily PRINT\#} statement should be used
 prior to closing the device.\\
 
-\subsection{COLOR}
+\subsection{COLOR}\index{COLOR}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1114,7 +1114,7 @@ to use in programs for drawing diagrams and images with PETSCII characters,
 since you can change both foreground and background colors for each individual
 charater.\\
 
-\subsection{DATA}
+\subsection{DATA}\index{DATA}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1151,7 +1151,7 @@ Examples:\\
 program if placed before code does need to execute.  Because of this, it is
 best to place all {\ttfamily DATA} statements at the end of program.\\
 
-\subsection{DEF}
+\subsection{DEF}\index{DEF}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1189,7 +1189,7 @@ can normally be used.\\
 
 }
 
-\subsection{DIM}
+\subsection{DIM}\index{DIM}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1238,7 +1238,7 @@ Executing a {\ttfamily DIM} statement on the same array more than once will
 cause an error.  It is a best practice to keep all the {\ttfamily DIM}
 statements towards the beginning of a program.\\
 
-\subsection{END}
+\subsection{END}\index{END}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1251,7 +1251,7 @@ rest of the program.  For details about the limitations of {\ttfamily
 CONT}inuing a program, see the documentation for the {\ttfamily CONT}
 command.\\
 
-\subsection{FMCHORD}
+\subsection{FMCHORD}\index{FMCHORD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1278,7 +1278,7 @@ Example:\\
 
 }
 
-\subsection{FMDRUM}
+\subsection{FMDRUM}\index{FMDRUM}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1304,7 +1304,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{FMFREQ}
+\subsection{FMFREQ}\index{FMFREQ}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1328,7 +1328,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{FMINIT}
+\subsection{FMINIT}\index{FMINIT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1345,7 +1345,7 @@ call {\ttfamily FMINIT} before using FM statements in a program, especially if
 the program relies on the default patches.  There's no guarantee that another
 program hasn't modified the state of the FM chip since boot.\\
 
-\subsection{FMINST}
+\subsection{FMINST}\index{FMINST}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1366,7 +1366,7 @@ Extended FM Instrument Patch Presets table in the appendix.\\
 
 \end{tabular}
 
-\subsection{FMNOTE}
+\subsection{FMNOTE}\index{FMNOTE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1426,7 +1426,7 @@ Examples:\\
 
 }
 
-\subsection{FMPAN}
+\subsection{FMPAN}\index{FMPAN}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1454,7 +1454,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{FMPLAY}
+\subsection{FMPLAY}\index{FMPLAY}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1518,7 +1518,7 @@ requires the {\ttfamily >} character to be placed between the
 
 }
 
-\subsection{FMPOKE}
+\subsection{FMPOKE}\index{FMPOKE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1543,7 +1543,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{FMVIB}
+\subsection{FMVIB}\index{FMVIB}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1562,7 +1562,7 @@ Example:\\
 	30 FMNOTE 0,\$4A : REM PLAY CONCERT A\\
 }
 
-\subsection{FMVOL}
+\subsection{FMVOL}\index{FMVOL}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1584,7 +1584,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{FOR}
+\subsection{FOR}\index{FOR}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1614,7 +1614,7 @@ For example, here is a for-loop that prints the numbers {\ttfamily 1} through
 	NEXT X\\
 }
 
-\subsection{FRAME}
+\subsection{FRAME}\index{FRAME}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1634,7 +1634,7 @@ Example:\\
 The {\ttfamily FRAME} statement is similar to the {\ttfamily RECT} statment,
 except that {\ttfamily FRAME} does not fill in the rectangle.
 
-\subsection{GET}
+\subsection{GET}\index{GET}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1680,7 +1680,7 @@ A common use for the {\ttfamily GET} statement is to pause a program in a loop u
 	30 PRINT "THANK YOU FOR PRESSING A KEY!"\\
 }
 
-\subsection{GET\#}
+\subsection{GET\#}\index{GET\#}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1706,7 +1706,7 @@ Example:\\
 }
 
 
-\subsection{GOSUB}
+\subsection{GOSUB}\index{GOSUB}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1747,7 +1747,7 @@ program, which stops line 50 from executing again.\\
 
 }
 
-\subsection{GOTO}
+\subsection{GOTO}\index{GOTO}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1765,7 +1765,7 @@ Example:\\
 	40 PRINT "THIS WILL ALSO PRINT"\\
 }
 
-\subsection{IF}
+\subsection{IF}\index{IF}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1801,7 +1801,7 @@ Example:\\
 
 }
 
-\subsection{INPUT}
+\subsection{INPUT}\index{INPUT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1831,7 +1831,7 @@ Example:\\
 }
 
 
-\subsection{INPUT\#}
+\subsection{INPUT\#}\index{INPUT\#}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1839,7 +1839,7 @@ The {\ttfamily INPUT\#} statement works just like the {\ttfamily INPUT}
 statement, but takes the data from a previously opened file or device.  The
 device number must be specified before the optional prompt or the variables.\\
 
-\subsection{LET}
+\subsection{LET}\index{LET}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -1860,7 +1860,7 @@ Example:\\
 The above code prints {\ttfamily 11} and {\ttfamily 12}, respectively, showing
 that using {\ttfamily LET} on variable assignments is optional.
 
-\subsection{I2CPOKE}
+\subsection{I2CPOKE}\index{I2CPOKE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1877,7 +1877,7 @@ Example:\\
 
 }
 
-\subsection{LINE}
+\subsection{LINE}\index{LINE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1907,7 +1907,7 @@ Draw a rainbow.\\
 	40 NEXT I\\
 }
 
-\subsection{LINPUT}
+\subsection{LINPUT}\index{LINPUT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1948,7 +1948,7 @@ prompts.  Here's some values to try:\\
 You will find that each of the above examples will have a different result when
 ready by {\ttfamily LINPUT} as opposed to {\ttfamily INPUT}.\\
 
-\subsection{LINPUT\#}
+\subsection{LINPUT\#}\index{LINPUT\#}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -1984,7 +1984,7 @@ Example:\\
 The above example parses and prints out the filenames from a directory
 listing.\\
 
-\subsection{LOCATE}
+\subsection{LOCATE}\index{LOCATE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2011,7 +2011,7 @@ Examples:
 
 \vspace{16pt}
 
-\subsection{MOUSE}
+\subsection{MOUSE}\index{MOUSE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2068,7 +2068,7 @@ version of the default VERA palette:\\
 	40 NEXT I\\
 }
 
-\subsection{MOVSPR}
+\subsection{MOVSPR}\index{MOVSPR}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2096,7 +2096,7 @@ Example:\\
 The above code will create a sprite that's a 16x16 pixel version of the default
 VERA palette, and then position it at coordinates (100,100).\\
 
-\subsection{NEXT}
+\subsection{NEXT}\index{NEXT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2130,7 +2130,7 @@ to the next.\\
 
 \vspace{16pt}
 
-\subsection{ON}
+\subsection{ON}\index{ON}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2170,7 +2170,7 @@ Example:\\
 
 }
 
-\subsection{OPEN}
+\subsection{OPEN}\index{OPEN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2221,7 +2221,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{OVAL}
+\subsection{OVAL}\index{OVAL}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2250,7 +2250,7 @@ Example:\\
 The {\ttfamily OVAL} statement is similar to the {\ttfamily RING} statement,
 except that {\ttfamily RECT} fills the ellipse with the specified color.
 
-\subsection{POKE}
+\subsection{POKE}\index{POKE}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2281,7 +2281,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{PRINT}
+\subsection{PRINT}\index{PRINT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2338,7 +2338,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{PRINT\#}
+\subsection{PRINT\#}\index{PRINT\#}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2389,7 +2389,7 @@ The file should contain the following pattern:\\
 	**********\\
 }
 
-\subsection{PSET}
+\subsection{PSET}\index{PSET}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2415,7 +2415,7 @@ time, it takes a few minutes to complete.  After all, it has 76,800 pixels to
 calculate!  See the {\ttfamily RECT} statement for a much faster way to display
 the palette.  It only has to calculate the color 256 times.\\
 
-\subsection{PSGCHORD}
+\subsection{PSGCHORD}\index{PSGCHORD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2442,7 +2442,7 @@ Example:\\
 
 }
 
-\subsection{PSGFREQ}
+\subsection{PSGFREQ}\index{PSGFREQ}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2466,7 +2466,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{PSGINIT}
+\subsection{PSGINIT}\index{PSGINIT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2484,7 +2484,7 @@ the PSG, and does the following on all 16 channels:\\
 
 \end{itemize}
 
-\subsection{PSGNOTE}
+\subsection{PSGNOTE}\index{PSGNOTE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2542,7 +2542,7 @@ Example:\\
 
 }
 
-\subsection{PSGPAN}
+\subsection{PSGPAN}\index{PSGPAN}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2570,7 +2570,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{PSGPLAY}
+\subsection{PSGPLAY}\index{PSGPLAY}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2590,7 +2590,7 @@ The {\ttfamily PSGPLAY} statement uses the exact same macro language as the
 {\ttfamily FMPLAY} statement, so see the section on {\ttfamily FMPLAY} for more
 information.
 
-\subsection{PSGVOL}
+\subsection{PSGVOL}\index{PSGVOL}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2612,7 +2612,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{PSGWAV}
+\subsection{PSGWAV}\index{PSGWAV}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2655,7 +2655,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{READ}
+\subsection{READ}\index{READ}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2679,7 +2679,7 @@ ERROR} will occur.\\
 	70 DATA 27.5,42\\
 }
 
-\subsection{RECT}
+\subsection{RECT}\index{RECT}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2708,7 +2708,7 @@ screen by drawing a 20x15 rectangle for each color.\\
 The {\ttfamily RECT} statement is similar to the {\ttfamily FRAME} statement,
 except that {\ttfamily RECT} fills the rectangle with the specified color.
 
-\subsection{REM}
+\subsection{REM}\index{REM}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2737,7 +2737,7 @@ Example:\\
 	70 PRINT C\\
 }
 
-\subsection{RESTORE}
+\subsection{RESTORE}\index{RESTORE}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2767,7 +2767,7 @@ Despite the above program {\ttfamily READ}ing three times yet only having
 enough data for two reads, it runs without error because {\ttfamily RESTORE}
 causes the first piece of data to be read twice.\\
 
-\subsection{RETURN}
+\subsection{RETURN}\index{RETURN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -2800,7 +2800,7 @@ Example:\\
 
 }
 
-\subsection{RING}
+\subsection{RING}\index{RING}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2827,7 +2827,7 @@ Example:\\
 The {\ttfamily RING} statement is similar to the {\ttfamily OVAL} statement,
 except that {\ttfamily OVAL} fills the ellipse with the specified color.
 
-\subsection{SCREEN}
+\subsection{SCREEN}\index{SCREEN}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2867,7 +2867,7 @@ In addition to the above table, the value {\ttfamily -1} can be passed to
 
 }
 
-\subsection{SLEEP}
+\subsection{SLEEP}\index{SLEEP}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2896,7 +2896,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{SPRITE}
+\subsection{SPRITE}\index{SPRITE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -2969,7 +2969,7 @@ Here is a brief summary of each argument:\\
 
 \end{tabular}
 
-\subsection{SPRMEM}
+\subsection{SPRMEM}\index{SPRMEM}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3005,7 +3005,7 @@ interpret the data there in 8bpp mode.  The {\ttfamily SPRITE} statement is
 then use to set the rest of the sprite's attributes, and the {\ttfamily
 MOVESPR} statement moves the sprite's location on the screen.\\
 
-\subsection{STEP}
+\subsection{STEP}\index{STEP}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3033,7 +3033,7 @@ Examples:\\
 
 \end{tabular}
 
-\subsection{STOP}
+\subsection{STOP}\index{STOP}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3062,7 +3062,7 @@ Example:\\
 Try {\ttfamily CONT}inuing the above program after the {\ttfamily STOP}
 statement halts the program.\\
 
-\subsection{SYS}
+\subsection{SYS}\index{SYS}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3083,7 +3083,7 @@ arguments to BASIC statements, the same can be written as:\\
 	SYS \$2000\\
 }
 
-\subsection{THEN}
+\subsection{THEN}\index{THEN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3122,7 +3122,7 @@ number with {\ttfamily THEN} instead of an expression.\\
 
 }
 
-\subsection{TILE}
+\subsection{TILE}\index{TILE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3162,7 +3162,7 @@ characters (the default tile set) on a 16 by 16 grid.\\
 
 }
 
-\subsection{TO}
+\subsection{TO}\index{TO}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3177,7 +3177,7 @@ follows the {\ttfamily TO} statement.\\
 See the {\ttfamily FOR} statement for examples of using the {\ttfamily TO}
 statement.\\
 
-\subsection{VPOKE}
+\subsection{VPOKE}\index{VPOKE}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3239,7 +3239,7 @@ forground color to black, although the character data does not change.\\
 
 }
 
-\subsection{VLOAD}
+\subsection{VLOAD}\index{VLOAD}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3264,7 +3264,7 @@ Examples:\\
 To load a file that does not have a two-byte header, see the {\ttfamily BVLOAD}
 statement.\\
 
-\subsection{WAIT}
+\subsection{WAIT}\index{WAIT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3319,7 +3319,7 @@ Because the return value is a fundamental property of a function, many of the
 examples in this section include the output of the example listed directly
 below the example, itself.\\
 
-\subsection{ABS}
+\subsection{ABS}\index{ABS}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3335,7 +3335,7 @@ Example:\\
 
 }
 
-\subsection{ASC}
+\subsection{ASC}\index{ASC}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3353,7 +3353,7 @@ Example:\\
 
 }
 
-\subsection{ATN}
+\subsection{ATN}\index{ATN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3372,7 +3372,7 @@ Example:\\
 
 In the above example, the value 0 will be printed on the screen.\\
 
-\subsection{BIN\$}
+\subsection{BIN\$}\index{BIN\$}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3401,7 +3401,7 @@ Examples:\\
 
 }
 
-\subsection{CHR\$}
+\subsection{CHR\$}\index{CHR\$}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3426,7 +3426,7 @@ Examples:\\
 
 }
 
-\subsection{COS}
+\subsection{COS}\index{COS}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3442,7 +3442,7 @@ Example:\\
 
 }
 
-\subsection{EXP}
+\subsection{EXP}\index{EXP}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3472,7 +3472,7 @@ result.\\
 
 See the {\ttfamily DEF} statement for details and examples.\\
 
-\subsection{FRE}
+\subsection{FRE}\index{FRE}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3495,7 +3495,7 @@ The above program will print the amount of free memory available to BASIC,
 allocate some of that memory, and then again print the updated amount of free
 memory.\\
 
-\subsection{HEX\$}
+\subsection{HEX\$}\index{HEX\$}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3540,7 +3540,7 @@ Example:\\
 The above program will print out a table showing values in decimal followed by
 the same value in hexadecimal.\\
 
-\subsection{INT}
+\subsection{INT}\index{INT}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3567,7 +3567,7 @@ certain precision, such as to the nearest hundredth:\\
 	X=INT(X*100+0.5)/100\\
 }
 
-\subsection{I2CPEEK}
+\subsection{I2CPEEK}\index{I2CPEEK}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3586,7 +3586,7 @@ Example:\\
 	60 GOTO 20\\
 }
 
-\subsection{JOY}
+\subsection{JOY}\index{JOY}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3640,7 +3640,7 @@ Example:\\
 	120 GOTO50\\
 }
 
-\subsection{LEFT\$}
+\subsection{LEFT\$}\index{LEFT\$}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3654,7 +3654,7 @@ Example:\\
 	BASE\\
 }
 
-\subsection{LEN}
+\subsection{LEN}\index{LEN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3669,7 +3669,7 @@ Example:\\
 	\hspace*{0.6em}13\\
 }
 
-\subsection{LOG}
+\subsection{LOG}\index{LOG}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3696,7 +3696,7 @@ Examples:\\
 
 }
 
-\subsection{MID\$}
+\subsection{MID\$}\index{MID\$}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3724,7 +3724,7 @@ Examples:\\
 	X16\\
 }
 
-\subsection{PEEK}
+\subsection{PEEK}\index{PEEK}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3747,7 +3747,7 @@ The above example will print the entire contents of the zero page\footnote{The
 "zero page" is the first 256 bytes of the Commander X16's memory.  This memory
 has special purposes on the 65C02 processor.}.\\
 
-\subsection{POINTER}
+\subsection{POINTER}\index{POINTER}
 
 \textit{Origin: Commodore 128 BASIC}
 
@@ -3760,7 +3760,7 @@ structure where a BASIC variable is stored.\\
 	20 PRINT HEX\$(POINTER(X\$))\\
 }
 
-\subsection{POS}
+\subsection{POS}\index{POS}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3777,7 +3777,7 @@ to always call the {\ttfamily POS} function as {\ttfamily POS(π)}.\\
 	40 PRINT POS(π)\\
 }
 
-\subsection{RIGHT\$}
+\subsection{RIGHT\$}\index{RIGHT\$}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3791,7 +3791,7 @@ Example:\\
 	BALL\\
 }
 
-\subsection{RND}
+\subsection{RND}\index{RND}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3835,7 +3835,7 @@ than) 40. When repeated, you might see numbers like 13.3567377, 24.5913944,
 
 \vspace{16pt}
 
-\subsection{RPT\$}
+\subsection{RPT\$}\index{RPT\$}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3855,7 +3855,7 @@ Example:\\
 
 }
 
-\subsection{SGN}
+\subsection{SGN}\index{SGN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3876,7 +3876,7 @@ Examples:\\
 
 }
 
-\subsection{SIN}
+\subsection{SIN}\index{SIN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3892,7 +3892,7 @@ Example:\\
 
 }
 
-\subsection{SPC}
+\subsection{SPC}\index{SPC}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3923,7 +3923,7 @@ Examples:\\
 	HELLO\hspace*{3em}WORLD\\
 }
 
-\subsection{SQR}
+\subsection{SQR}\index{SQR}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3941,7 +3941,7 @@ Examples:\\
 	 \hspace*{0.6em}6.92820323\\
  }
 
-\subsection{STR\$}
+\subsection{STR\$}\index{STR\$}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -3959,7 +3959,7 @@ Example:\\
 	\hspace*{0.6em}3\\
 }
 
-\subsection{STRPTR}
+\subsection{STRPTR}\index{STRPTR}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -3983,7 +3983,7 @@ Example:\\
 	T\\
 }
 
-\subsection{TAB}
+\subsection{TAB}\index{TAB}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4004,7 +4004,7 @@ Example:\\
 	30 NEXT I\\
 }
 
-\subsection{TAN}
+\subsection{TAN}\index{TAN}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4020,7 +4020,7 @@ Example:\\
 
 }
 
-\subsection{TATTR}
+\subsection{TATTR}\index{TATTR}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4044,7 +4044,7 @@ Example:\\
 	80 NEXT Y\\
 }
 
-\subsection{TDATA}
+\subsection{TDATA}\index{TDATA}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4066,7 +4066,7 @@ Example:\\
 	80 NEXT Y\\
 }
 
-\subsection{USR}
+\subsection{USR}\index{USR}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4103,7 +4103,7 @@ number in the FACC and adds {\ttfamily 0.5} to it.  The program then calls the
 {\ttfamily FADDH} routine with {\ttfamily 4.2} using the {\ttfamily USR}
 function.  The program should print a result of {\ttfamily 4.7}.
 
-\subsection{VAL}
+\subsection{VAL}\index{VAL}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4166,7 +4166,7 @@ The exponential notation string is returned as a simplified number.\\
 
 }
 
-\subsection{VPEEK}
+\subsection{VPEEK}\index{VPEEK}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4195,7 +4195,7 @@ variables cannot be assigned values in BASIC programs or commands.  These
 variables provide a convenient way to perform common calculations or read
 values from the X16 hardware.\\
 
-\subsection{DA\$}
+\subsection{DA\$}\index{DA\$}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4209,7 +4209,7 @@ Example:\\
 	20240617\\
 }
 
-\subsection{MWHEEL}
+\subsection{MWHEEL}\index{MWHEEL}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4234,7 +4234,7 @@ Example:\\
 Run the above program and try scrolling the mouse between outputs to the
 screen.\\
 
-\subsection{MX/MY}
+\subsection{MX/MY}\index{MX}\index{MY}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4254,7 +4254,7 @@ Example:\\
 
 Run the above program and move the mouse around.\\
 
-\subsection{MB}
+\subsection{MB}\index{MB}
 
 \textit{Origin: Commander X16 BASIC}
 
@@ -4319,7 +4319,7 @@ Example:\\
 
 }
 
-\subsection{\ttfamily π}
+\subsection{\ttfamily π}\index{π (pi)}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4332,7 +4332,7 @@ other floating point variable or literal.\\
 	30 PRINT "AREA:",,R*R*π\\
 }
 
-\subsection{ST}
+\subsection{ST}\index{ST}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4372,7 +4372,7 @@ executed:\\
 
 \vspace{16pt}
 
-\subsection{TI}
+\subsection{TI}\index{TI}
 
 \textit{Origin: Commodore 64 BASIC}
 
@@ -4390,7 +4390,7 @@ Example:\\
 	PRINT TI
 }
 
-\subsection{TI\$}
+\subsection{TI\$}\index{TI\$}
 
 \textit{Origin: Commodore 64 BASIC}
 

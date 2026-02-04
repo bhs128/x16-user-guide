@@ -881,26 +881,23 @@ Here's a program that creates our rainbow X logo and displays it:\\
 }
 
 \codeblock{
-	200 REM ROW 0-3: RED/PURPLE CORNERS\\
-	210 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
-	220 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
-	230 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
-	240 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
-	300 REM ROW 4-7: ORANGE/BLUE SECTION\\
-	310 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
-	320 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
-	330 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
-	340 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
-	400 REM ROW 8-11: CENTER AND SPREAD\\
-	410 DATA 0,0,0,0,0,0,7,5,5,7,0,0,0,0,0,0\\
-	420 DATA 0,0,0,0,0,0,7,7,7,7,0,0,0,0,0,0\\
-	430 DATA 0,0,0,0,0,8,8,0,0,6,6,0,0,0,0,0\\
-	440 DATA 0,0,0,0,8,8,0,0,0,0,6,6,0,0,0,0\\
-	500 REM ROW 12-15: BACK TO CORNERS\\
-	510 DATA 0,0,0,2,2,0,0,0,0,0,0,4,4,0,0,0\\
-	520 DATA 0,0,2,2,0,0,0,0,0,0,0,0,4,4,0,0\\
-	530 DATA 0,2,2,0,0,0,0,0,0,0,0,0,0,4,4,0\\
-	540 DATA 2,2,0,0,0,0,0,0,0,0,0,0,0,0,4,4\\
+	200 REM RAINBOW X SPRITE DATA\\
+	210 DATA 11,11,11,00,00,00,00,00,00,00,00,00,00,11,11,11\\
+	220 DATA 11,04,04,11,00,00,00,00,00,00,00,00,11,04,04,11\\
+	230 DATA 11,04,04,04,11,00,00,00,00,00,00,11,04,04,04,11\\
+	240 DATA 11,14,14,14,14,11,00,00,00,00,11,14,14,14,14,11\\
+	250 DATA 11,14,14,14,14,14,11,00,00,11,14,14,14,14,14,11\\
+	260 DATA 00,11,11,03,03,03,03,11,11,03,03,03,03,11,11,00\\
+	270 DATA 00,00,00,11,11,03,03,11,11,03,03,11,11,00,00,00\\
+	280 DATA 00,00,00,00,00,11,05,11,11,05,11,00,00,00,00,00\\
+	290 DATA 00,00,00,00,00,11,05,11,11,05,11,00,00,00,00,00\\
+	300 DATA 00,00,00,00,11,07,07,11,11,07,07,11,00,00,00,00\\
+	310 DATA 00,00,00,11,07,07,07,11,11,07,07,07,11,00,00,00\\
+	320 DATA 00,00,11,08,08,08,11,00,00,11,08,08,08,11,00,00\\
+	330 DATA 00,11,08,08,08,11,00,00,00,00,11,08,08,08,11,00\\
+	340 DATA 11,02,02,02,11,00,00,00,00,00,00,11,02,02,02,11\\
+	350 DATA 11,02,02,11,00,00,00,00,00,00,00,00,11,02,02,11\\
+	360 DATA 11,11,11,00,00,00,00,00,00,00,00,00,00,11,11,11\\
 }
 
 Let's examine what each part does:\\
@@ -918,9 +915,10 @@ Let's examine what each part does:\\
 \end{itemize}
 
 The DATA statements define our rainbow X pixel by pixel.  Notice the colors:
-red (2) in the top-left and bottom-left, purple (4) in the top-right and
-bottom-right, orange (8) and blue (6) in the middle arms, with yellow (7) and
-green (5) at the center crossing.  This creates a beautiful rainbow effect!\\
+dark gray (11) forms the outline, purple (4) and light blue (14) fill the upper
+arms, cyan (3) appears at the center crossing, green (5) in the middle, yellow
+(7) below that, orange (8) in the lower arms, and red (2) at the bottom.  This
+creates the official Commander X16 rainbow logo effect!\\
 
 Run the program and you should see the colorful X logo appear in the center of
 the screen!  This is a \emph{bitmap sprite} --- a custom image that would be

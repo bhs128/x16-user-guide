@@ -52,6 +52,8 @@ BIBLIOGRAPHY_ARTIFACTS	= $(MAIN).bbl \
 
 FINAL_ARTIFACTS			= $(NAME).bcf \
 						  $(NAME).idx \
+						  $(NAME).ilg \
+						  $(NAME).ind \
 						  $(NAME).ptc \
 						  $(NAME).run.xml \
 						  $(NAME).toc
@@ -102,6 +104,7 @@ bibliography: $(BIBLIOGRAPHY_ARTIFACTS)
 
 $(NAME).pdf: $(FINAL_SOURCES)
 	$(LATEX_COMPILER) $(LATEX_COMPILER_FLAGS) -jobname=$(NAME) $(TARGETS)
+	makeindex $(NAME).idx -s indexstyle.ist
 	$(LATEX_COMPILER) $(LATEX_COMPILER_FLAGS) -jobname=$(NAME) $(TARGETS)
 
 $(GETTING_STARTED_NAME).pdf: $(FINAL_SOURCES)
